@@ -7,6 +7,8 @@
 //
 
 #import "Tests.h"
+#import "Ford.h"
+#import "InDependence.h"
 
 @implementation Tests
 
@@ -26,7 +28,7 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in Tests");
+    [[RSInjector sharedInjector] getObject:[Ford class]];
 }
 
 @end

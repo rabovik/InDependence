@@ -6,3 +6,4 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
+#import "RSInjector.h"

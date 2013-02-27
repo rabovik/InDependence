@@ -12,9 +12,6 @@
 #import "RSInjectorSession.h"
 #import "RSInjectorSingletonExtension.h"
 
-typedef id(^InstantiatorBlock)(void);
-
-static NSMutableDictionary *gRegistrationContext;
 static NSMutableArray *gExtensions;
 
 @interface RSInjector () <RSInjectorExtensionDelegate>
@@ -44,7 +41,6 @@ static NSMutableArray *gExtensions;
 + (void)initialize  {
     if (self != [RSInjector class]) return;
 
-    gRegistrationContext = [NSMutableDictionary new];
     gExtensions = [NSMutableArray new];
     
     [self registerDefaultExtensions];
@@ -102,8 +98,6 @@ static NSMutableArray *gExtensions;
         isRootObjectInSession = YES;
         session = [RSInjectorSession new];
     }
-    
-    //[[self class] registerClass:klass];
     
     Class resolvedClass = [self desiredClassForClass:klass];
     
@@ -163,16 +157,13 @@ static NSMutableArray *gExtensions;
 }
 
 -(void)informObjectsCreatedInSessionThatTheyAreReady{
-    
-    //[self.delegate informObjectsCreatedInSessionThatTheyAreReady];
+    // todo
 }
 
 #pragma mark - Bindings
 
 -(void)bindClass:(Class)aClass toClass:(Class)toClass{
-    NSString *key = NSStringFromClass(toClass);
-    NSString *val = NSStringFromClass(aClass);
-    [_bindings setObject:val forKey:key];
+    // todo
 }
 
 

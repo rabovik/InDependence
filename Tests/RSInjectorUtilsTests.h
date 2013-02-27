@@ -1,15 +1,13 @@
 //
-//  Car.m
+//  RSInjectorUtilsTests.h
 //  InDependence
 //
 //  Created by Yan Rabovik on 27.02.13.
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "Car.h"
+#import <SenTestingKit/SenTestingKit.h>
 
-@implementation Car
-
-rs_requires(@"engine");
+@interface RSInjectorUtilsTests : SenTestCase
 
 @end

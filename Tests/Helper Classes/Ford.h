@@ -9,5 +9,11 @@
 #import "Car.h"
 
 @interface Ford : Car
+@end
 
+@interface FordFocusLogo : NSObject
+@end
+
+@interface FordFocus : Ford
+@property (nonatomic,strong) FordFocusLogo *logo;
 @end

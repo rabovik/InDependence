@@ -54,7 +54,11 @@ static NSMutableDictionary *gRegistrationContext;
     //entry.klass = klass;
     [gRegistrationContext setObject:entry forKey:key];
     
-    NSLog(@"Registered class %@",klass);
+    if ([klass respondsToSelector:@selector(rs_requires)]){
+        entry.registeredProperties = [klass performSelector:@selector(rs_requires)];
+    }
+
+    NSLog(@"Registered class %@ properties %@",klass,entry.registeredProperties);
     
     Class superClass = class_getSuperclass([klass class]);
     [self registerClass:superClass];

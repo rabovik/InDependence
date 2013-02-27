@@ -10,6 +10,7 @@
 
 @interface RSInjectorRegistrationEntry : NSObject
 
+@property (nonatomic, copy) NSDictionary *registeredProperties;
 //@property (nonatomic,unsafe_unretained) Class klass;
 
 @end

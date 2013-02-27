@@ -9,5 +9,8 @@
 #import "Ford.h"
 
 @implementation Ford
+@end
 
+@implementation FordFocus
+rs_requires(@"logo");
 @end

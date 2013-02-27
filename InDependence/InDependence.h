@@ -7,8 +7,12 @@
 //
 
 #import "RSInjector.h"
+#import "RSInjectorUtils.h"
 
 #define rs_requires(args...) \
 +(NSSet *)rs_requires{ \
-    return [NSSet setWithObjects:args, nil]; \
+    NSSet *requirements = [NSSet setWithObjects: args, nil]; \
+    return [RSInjectorUtils collectRequirementsForClass:self \
+                                           requirements:requirements \
+                                               selector:@selector(rs_requires)]; \
 }

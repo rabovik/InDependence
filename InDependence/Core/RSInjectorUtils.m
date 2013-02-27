@@ -12,6 +12,35 @@ static NSString *const RSInjectorException = @"RSInjectorException";
 
 @implementation RSInjectorUtils
 
++(NSString *)key:(id)classOrProtocol{
+    NSString *key = nil;
+    BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
+    if (isClass) {
+        key = NSStringFromClass(classOrProtocol);
+    } else {
+        key = [NSString stringWithFormat:@"<%@>", NSStringFromProtocol(classOrProtocol)];
+    }
+    return key;
+}
+
+
++(BOOL)requiredInstructionForClass:(Class)klass selector:(SEL)selector{
+    if ([klass respondsToSelector:selector]) {
+        NSMethodSignature *signature = [klass methodSignatureForSelector:selector];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+        [invocation setTarget:klass];
+        [invocation setSelector:selector];
+        [invocation invoke];
+        BOOL returnValue;
+        [invocation getReturnValue:&returnValue];
+        if (returnValue) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
 +(NSSet *)requirementsForClass:(Class)klass selector:(SEL)selector{
     if ([klass respondsToSelector:selector]){
 #pragma clang diagnostic push

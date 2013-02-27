@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RSInjectorRegistrationEntry : NSObject
+@interface RSInjectorBindingEntry : NSObject
 
-@property (nonatomic, copy) NSSet *registeredProperties;
-//@property (nonatomic,unsafe_unretained) Class klass;
+-(void)setObject:(id)object forKey:(NSString *)aKey;
+-(id)objectForKey:(NSString *)key;
 
 @end

@@ -7,27 +7,27 @@
 //
 
 #import "RSInjectorSingletonExtension.h"
+#import "RSInjectorBindingEntry.h"
+
+static NSString *const RSInjectorBindingSingletonStorageKey = @"RSInjectorBindingSingletonStorageKey";
 
 @implementation RSInjectorSingletonExtension
 
 -(id)createObjectOfClass:(Class)resolvedClass injector:(RSInjector *)injector session:(RSInjectorSession *)session ancestors:(NSArray *)ancestors{
     
-    SEL selector = @selector(rs_register_singleton);
-    if ([resolvedClass respondsToSelector:selector]) {
-        NSMethodSignature *signature = [resolvedClass methodSignatureForSelector:selector];
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-        [invocation setTarget:resolvedClass];
-        [invocation setSelector:selector];
-        [invocation invoke];
-        BOOL returnValue;
-        [invocation getReturnValue:&returnValue];
-        if (returnValue) {
-            NSLog(@"Class %@ wants to be a singleton!",resolvedClass);
-        }else{
-            NSLog(@"Class %@ DOES NOT want to be a singleton!",resolvedClass);
+    if ([RSInjectorUtils requiredInstructionForClass:resolvedClass selector:@selector(rs_register_singleton)]) {
+        
+        RSInjectorBindingEntry *binding = [injector getBinding:resolvedClass];
+        
+        id object = [binding objectForKey:RSInjectorBindingSingletonStorageKey];
+        if (!object) {
+            object = [super createObjectOfClass:resolvedClass injector:injector session:session ancestors:ancestors];
+            [binding setObject:object forKey:RSInjectorBindingSingletonStorageKey];
         }
+        
+        return object;
     }
-    
+        
     return [super createObjectOfClass:resolvedClass injector:injector session:session ancestors:ancestors];
 }
 

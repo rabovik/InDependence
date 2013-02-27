@@ -8,7 +8,7 @@
 
 #import "RSInjector.h"
 #import <objc/runtime.h>
-#import "RSInjectorRegistrationEntry.h"
+#import "RSInjectorBindingEntry.h"
 #import "RSInjectorSession.h"
 #import "RSInjectorSingletonExtension.h"
 
@@ -76,23 +76,18 @@ static NSMutableArray *gExtensions;
     return sharedInstance;
 }
 
-#pragma mark - Registrations
-+(void)registerClass:(id)klass{
-    if (!klass) return;
-    NSString *key = NSStringFromClass(klass);
-    if ([gRegistrationContext objectForKey:key]) return;
-    
-    RSInjectorRegistrationEntry *entry = [RSInjectorRegistrationEntry new];
-    //entry.klass = klass;
-    [gRegistrationContext setObject:entry forKey:key];
-    
-    //entry.registeredProperties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
-    
-    NSLog(@"Registered class %@",klass/*,entry.registeredProperties*/);
-    
-    Class superClass = class_getSuperclass([klass class]);
-    [self registerClass:superClass];
+#pragma mark - Bindings
+-(RSInjectorBindingEntry *)getBinding:(id)classOrProtocol{
+    NSString *key = [RSInjectorUtils key:classOrProtocol];
+    RSInjectorBindingEntry *binding = [_bindings objectForKey:key];
+    if (!binding) {
+        binding = [RSInjectorBindingEntry new];
+        [_bindings setObject:binding forKey:key];
+    }
+    return binding;
 }
+
+
 
 #pragma mark - Object factory
 -(id)getObject:(id)klass{

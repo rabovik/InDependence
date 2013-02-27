@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class RSInjectorBindingEntry;
+
 @interface RSInjector : NSObject
 
 +(id)sharedInjector;
 
 -(id)getObject:(id)klass;
+
+-(RSInjectorBindingEntry *)getBinding:(id)classOrProtocol;
 
 -(void)bindClass:(Class)aClass toClass:(Class)toClass;
 

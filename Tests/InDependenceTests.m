@@ -6,11 +6,10 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "Tests.h"
+#import "InDependenceTests.h"
 #import "Ford.h"
-#import "InDependence.h"
 
-@implementation Tests
+@implementation InDependenceTests
 
 - (void)setUp
 {
@@ -26,9 +25,10 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testInjectEngineToCar
 {
-    [[RSInjector sharedInjector] getObject:[Ford class]];
+    Ford *fordCar = [[RSInjector sharedInjector] getObject:[Ford class]];
+    STAssertNotNil(fordCar.engine, @"");
 }
 
 @end

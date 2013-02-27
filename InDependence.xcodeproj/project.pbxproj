@@ -11,7 +11,7 @@
 		1A1DFD8F16DC921300658409 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1DFD5416DC918300658409 /* UIKit.framework */; };
 		1A1DFD9016DC921300658409 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1DFD5616DC918300658409 /* Foundation.framework */; };
 		1A1DFD9616DC921300658409 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9416DC921300658409 /* InfoPlist.strings */; };
-		1A1DFD9916DC921300658409 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9816DC921300658409 /* Tests.m */; };
+		1A1DFD9916DC921300658409 /* InDependenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9816DC921300658409 /* InDependenceTests.m */; };
 		1A1DFDA316DC972C00658409 /* RSInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA216DC972C00658409 /* RSInjector.m */; };
 		1A1DFDA616DDF84300658409 /* RSInjectorRegistrationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA516DDF84300658409 /* RSInjectorRegistrationEntry.m */; };
 		1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA916DDFE8D00658409 /* Car.m */; };
@@ -27,8 +27,8 @@
 		1A1DFD8D16DC921300658409 /* Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A1DFD9316DC921300658409 /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		1A1DFD9516DC921300658409 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		1A1DFD9716DC921300658409 /* Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
-		1A1DFD9816DC921300658409 /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		1A1DFD9716DC921300658409 /* InDependenceTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InDependenceTests.h; sourceTree = "<group>"; };
+		1A1DFD9816DC921300658409 /* InDependenceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InDependenceTests.m; sourceTree = "<group>"; };
 		1A1DFD9A16DC921300658409 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		1A1DFDA016DC963300658409 /* InDependence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InDependence.h; sourceTree = "<group>"; };
 		1A1DFDA116DC972C00658409 /* RSInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjector.h; path = Core/RSInjector.h; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				1A1DFDA716DDFCB100658409 /* Helper Classes */,
-				1A1DFD9716DC921300658409 /* Tests.h */,
-				1A1DFD9816DC921300658409 /* Tests.m */,
+				1A1DFD9716DC921300658409 /* InDependenceTests.h */,
+				1A1DFD9816DC921300658409 /* InDependenceTests.m */,
 				1A1DFD9216DC921300658409 /* Supporting Files */,
 			);
 			path = Tests;
@@ -228,7 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A1DFD9916DC921300658409 /* Tests.m in Sources */,
+				1A1DFD9916DC921300658409 /* InDependenceTests.m in Sources */,
 				1A1DFDA316DC972C00658409 /* RSInjector.m in Sources */,
 				1A1DFDA616DDF84300658409 /* RSInjectorRegistrationEntry.m in Sources */,
 				1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */,

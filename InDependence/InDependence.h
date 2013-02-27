@@ -7,3 +7,8 @@
 //
 
 #import "RSInjector.h"
+
+#define rs_requires(args...) \
++(NSSet *)rs_requires{ \
+    return [NSSet setWithObjects:args, nil]; \
+}

@@ -10,4 +10,6 @@
 
 @implementation Engine
 
+rs_requires(@"engine");
+
 @end

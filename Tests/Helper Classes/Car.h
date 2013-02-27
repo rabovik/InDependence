@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class Engine;
+
 @interface Car : NSObject
+
+@property (nonatomic,strong) Engine *engine;
 
 @end

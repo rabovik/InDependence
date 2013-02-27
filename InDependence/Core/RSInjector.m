@@ -99,7 +99,7 @@ static NSMutableArray *gExtensions;
         session = [RSInjectorSession new];
     }
     
-    Class resolvedClass = [self desiredClassForClass:klass];
+    Class resolvedClass = [self.lastExtension resolveClass:klass];
     
     id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
                                                                 injector:self
@@ -135,10 +135,6 @@ static NSMutableArray *gExtensions;
     }
     
     return objectUnderConstruction;
-}
-
--(Class)desiredClassForClass:(id)klass{
-    return klass;
 }
 
 #pragma mark - Extension delegate

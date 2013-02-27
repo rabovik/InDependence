@@ -66,7 +66,16 @@ static NSMutableDictionary *gRegistrationContext;
 
 -(id)getObject:(id)klass{
     [[self class] registerClass:klass];
-    return nil;
+    
+    Class desiredClass = [self desiredClassForClass:klass];
+    
+    id objectUnderConstruction = [desiredClass new];
+    
+    return objectUnderConstruction;
+}
+
+-(Class)desiredClassForClass:(id)klass{
+    return klass;
 }
 
 #pragma mark - Bindings

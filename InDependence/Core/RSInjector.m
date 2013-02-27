@@ -63,9 +63,14 @@ static NSMutableDictionary *gRegistrationContext;
 }
 
 #pragma mark - Object factory
-
 -(id)getObject:(id)klass{
-    [[self class] registerClass:klass];
+    return [self getObject:klass ancestors:[NSArray new]];
+}
+
+-(id)getObject:(id)klass ancestors:(NSArray *)ancestors{
+    NSLog(@"GET OBJECT class %@. ANCESTORS %@",klass,ancestors);
+    
+    //[[self class] registerClass:klass];
     
     Class desiredClass = [self desiredClassForClass:klass];
     
@@ -74,12 +79,15 @@ static NSMutableDictionary *gRegistrationContext;
     NSSet *properties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
     if (properties) {
         NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
+        NSMutableArray *ancestorsForProperties = [NSMutableArray arrayWithArray:ancestors];
+        [ancestorsForProperties addObject:objectUnderConstruction];
+
         for (NSString *propertyName in properties) {
             objc_property_t property = [RSInjectorUtils getProperty:propertyName fromClass:klass];
             RSInjectorPropertyInfo propertyInfo = [RSInjectorUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
-            id theObject = [self getObject:desiredClassOrProtocol];
+            id theObject = [self getObject:desiredClassOrProtocol ancestors:ancestorsForProperties];
             
             if (nil == theObject) {
                 theObject = [NSNull null];

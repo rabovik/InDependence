@@ -12,6 +12,7 @@
 		1A1DFD9016DC921300658409 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1DFD5616DC918300658409 /* Foundation.framework */; };
 		1A1DFD9616DC921300658409 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9416DC921300658409 /* InfoPlist.strings */; };
 		1A1DFD9916DC921300658409 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9816DC921300658409 /* Tests.m */; };
+		1A1DFDA316DC972C00658409 /* RSInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA216DC972C00658409 /* RSInjector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,9 @@
 		1A1DFD9716DC921300658409 /* Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tests.h; sourceTree = "<group>"; };
 		1A1DFD9816DC921300658409 /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		1A1DFD9A16DC921300658409 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		1A1DFDA016DC963300658409 /* InDependence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InDependence.h; sourceTree = "<group>"; };
+		1A1DFDA116DC972C00658409 /* RSInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjector.h; path = Core/RSInjector.h; sourceTree = "<group>"; };
+		1A1DFDA216DC972C00658409 /* RSInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjector.m; path = Core/RSInjector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,9 @@
 		1A1DFD5A16DC918300658409 /* InDependence */ = {
 			isa = PBXGroup;
 			children = (
+				1A1DFDA016DC963300658409 /* InDependence.h */,
+				1A1DFD9E16DC947B00658409 /* Core */,
+				1A1DFD9F16DC948400658409 /* Extensions */,
 			);
 			path = InDependence;
 			sourceTree = "<group>";
@@ -95,6 +102,22 @@
 				1A1DFD9A16DC921300658409 /* Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1A1DFD9E16DC947B00658409 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				1A1DFDA116DC972C00658409 /* RSInjector.h */,
+				1A1DFDA216DC972C00658409 /* RSInjector.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		1A1DFD9F16DC948400658409 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1DFD9916DC921300658409 /* Tests.m in Sources */,
+				1A1DFDA316DC972C00658409 /* RSInjector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

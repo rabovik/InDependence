@@ -12,4 +12,8 @@
 
 rs_requires(@"engine",@"road");
 
+-(void)awakeFromInjector{
+    NSLog(@"AWAKE %@",self);
+}
+
 @end

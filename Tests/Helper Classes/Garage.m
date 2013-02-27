@@ -10,4 +10,9 @@
 
 @implementation Garage
 rs_requires(@"fordCar",@"renaultCar");
+
+-(void)awakeFromInjector{
+    NSLog(@"AWAKE %@",self);
+}
+
 @end

@@ -21,9 +21,26 @@
 	return self;
 }
 
+
 -(void)registerInstantiatedObject:(id)object{
     [_instantiatedObjects addObject:object];
 }
+
+-(void)notifyObjectsThatTheyAreReady{
+    NSLog(@"INForming %@",_instantiatedObjects);
+    
+    for (id object in _instantiatedObjects) {
+        SEL selector = @selector(awakeFromInjector);
+        if([object respondsToSelector:selector]) {
+            NSMethodSignature *signature = [object methodSignatureForSelector:selector];
+            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+            [invocation setTarget:object];
+            [invocation setSelector:selector];
+            [invocation invoke];
+        }
+    }
+}
+
 
 
 @end

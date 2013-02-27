@@ -131,7 +131,7 @@ static NSMutableArray *gExtensions;
     [session registerInstantiatedObject:objectUnderConstruction];
     
     if (isRootObjectInSession) {
-        NSLog(@"ROOT OBJECT INSTANTIATED. objects = %@",session.instantiatedObjects);
+        [session notifyObjectsThatTheyAreReady];
     }
     
     return objectUnderConstruction;

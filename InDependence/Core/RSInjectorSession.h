@@ -11,6 +11,7 @@
 @interface RSInjectorSession : NSObject
 
 -(void)registerInstantiatedObject:(id)object;
-@property (nonatomic,readonly) NSArray *instantiatedObjects;
+-(void)notifyObjectsThatTheyAreReady;
+//@property (nonatomic,readonly) NSArray *instantiatedObjects;
 
 @end

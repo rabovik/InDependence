@@ -54,9 +54,9 @@ static NSMutableDictionary *gRegistrationContext;
     //entry.klass = klass;
     [gRegistrationContext setObject:entry forKey:key];
     
-    entry.registeredProperties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
+    //entry.registeredProperties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
     
-    NSLog(@"Registered class %@ properties %@",klass,entry.registeredProperties);
+    NSLog(@"Registered class %@",klass/*,entry.registeredProperties*/);
     
     Class superClass = class_getSuperclass([klass class]);
     [self registerClass:superClass];
@@ -70,6 +70,25 @@ static NSMutableDictionary *gRegistrationContext;
     Class desiredClass = [self desiredClassForClass:klass];
     
     id objectUnderConstruction = [desiredClass new];
+    
+    NSSet *properties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
+    if (properties) {
+        NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
+        for (NSString *propertyName in properties) {
+            objc_property_t property = [RSInjectorUtils getProperty:propertyName fromClass:klass];
+            RSInjectorPropertyInfo propertyInfo = [RSInjectorUtils classOrProtocolForProperty:property];
+            id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
+            
+            id theObject = [self getObject:desiredClassOrProtocol];
+            
+            if (nil == theObject) {
+                theObject = [NSNull null];
+            }
+            
+            [propertiesDictionary setObject:theObject forKey:propertyName];
+        }
+        [objectUnderConstruction setValuesForKeysWithDictionary:propertiesDictionary];
+    }
     
     return objectUnderConstruction;
 }

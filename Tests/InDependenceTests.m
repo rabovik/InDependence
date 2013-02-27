@@ -25,8 +25,8 @@
     [super tearDown];
 }
 
-- (void)testInjectEngineToCar
-{
+- (void)testInjectEngineToCar{
+    
     Ford *fordCar = [[RSInjector sharedInjector] getObject:[FordFocus class]];
     STAssertNotNil(fordCar.engine, @"");
 }

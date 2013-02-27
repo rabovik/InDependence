@@ -11,6 +11,9 @@
 @implementation Ford
 @end
 
+@implementation FordFocusLogo
+@end
+
 @implementation FordFocus
 rs_requires(@"logo");
 @end

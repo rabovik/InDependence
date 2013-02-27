@@ -11,6 +11,16 @@
 
 @implementation RSInjectorUtils
 
++(NSSet *)requirementsForClass:(id)klass selector:(SEL)selector{
+    if ([klass respondsToSelector:selector]){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        return [klass performSelector:selector];
+#pragma clang diagnostic pop
+    }
+    return nil;
+}
+
 +(NSSet *)collectRequirementsForClass:(id)klass requirements:(NSSet *)requirements selector:(SEL)selector{
     Class superClass = class_getSuperclass([klass class]);
     if([superClass respondsToSelector:selector]) {

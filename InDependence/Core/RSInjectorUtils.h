@@ -10,6 +10,7 @@
 
 @interface RSInjectorUtils : NSObject
 
++(NSSet *)requirementsForClass:(id)klass selector:(SEL)selector;
 +(NSSet *)collectRequirementsForClass:(id)klass requirements:(NSSet *)requirements selector:(SEL)selector;
 
 @end

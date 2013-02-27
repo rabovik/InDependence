@@ -10,21 +10,48 @@
 #import <objc/runtime.h>
 #import "RSInjectorRegistrationEntry.h"
 #import "RSInjectorSession.h"
+#import "RSInjectorSingletonExtension.h"
 
 typedef id(^InstantiatorBlock)(void);
 
 static NSMutableDictionary *gRegistrationContext;
+static NSMutableArray *gExtensions;
+
+@interface RSInjector () <RSInjectorExtensionDelegate>
+@property (nonatomic,readonly) id<RSInjectorExtensionDelegate> lastExtension;
+@end
 
 @implementation RSInjector{
     NSMutableDictionary *_bindings;
 }
 
+#pragma mark - Extensions
++(void)registerExtension:(RSInjectorExtension *)extension{
+    extension.delegate = [gExtensions lastObject];
+    [gExtensions addObject:extension];
+}
+
+-(id<RSInjectorExtensionDelegate>)lastExtension{
+    if (gExtensions.count == 0) {
+        return self;
+    }else{
+        return [gExtensions lastObject];
+    }
+}
+
 #pragma mark - Init
 
 + (void)initialize  {
-    if (self == [RSInjector class]) {
-        gRegistrationContext = [NSMutableDictionary new];
-    }
+    if (self != [RSInjector class]) return;
+
+    gRegistrationContext = [NSMutableDictionary new];
+    gExtensions = [NSMutableArray new];
+    
+    [self registerDefaultExtensions];
+}
+
++(void)registerDefaultExtensions{
+    [self registerExtension:[RSInjectorSingletonExtension new]];
 }
 
 - (id)init{
@@ -41,6 +68,10 @@ static NSMutableDictionary *gRegistrationContext;
     static id sharedInstance;
     dispatch_once(&once, ^{
         sharedInstance = [[self class] new];
+        if (gExtensions.count > 0) {
+            RSInjectorExtension *firstExtension = [gExtensions objectAtIndex:0];
+            firstExtension.delegate = sharedInstance;
+        }
     });
     return sharedInstance;
 }
@@ -81,7 +112,10 @@ static NSMutableDictionary *gRegistrationContext;
     
     Class resolvedClass = [self desiredClassForClass:klass];
     
-    id objectUnderConstruction = [resolvedClass new];
+    id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
+                                                                injector:self
+                                                                 session:session
+                                                               ancestors:ancestors];
     
     NSSet *properties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
     if (properties) {
@@ -116,6 +150,26 @@ static NSMutableDictionary *gRegistrationContext;
 
 -(Class)desiredClassForClass:(id)klass{
     return klass;
+}
+
+#pragma mark - Extension delegate
+
+-(Class)resolveClass:(id)classOrProtocol{
+    return classOrProtocol;
+    //return [self.delegate resolveClass:classOrProtocol];
+}
+
+-(id)createObjectOfClass:(Class)resolvedClass
+                injector:(RSInjector*)injector
+                 session:(RSInjectorSession*)session
+               ancestors:(NSArray *)ancestors{
+    
+    return [resolvedClass new];
+}
+
+-(void)informObjectsCreatedInSessionThatTheyAreReady{
+    
+    //[self.delegate informObjectsCreatedInSessionThatTheyAreReady];
 }
 
 #pragma mark - Bindings

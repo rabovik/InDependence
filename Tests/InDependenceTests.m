@@ -7,7 +7,8 @@
 //
 
 #import "InDependenceTests.h"
-#import "Ford.h"
+#import "CarModels.h"
+#import "Garage.h"
 
 @implementation InDependenceTests
 
@@ -29,6 +30,13 @@
     
     Ford *fordCar = [[RSInjector sharedInjector] getObject:[FordFocus class]];
     STAssertNotNil(fordCar.engine, @"");
+}
+
+-(void)testSingletonRoad{
+    Garage *garage = [[RSInjector sharedInjector] getObject:[Garage class]];
+    STAssertNotNil(garage.fordCar.road, @"");
+    STAssertNotNil(garage.renaultCar.road, @"");
+    STAssertEqualObjects(garage.fordCar.road, garage.renaultCar.road, @"");
 }
 
 @end

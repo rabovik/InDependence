@@ -1,5 +1,5 @@
 //
-//  Car.h
+//  Garage.h
 //  InDependence
 //
 //  Created by Yan Rabovik on 27.02.13.
@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class Engine,Road;
+@class Ford,Renault;
 
-@interface Car : NSObject
+@interface Garage : NSObject
 
-@property (nonatomic,strong) Engine *engine;
-@property (nonatomic,strong) Road *road;
+@property (nonatomic,strong) Ford *fordCar;
+@property (nonatomic,strong) Renault *renaultCar;
 
 @end

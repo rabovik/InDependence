@@ -1,15 +1,13 @@
 //
-//  Car.m
+//  Garage.m
 //  InDependence
 //
 //  Created by Yan Rabovik on 27.02.13.
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "Car.h"
+#import "Garage.h"
 
-@implementation Car
-
-rs_requires(@"engine",@"road");
-
+@implementation Garage
+rs_requires(@"fordCar",@"renaultCar");
 @end

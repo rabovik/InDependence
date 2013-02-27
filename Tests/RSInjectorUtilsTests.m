@@ -7,13 +7,13 @@
 //
 
 #import "RSInjectorUtilsTests.h"
-#import "Ford.h"
+#import "CarModels.h"
 
 @implementation RSInjectorUtilsTests
 
 -(void)testEntriesFromClassAndSuperClasses{
     NSSet *requiredSet = [FordFocus performSelector:@selector(rs_requires)];
-    NSSet *etalonSet = [NSSet setWithObjects:@"logo",@"engine",nil];
+    NSSet *etalonSet = [NSSet setWithObjects:@"logo",@"engine",@"road",nil];
     
     NSMutableSet *s = [NSMutableSet new];
     [s unionSet:nil];

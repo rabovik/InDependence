@@ -1,15 +1,13 @@
 //
-//  Car.m
+//  Road.m
 //  InDependence
 //
 //  Created by Yan Rabovik on 27.02.13.
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "Car.h"
+#import "Road.h"
 
-@implementation Car
-
-rs_requires(@"engine",@"road");
-
+@implementation Road
+rs_register_singleton();
 @end

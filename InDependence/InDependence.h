@@ -9,6 +9,8 @@
 #import "RSInjector.h"
 #import "RSInjectorUtils.h"
 
+#import "RSInjectorSingletonExtension.h"
+
 #define rs_requires(args...) \
 +(NSSet *)rs_requires{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \

@@ -16,10 +16,14 @@
 		1A1DFDA616DDF84300658409 /* RSInjectorRegistrationEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA516DDF84300658409 /* RSInjectorRegistrationEntry.m */; };
 		1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA916DDFE8D00658409 /* Car.m */; };
 		1A1DFDAD16DDFE9D00658409 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAC16DDFE9D00658409 /* Engine.m */; };
-		1A1DFDB016DDFEBA00658409 /* Ford.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAF16DDFEBA00658409 /* Ford.m */; };
+		1A1DFDB016DDFEBA00658409 /* CarModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAF16DDFEBA00658409 /* CarModels.m */; };
 		1A1DFDB316DE19CB00658409 /* RSInjectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */; };
 		1A1DFDB616DE1AAB00658409 /* RSInjectorUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */; };
 		1A1DFDBA16DE6B9200658409 /* RSInjectorSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */; };
+		1A1DFDBD16DE78E900658409 /* RSInjectorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */; };
+		1A1DFDC016DE7C9200658409 /* RSInjectorSingletonExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */; };
+		1A1DFDC316DE864900658409 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC216DE864900658409 /* Road.m */; };
+		1A1DFDC616DE86D500658409 /* Garage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC516DE86D500658409 /* Garage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,14 +46,22 @@
 		1A1DFDA916DDFE8D00658409 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Car.m; path = "Helper Classes/Car.m"; sourceTree = "<group>"; };
 		1A1DFDAB16DDFE9D00658409 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Engine.h; path = "Helper Classes/Engine.h"; sourceTree = "<group>"; };
 		1A1DFDAC16DDFE9D00658409 /* Engine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Engine.m; path = "Helper Classes/Engine.m"; sourceTree = "<group>"; };
-		1A1DFDAE16DDFEBA00658409 /* Ford.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ford.h; path = "Helper Classes/Ford.h"; sourceTree = "<group>"; };
-		1A1DFDAF16DDFEBA00658409 /* Ford.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Ford.m; path = "Helper Classes/Ford.m"; sourceTree = "<group>"; };
+		1A1DFDAE16DDFEBA00658409 /* CarModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModels.h; path = "Helper Classes/CarModels.h"; sourceTree = "<group>"; };
+		1A1DFDAF16DDFEBA00658409 /* CarModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModels.m; path = "Helper Classes/CarModels.m"; sourceTree = "<group>"; };
 		1A1DFDB116DE19CA00658409 /* RSInjectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorUtils.h; path = Core/RSInjectorUtils.h; sourceTree = "<group>"; };
 		1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorUtils.m; path = Core/RSInjectorUtils.m; sourceTree = "<group>"; };
 		1A1DFDB416DE1AAB00658409 /* RSInjectorUtilsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSInjectorUtilsTests.h; sourceTree = "<group>"; };
 		1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSInjectorUtilsTests.m; sourceTree = "<group>"; };
 		1A1DFDB816DE6B9100658409 /* RSInjectorSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorSession.h; path = Core/RSInjectorSession.h; sourceTree = "<group>"; };
 		1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorSession.m; path = Core/RSInjectorSession.m; sourceTree = "<group>"; };
+		1A1DFDBB16DE78E900658409 /* RSInjectorExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorExtension.h; path = Extensions/RSInjectorExtension.h; sourceTree = "<group>"; };
+		1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorExtension.m; path = Extensions/RSInjectorExtension.m; sourceTree = "<group>"; };
+		1A1DFDBE16DE7C9200658409 /* RSInjectorSingletonExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorSingletonExtension.h; path = Extensions/RSInjectorSingletonExtension.h; sourceTree = "<group>"; };
+		1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorSingletonExtension.m; path = Extensions/RSInjectorSingletonExtension.m; sourceTree = "<group>"; };
+		1A1DFDC116DE864800658409 /* Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Road.h; path = "Helper Classes/Road.h"; sourceTree = "<group>"; };
+		1A1DFDC216DE864900658409 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Road.m; path = "Helper Classes/Road.m"; sourceTree = "<group>"; };
+		1A1DFDC416DE86D500658409 /* Garage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Garage.h; path = "Helper Classes/Garage.h"; sourceTree = "<group>"; };
+		1A1DFDC516DE86D500658409 /* Garage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Garage.m; path = "Helper Classes/Garage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +158,10 @@
 		1A1DFD9F16DC948400658409 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1A1DFDBB16DE78E900658409 /* RSInjectorExtension.h */,
+				1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */,
+				1A1DFDBE16DE7C9200658409 /* RSInjectorSingletonExtension.h */,
+				1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -155,10 +171,14 @@
 			children = (
 				1A1DFDA816DDFE8D00658409 /* Car.h */,
 				1A1DFDA916DDFE8D00658409 /* Car.m */,
+				1A1DFDC416DE86D500658409 /* Garage.h */,
+				1A1DFDC516DE86D500658409 /* Garage.m */,
 				1A1DFDAB16DDFE9D00658409 /* Engine.h */,
 				1A1DFDAC16DDFE9D00658409 /* Engine.m */,
-				1A1DFDAE16DDFEBA00658409 /* Ford.h */,
-				1A1DFDAF16DDFEBA00658409 /* Ford.m */,
+				1A1DFDAE16DDFEBA00658409 /* CarModels.h */,
+				1A1DFDAF16DDFEBA00658409 /* CarModels.m */,
+				1A1DFDC116DE864800658409 /* Road.h */,
+				1A1DFDC216DE864900658409 /* Road.m */,
 			);
 			name = "Helper Classes";
 			sourceTree = "<group>";
@@ -248,10 +268,14 @@
 				1A1DFDA616DDF84300658409 /* RSInjectorRegistrationEntry.m in Sources */,
 				1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */,
 				1A1DFDAD16DDFE9D00658409 /* Engine.m in Sources */,
-				1A1DFDB016DDFEBA00658409 /* Ford.m in Sources */,
+				1A1DFDB016DDFEBA00658409 /* CarModels.m in Sources */,
 				1A1DFDB316DE19CB00658409 /* RSInjectorUtils.m in Sources */,
 				1A1DFDB616DE1AAB00658409 /* RSInjectorUtilsTests.m in Sources */,
 				1A1DFDBA16DE6B9200658409 /* RSInjectorSession.m in Sources */,
+				1A1DFDBD16DE78E900658409 /* RSInjectorExtension.m in Sources */,
+				1A1DFDC016DE7C9200658409 /* RSInjectorSingletonExtension.m in Sources */,
+				1A1DFDC316DE864900658409 /* Road.m in Sources */,
+				1A1DFDC616DE86D500658409 /* Garage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

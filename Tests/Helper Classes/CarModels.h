@@ -17,3 +17,6 @@
 @interface FordFocus : Ford
 @property (nonatomic,strong) FordFocusLogo *logo;
 @end
+
+@interface Renault : Car
+@end

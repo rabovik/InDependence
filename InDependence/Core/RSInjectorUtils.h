@@ -21,6 +21,8 @@ typedef struct rsinjector_property_info {
 
 @interface RSInjectorUtils : NSObject
 
++(BOOL)requiredInstructionForClass:(Class)klass selector:(SEL)selector;
+
 +(NSSet *)requirementsForClass:(Class)klass selector:(SEL)selector;
 +(NSSet *)collectRequirementsForClass:(Class)klass requirements:(NSSet *)requirements selector:(SEL)selector;
 

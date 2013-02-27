@@ -9,6 +9,7 @@
 #import "RSInjector.h"
 #import <objc/runtime.h>
 #import "RSInjectorRegistrationEntry.h"
+#import "RSInjectorSession.h"
 
 typedef id(^InstantiatorBlock)(void);
 
@@ -64,17 +65,23 @@ static NSMutableDictionary *gRegistrationContext;
 
 #pragma mark - Object factory
 -(id)getObject:(id)klass{
-    return [self getObject:klass ancestors:[NSArray new]];
+    return [self getObject:klass session:nil ancestors:[NSArray array]];
 }
 
--(id)getObject:(id)klass ancestors:(NSArray *)ancestors{
+-(id)getObject:(id)klass session:(RSInjectorSession *)session ancestors:(NSArray *)ancestors{
     NSLog(@"GET OBJECT class %@. ANCESTORS %@",klass,ancestors);
+    
+    BOOL isRootObjectInSession = NO;
+    if (nil == session) {
+        isRootObjectInSession = YES;
+        session = [RSInjectorSession new];
+    }
     
     //[[self class] registerClass:klass];
     
-    Class desiredClass = [self desiredClassForClass:klass];
+    Class resolvedClass = [self desiredClassForClass:klass];
     
-    id objectUnderConstruction = [desiredClass new];
+    id objectUnderConstruction = [resolvedClass new];
     
     NSSet *properties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
     if (properties) {
@@ -87,7 +94,7 @@ static NSMutableDictionary *gRegistrationContext;
             RSInjectorPropertyInfo propertyInfo = [RSInjectorUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
-            id theObject = [self getObject:desiredClassOrProtocol ancestors:ancestorsForProperties];
+            id theObject = [self getObject:desiredClassOrProtocol session:session ancestors:ancestorsForProperties];
             
             if (nil == theObject) {
                 theObject = [NSNull null];
@@ -96,6 +103,12 @@ static NSMutableDictionary *gRegistrationContext;
             [propertiesDictionary setObject:theObject forKey:propertyName];
         }
         [objectUnderConstruction setValuesForKeysWithDictionary:propertiesDictionary];
+    }
+    
+    [session registerInstantiatedObject:objectUnderConstruction];
+    
+    if (isRootObjectInSession) {
+        NSLog(@"ROOT OBJECT INSTANTIATED. objects = %@",session.instantiatedObjects);
     }
     
     return objectUnderConstruction;

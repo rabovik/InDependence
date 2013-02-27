@@ -19,6 +19,7 @@
 		1A1DFDB016DDFEBA00658409 /* Ford.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAF16DDFEBA00658409 /* Ford.m */; };
 		1A1DFDB316DE19CB00658409 /* RSInjectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */; };
 		1A1DFDB616DE1AAB00658409 /* RSInjectorUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */; };
+		1A1DFDBA16DE6B9200658409 /* RSInjectorSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,8 @@
 		1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorUtils.m; path = Core/RSInjectorUtils.m; sourceTree = "<group>"; };
 		1A1DFDB416DE1AAB00658409 /* RSInjectorUtilsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSInjectorUtilsTests.h; sourceTree = "<group>"; };
 		1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSInjectorUtilsTests.m; sourceTree = "<group>"; };
+		1A1DFDB816DE6B9100658409 /* RSInjectorSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorSession.h; path = Core/RSInjectorSession.h; sourceTree = "<group>"; };
+		1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorSession.m; path = Core/RSInjectorSession.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,8 @@
 			children = (
 				1A1DFDA116DC972C00658409 /* RSInjector.h */,
 				1A1DFDA216DC972C00658409 /* RSInjector.m */,
+				1A1DFDB816DE6B9100658409 /* RSInjectorSession.h */,
+				1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */,
 				1A1DFDB116DE19CA00658409 /* RSInjectorUtils.h */,
 				1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */,
 				1A1DFDA416DDF84300658409 /* RSInjectorRegistrationEntry.h */,
@@ -246,6 +251,7 @@
 				1A1DFDB016DDFEBA00658409 /* Ford.m in Sources */,
 				1A1DFDB316DE19CB00658409 /* RSInjectorUtils.m in Sources */,
 				1A1DFDB616DE1AAB00658409 /* RSInjectorUtilsTests.m in Sources */,
+				1A1DFDBA16DE6B9200658409 /* RSInjectorSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

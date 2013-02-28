@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RSInjectorBindingEntry : NSObject
+@interface InDependenceBindingEntry : NSObject
 
 -(void)setObject:(id)object forKey:(NSString *)aKey;
 -(id)objectForKey:(NSString *)key;

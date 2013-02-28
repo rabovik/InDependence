@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RSInjectorSession : NSObject
+@interface InDependenceSession : NSObject
 
 -(void)registerInstantiatedObject:(id)object;
 -(void)notifyObjectsThatTheyAreReady;

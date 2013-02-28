@@ -6,42 +6,42 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjector.h"
+#import "InDependenceInjector.h"
 #import <objc/runtime.h>
-#import "RSInjectorBindingEntry.h"
-#import "RSInjectorSession.h"
+#import "InDependenceBindingEntry.h"
+#import "InDependenceSession.h"
 
-#import "RSInjectorCustomInitializerExtension.h"
-#import "RSInjectorSingletonExtension.h"
+#import "InDependenceCustomInitializerExtension.h"
+#import "InDependenceSingletonExtension.h"
 
 static NSMutableArray *gExtensions;
 
-@interface RSInjector () <RSInjectorExtensionDelegate>
-@property (nonatomic,readonly) id<RSInjectorExtensionDelegate> lastExtension;
+@interface InDependenceInjector () <InDependenceExtensionDelegate>
+@property (nonatomic,readonly) id<InDependenceExtensionDelegate> lastExtension;
 @end
 
-@implementation RSInjector{
+@implementation InDependenceInjector{
     NSMutableDictionary *_bindings;
 }
 
 #pragma mark - Extensions
-+(void)registerExtension:(RSInjectorExtension *)extension{
++(void)registerExtension:(InDependenceExtension *)extension{
     extension.delegate = [gExtensions lastObject];
     [gExtensions addObject:extension];
 }
 
-+(void)registerExtensions:(RSInjectorExtension *)first, ... NS_REQUIRES_NIL_TERMINATION{
++(void)registerExtensions:(InDependenceExtension *)first, ... NS_REQUIRES_NIL_TERMINATION{
     va_list extensions;
     [self registerExtension:first];
     va_start(extensions, first);
-    RSInjectorExtension *extension;
-    while ((extension = va_arg( extensions, RSInjectorExtension *) )) {
+    InDependenceExtension *extension;
+    while ((extension = va_arg( extensions, InDependenceExtension *) )) {
         [self registerExtension:extension];
     }
     va_end(extensions);
 }
 
--(id<RSInjectorExtensionDelegate>)lastExtension{
+-(id<InDependenceExtensionDelegate>)lastExtension{
     if (gExtensions.count == 0) {
         return self;
     }else{
@@ -52,7 +52,7 @@ static NSMutableArray *gExtensions;
 #pragma mark - Init
 
 + (void)initialize  {
-    if (self != [RSInjector class]) return;
+    if (self != [InDependenceInjector class]) return;
 
     gExtensions = [NSMutableArray new];
     
@@ -61,8 +61,8 @@ static NSMutableArray *gExtensions;
 
 +(void)registerDefaultExtensions{
     [self registerExtensions:
-        [RSInjectorCustomInitializerExtension new],
-        [RSInjectorSingletonExtension new],
+        [InDependenceCustomInitializerExtension new],
+        [InDependenceSingletonExtension new],
         nil
      ];
 }
@@ -82,7 +82,7 @@ static NSMutableArray *gExtensions;
     dispatch_once(&once, ^{
         sharedInstance = [[self class] new];
         if (gExtensions.count > 0) {
-            RSInjectorExtension *firstExtension = [gExtensions objectAtIndex:0];
+            InDependenceExtension *firstExtension = [gExtensions objectAtIndex:0];
             firstExtension.delegate = sharedInstance;
         }
     });
@@ -90,11 +90,11 @@ static NSMutableArray *gExtensions;
 }
 
 #pragma mark - Bindings
--(RSInjectorBindingEntry *)getBinding:(id)classOrProtocol{
-    NSString *key = [RSInjectorUtils key:classOrProtocol];
-    RSInjectorBindingEntry *binding = [_bindings objectForKey:key];
+-(InDependenceBindingEntry *)getBinding:(id)classOrProtocol{
+    NSString *key = [InDependenceUtils key:classOrProtocol];
+    InDependenceBindingEntry *binding = [_bindings objectForKey:key];
     if (!binding) {
-        binding = [RSInjectorBindingEntry new];
+        binding = [InDependenceBindingEntry new];
         [_bindings setObject:binding forKey:key];
     }
     return binding;
@@ -107,13 +107,13 @@ static NSMutableArray *gExtensions;
     return [self getObject:klass session:nil ancestors:[NSArray array]];
 }
 
--(id)getObject:(id)klass session:(RSInjectorSession *)session ancestors:(NSArray *)ancestors{
+-(id)getObject:(id)klass session:(InDependenceSession *)session ancestors:(NSArray *)ancestors{
     NSLog(@"GET OBJECT class %@. ANCESTORS %@",klass,ancestors);
     
     BOOL isRootObjectInSession = NO;
     if (nil == session) {
         isRootObjectInSession = YES;
-        session = [RSInjectorSession new];
+        session = [InDependenceSession new];
     }
     
     Class resolvedClass = [self.lastExtension resolveClass:klass];
@@ -123,15 +123,15 @@ static NSMutableArray *gExtensions;
                                                                  session:session
                                                                ancestors:ancestors];
     
-    NSSet *properties = [RSInjectorUtils requirementsForClass:klass selector:@selector(rs_requires)];
+    NSSet *properties = [InDependenceUtils requirementsForClass:klass selector:@selector(independence_requires)];
     if (properties) {
         NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
         NSMutableArray *ancestorsForProperties = [NSMutableArray arrayWithArray:ancestors];
         [ancestorsForProperties addObject:objectUnderConstruction];
 
         for (NSString *propertyName in properties) {
-            objc_property_t property = [RSInjectorUtils getProperty:propertyName fromClass:klass];
-            RSInjectorPropertyInfo propertyInfo = [RSInjectorUtils classOrProtocolForProperty:property];
+            objc_property_t property = [InDependenceUtils getProperty:propertyName fromClass:klass];
+            RSInjectorPropertyInfo propertyInfo = [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
             id theObject = [self getObject:desiredClassOrProtocol session:session ancestors:ancestorsForProperties];
@@ -162,8 +162,8 @@ static NSMutableArray *gExtensions;
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(RSInjector*)injector
-                 session:(RSInjectorSession*)session
+                injector:(InDependenceInjector*)injector
+                 session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors{
     
     return [resolvedClass new];

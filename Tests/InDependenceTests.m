@@ -28,19 +28,19 @@
 
 - (void)testInjectEngineToCar{
     
-    Ford *fordCar = [[RSInjector sharedInjector] getObject:[FordFocus class]];
+    Ford *fordCar = [[InDependenceInjector sharedInjector] getObject:[FordFocus class]];
     STAssertNotNil(fordCar.engine, @"");
 }
 
 -(void)testSingletonRoad{
-    Garage *garage = [[RSInjector sharedInjector] getObject:[Garage class]];
+    Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
     STAssertNotNil(garage.fordCar.road, @"");
     STAssertNotNil(garage.renaultCar.road, @"");
     STAssertEqualObjects(garage.fordCar.road, garage.renaultCar.road, @"");
 }
 
 -(void)testCustomInitializer{
-    FordFocus *car = [[RSInjector sharedInjector] getObject:[FordFocus class]];
+    FordFocus *car = [[InDependenceInjector sharedInjector] getObject:[FordFocus class]];
     STAssertTrue([car.year isEqualToString:@"2010"], @"");
     
     //FordFocus *car2013 = [[RSInjector sharedInjector] getObject:[FordFocus class]];

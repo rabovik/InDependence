@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorExtension.h"
+#import "InDependenceExtension.h"
 
 #define rs_register_singleton() \
 +(BOOL)rs_register_singleton { \
     return YES; \
 }
 
-@interface RSInjectorSingletonExtension : RSInjectorExtension
+@interface InDependenceSingletonExtension : InDependenceExtension
 
 @end

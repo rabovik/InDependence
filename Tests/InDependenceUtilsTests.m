@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorUtilsTests.h"
+#import "InDependenceUtilsTests.h"
 #import "CarModels.h"
 
-@implementation RSInjectorUtilsTests
+@implementation InDependenceUtilsTests
 
 -(void)testEntriesFromClassAndSuperClasses{
-    NSSet *requiredSet = [FordFocus performSelector:@selector(rs_requires)];
+    NSSet *requiredSet = [FordFocus performSelector:@selector(independence_requires)];
     NSSet *etalonSet = [NSSet setWithObjects:@"logo",@"engine",@"road",nil];
     
     NSMutableSet *s = [NSMutableSet new];

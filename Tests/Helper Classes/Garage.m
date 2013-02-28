@@ -9,7 +9,7 @@
 #import "Garage.h"
 
 @implementation Garage
-rs_requires(@"fordCar",@"renaultCar");
+independence_requires(@"fordCar",@"renaultCar");
 
 -(void)awakeFromInjector{
     NSLog(@"AWAKE %@",self);

@@ -10,7 +10,7 @@
 
 @implementation Car
 
-rs_requires(@"engine",@"road");
+independence_requires(@"engine",@"road");
 
 -(void)awakeFromInjector{
     NSLog(@"AWAKE %@",self);

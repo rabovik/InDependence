@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorSession.h"
+#import "InDependenceSession.h"
 
-@implementation RSInjectorSession{
+@implementation InDependenceSession{
     NSMutableArray *_instantiatedObjects;
 }
 

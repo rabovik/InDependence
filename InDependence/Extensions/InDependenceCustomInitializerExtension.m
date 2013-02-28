@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorCustomInitializerExtension.h"
+#import "InDependenceCustomInitializerExtension.h"
 
-@implementation RSInjectorCustomInitializerExtension
+@implementation InDependenceCustomInitializerExtension
 
 @end

@@ -12,19 +12,19 @@
 		1A1DFD9016DC921300658409 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1DFD5616DC918300658409 /* Foundation.framework */; };
 		1A1DFD9616DC921300658409 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9416DC921300658409 /* InfoPlist.strings */; };
 		1A1DFD9916DC921300658409 /* InDependenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9816DC921300658409 /* InDependenceTests.m */; };
-		1A1DFDA316DC972C00658409 /* RSInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA216DC972C00658409 /* RSInjector.m */; };
-		1A1DFDA616DDF84300658409 /* RSInjectorBindingEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA516DDF84300658409 /* RSInjectorBindingEntry.m */; };
+		1A1DFDA316DC972C00658409 /* InDependenceInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA216DC972C00658409 /* InDependenceInjector.m */; };
+		1A1DFDA616DDF84300658409 /* InDependenceBindingEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */; };
 		1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA916DDFE8D00658409 /* Car.m */; };
 		1A1DFDAD16DDFE9D00658409 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAC16DDFE9D00658409 /* Engine.m */; };
 		1A1DFDB016DDFEBA00658409 /* CarModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAF16DDFEBA00658409 /* CarModels.m */; };
-		1A1DFDB316DE19CB00658409 /* RSInjectorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */; };
-		1A1DFDB616DE1AAB00658409 /* RSInjectorUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */; };
-		1A1DFDBA16DE6B9200658409 /* RSInjectorSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */; };
-		1A1DFDBD16DE78E900658409 /* RSInjectorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */; };
-		1A1DFDC016DE7C9200658409 /* RSInjectorSingletonExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */; };
+		1A1DFDB316DE19CB00658409 /* InDependenceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB216DE19CA00658409 /* InDependenceUtils.m */; };
+		1A1DFDB616DE1AAB00658409 /* InDependenceUtilsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB516DE1AAB00658409 /* InDependenceUtilsTests.m */; };
+		1A1DFDBA16DE6B9200658409 /* InDependenceSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDB916DE6B9200658409 /* InDependenceSession.m */; };
+		1A1DFDBD16DE78E900658409 /* InDependenceExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBC16DE78E900658409 /* InDependenceExtension.m */; };
+		1A1DFDC016DE7C9200658409 /* InDependenceSingletonExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBF16DE7C9200658409 /* InDependenceSingletonExtension.m */; };
 		1A1DFDC316DE864900658409 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC216DE864900658409 /* Road.m */; };
 		1A1DFDC616DE86D500658409 /* Garage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC516DE86D500658409 /* Garage.m */; };
-		1A1DFDC916DF46F500658409 /* RSInjectorCustomInitializerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC816DF46F500658409 /* RSInjectorCustomInitializerExtension.m */; };
+		1A1DFDC916DF46F500658409 /* InDependenceCustomInitializerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,32 +39,32 @@
 		1A1DFD9816DC921300658409 /* InDependenceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InDependenceTests.m; sourceTree = "<group>"; };
 		1A1DFD9A16DC921300658409 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		1A1DFDA016DC963300658409 /* InDependence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InDependence.h; sourceTree = "<group>"; };
-		1A1DFDA116DC972C00658409 /* RSInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjector.h; path = Core/RSInjector.h; sourceTree = "<group>"; };
-		1A1DFDA216DC972C00658409 /* RSInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjector.m; path = Core/RSInjector.m; sourceTree = "<group>"; };
-		1A1DFDA416DDF84300658409 /* RSInjectorBindingEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorBindingEntry.h; path = Core/RSInjectorBindingEntry.h; sourceTree = "<group>"; };
-		1A1DFDA516DDF84300658409 /* RSInjectorBindingEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorBindingEntry.m; path = Core/RSInjectorBindingEntry.m; sourceTree = "<group>"; };
+		1A1DFDA116DC972C00658409 /* InDependenceInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceInjector.h; path = Core/InDependenceInjector.h; sourceTree = "<group>"; };
+		1A1DFDA216DC972C00658409 /* InDependenceInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceInjector.m; path = Core/InDependenceInjector.m; sourceTree = "<group>"; };
+		1A1DFDA416DDF84300658409 /* InDependenceBindingEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceBindingEntry.h; path = Core/InDependenceBindingEntry.h; sourceTree = "<group>"; };
+		1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceBindingEntry.m; path = Core/InDependenceBindingEntry.m; sourceTree = "<group>"; };
 		1A1DFDA816DDFE8D00658409 /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Car.h; path = "Helper Classes/Car.h"; sourceTree = "<group>"; };
 		1A1DFDA916DDFE8D00658409 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Car.m; path = "Helper Classes/Car.m"; sourceTree = "<group>"; };
 		1A1DFDAB16DDFE9D00658409 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Engine.h; path = "Helper Classes/Engine.h"; sourceTree = "<group>"; };
 		1A1DFDAC16DDFE9D00658409 /* Engine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Engine.m; path = "Helper Classes/Engine.m"; sourceTree = "<group>"; };
 		1A1DFDAE16DDFEBA00658409 /* CarModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CarModels.h; path = "Helper Classes/CarModels.h"; sourceTree = "<group>"; };
 		1A1DFDAF16DDFEBA00658409 /* CarModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CarModels.m; path = "Helper Classes/CarModels.m"; sourceTree = "<group>"; };
-		1A1DFDB116DE19CA00658409 /* RSInjectorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorUtils.h; path = Core/RSInjectorUtils.h; sourceTree = "<group>"; };
-		1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorUtils.m; path = Core/RSInjectorUtils.m; sourceTree = "<group>"; };
-		1A1DFDB416DE1AAB00658409 /* RSInjectorUtilsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSInjectorUtilsTests.h; sourceTree = "<group>"; };
-		1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSInjectorUtilsTests.m; sourceTree = "<group>"; };
-		1A1DFDB816DE6B9100658409 /* RSInjectorSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorSession.h; path = Core/RSInjectorSession.h; sourceTree = "<group>"; };
-		1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorSession.m; path = Core/RSInjectorSession.m; sourceTree = "<group>"; };
-		1A1DFDBB16DE78E900658409 /* RSInjectorExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorExtension.h; path = Extensions/RSInjectorExtension.h; sourceTree = "<group>"; };
-		1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorExtension.m; path = Extensions/RSInjectorExtension.m; sourceTree = "<group>"; };
-		1A1DFDBE16DE7C9200658409 /* RSInjectorSingletonExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorSingletonExtension.h; path = Extensions/RSInjectorSingletonExtension.h; sourceTree = "<group>"; };
-		1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorSingletonExtension.m; path = Extensions/RSInjectorSingletonExtension.m; sourceTree = "<group>"; };
+		1A1DFDB116DE19CA00658409 /* InDependenceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceUtils.h; path = Core/InDependenceUtils.h; sourceTree = "<group>"; };
+		1A1DFDB216DE19CA00658409 /* InDependenceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceUtils.m; path = Core/InDependenceUtils.m; sourceTree = "<group>"; };
+		1A1DFDB416DE1AAB00658409 /* InDependenceUtilsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InDependenceUtilsTests.h; sourceTree = "<group>"; };
+		1A1DFDB516DE1AAB00658409 /* InDependenceUtilsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InDependenceUtilsTests.m; sourceTree = "<group>"; };
+		1A1DFDB816DE6B9100658409 /* InDependenceSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceSession.h; path = Core/InDependenceSession.h; sourceTree = "<group>"; };
+		1A1DFDB916DE6B9200658409 /* InDependenceSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceSession.m; path = Core/InDependenceSession.m; sourceTree = "<group>"; };
+		1A1DFDBB16DE78E900658409 /* InDependenceExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceExtension.h; path = Extensions/InDependenceExtension.h; sourceTree = "<group>"; };
+		1A1DFDBC16DE78E900658409 /* InDependenceExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceExtension.m; path = Extensions/InDependenceExtension.m; sourceTree = "<group>"; };
+		1A1DFDBE16DE7C9200658409 /* InDependenceSingletonExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceSingletonExtension.h; path = Extensions/InDependenceSingletonExtension.h; sourceTree = "<group>"; };
+		1A1DFDBF16DE7C9200658409 /* InDependenceSingletonExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceSingletonExtension.m; path = Extensions/InDependenceSingletonExtension.m; sourceTree = "<group>"; };
 		1A1DFDC116DE864800658409 /* Road.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Road.h; path = "Helper Classes/Road.h"; sourceTree = "<group>"; };
 		1A1DFDC216DE864900658409 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Road.m; path = "Helper Classes/Road.m"; sourceTree = "<group>"; };
 		1A1DFDC416DE86D500658409 /* Garage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Garage.h; path = "Helper Classes/Garage.h"; sourceTree = "<group>"; };
 		1A1DFDC516DE86D500658409 /* Garage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Garage.m; path = "Helper Classes/Garage.m"; sourceTree = "<group>"; };
-		1A1DFDC716DF46F500658409 /* RSInjectorCustomInitializerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorCustomInitializerExtension.h; path = Extensions/RSInjectorCustomInitializerExtension.h; sourceTree = "<group>"; };
-		1A1DFDC816DF46F500658409 /* RSInjectorCustomInitializerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorCustomInitializerExtension.m; path = Extensions/RSInjectorCustomInitializerExtension.m; sourceTree = "<group>"; };
+		1A1DFDC716DF46F500658409 /* InDependenceCustomInitializerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceCustomInitializerExtension.h; path = Extensions/InDependenceCustomInitializerExtension.h; sourceTree = "<group>"; };
+		1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceCustomInitializerExtension.m; path = Extensions/InDependenceCustomInitializerExtension.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +126,8 @@
 				1A1DFDA716DDFCB100658409 /* Helper Classes */,
 				1A1DFD9716DC921300658409 /* InDependenceTests.h */,
 				1A1DFD9816DC921300658409 /* InDependenceTests.m */,
-				1A1DFDB416DE1AAB00658409 /* RSInjectorUtilsTests.h */,
-				1A1DFDB516DE1AAB00658409 /* RSInjectorUtilsTests.m */,
+				1A1DFDB416DE1AAB00658409 /* InDependenceUtilsTests.h */,
+				1A1DFDB516DE1AAB00658409 /* InDependenceUtilsTests.m */,
 				1A1DFD9216DC921300658409 /* Supporting Files */,
 			);
 			path = Tests;
@@ -146,14 +146,14 @@
 		1A1DFD9E16DC947B00658409 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				1A1DFDA116DC972C00658409 /* RSInjector.h */,
-				1A1DFDA216DC972C00658409 /* RSInjector.m */,
-				1A1DFDB816DE6B9100658409 /* RSInjectorSession.h */,
-				1A1DFDB916DE6B9200658409 /* RSInjectorSession.m */,
-				1A1DFDB116DE19CA00658409 /* RSInjectorUtils.h */,
-				1A1DFDB216DE19CA00658409 /* RSInjectorUtils.m */,
-				1A1DFDA416DDF84300658409 /* RSInjectorBindingEntry.h */,
-				1A1DFDA516DDF84300658409 /* RSInjectorBindingEntry.m */,
+				1A1DFDA116DC972C00658409 /* InDependenceInjector.h */,
+				1A1DFDA216DC972C00658409 /* InDependenceInjector.m */,
+				1A1DFDB816DE6B9100658409 /* InDependenceSession.h */,
+				1A1DFDB916DE6B9200658409 /* InDependenceSession.m */,
+				1A1DFDB116DE19CA00658409 /* InDependenceUtils.h */,
+				1A1DFDB216DE19CA00658409 /* InDependenceUtils.m */,
+				1A1DFDA416DDF84300658409 /* InDependenceBindingEntry.h */,
+				1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -161,12 +161,12 @@
 		1A1DFD9F16DC948400658409 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1A1DFDBB16DE78E900658409 /* RSInjectorExtension.h */,
-				1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */,
-				1A1DFDC716DF46F500658409 /* RSInjectorCustomInitializerExtension.h */,
-				1A1DFDC816DF46F500658409 /* RSInjectorCustomInitializerExtension.m */,
-				1A1DFDBE16DE7C9200658409 /* RSInjectorSingletonExtension.h */,
-				1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */,
+				1A1DFDBB16DE78E900658409 /* InDependenceExtension.h */,
+				1A1DFDBC16DE78E900658409 /* InDependenceExtension.m */,
+				1A1DFDC716DF46F500658409 /* InDependenceCustomInitializerExtension.h */,
+				1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */,
+				1A1DFDBE16DE7C9200658409 /* InDependenceSingletonExtension.h */,
+				1A1DFDBF16DE7C9200658409 /* InDependenceSingletonExtension.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 		1A1DFD4916DC918300658409 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = RS;
+				CLASSPREFIX = InDependence;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Yan Rabovik";
 			};
@@ -269,19 +269,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1DFD9916DC921300658409 /* InDependenceTests.m in Sources */,
-				1A1DFDA316DC972C00658409 /* RSInjector.m in Sources */,
-				1A1DFDA616DDF84300658409 /* RSInjectorBindingEntry.m in Sources */,
+				1A1DFDA316DC972C00658409 /* InDependenceInjector.m in Sources */,
+				1A1DFDA616DDF84300658409 /* InDependenceBindingEntry.m in Sources */,
 				1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */,
 				1A1DFDAD16DDFE9D00658409 /* Engine.m in Sources */,
 				1A1DFDB016DDFEBA00658409 /* CarModels.m in Sources */,
-				1A1DFDB316DE19CB00658409 /* RSInjectorUtils.m in Sources */,
-				1A1DFDB616DE1AAB00658409 /* RSInjectorUtilsTests.m in Sources */,
-				1A1DFDBA16DE6B9200658409 /* RSInjectorSession.m in Sources */,
-				1A1DFDBD16DE78E900658409 /* RSInjectorExtension.m in Sources */,
-				1A1DFDC016DE7C9200658409 /* RSInjectorSingletonExtension.m in Sources */,
+				1A1DFDB316DE19CB00658409 /* InDependenceUtils.m in Sources */,
+				1A1DFDB616DE1AAB00658409 /* InDependenceUtilsTests.m in Sources */,
+				1A1DFDBA16DE6B9200658409 /* InDependenceSession.m in Sources */,
+				1A1DFDBD16DE78E900658409 /* InDependenceExtension.m in Sources */,
+				1A1DFDC016DE7C9200658409 /* InDependenceSingletonExtension.m in Sources */,
 				1A1DFDC316DE864900658409 /* Road.m in Sources */,
 				1A1DFDC616DE86D500658409 /* Garage.m in Sources */,
-				1A1DFDC916DF46F500658409 /* RSInjectorCustomInitializerExtension.m in Sources */,
+				1A1DFDC916DF46F500658409 /* InDependenceCustomInitializerExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

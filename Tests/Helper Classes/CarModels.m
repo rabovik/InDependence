@@ -15,7 +15,7 @@
 @end
 
 @implementation FordFocus
-rs_requires(@"logo");
+independence_requires(@"logo");
 rs_initializer(initWithYear:,@"2010");
 
 -(id)initWithYear:(NSString *)year{

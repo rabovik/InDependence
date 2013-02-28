@@ -6,16 +6,16 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjector.h"
-#import "RSInjectorUtils.h"
+#import "InDependenceInjector.h"
+#import "InDependenceUtils.h"
 
-#import "RSInjectorCustomInitializerExtension.h"
-#import "RSInjectorSingletonExtension.h"
+#import "InDependenceCustomInitializerExtension.h"
+#import "InDependenceSingletonExtension.h"
 
-#define rs_requires(args...) \
-+(NSSet *)rs_requires{ \
+#define independence_requires(args...) \
++(NSSet *)independence_requires{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
-    return [RSInjectorUtils collectRequirementsForClass:self \
+    return [InDependenceUtils collectRequirementsForClass:self \
                                            requirements:requirements \
-                                               selector:@selector(rs_requires)]; \
+                                               selector:@selector(independence_requires)]; \
 }

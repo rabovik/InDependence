@@ -19,7 +19,7 @@ typedef struct rsinjector_property_info {
     RSInjectorType type;
 } RSInjectorPropertyInfo;
 
-@interface RSInjectorUtils : NSObject
+@interface InDependenceUtils : NSObject
 
 +(NSString *)key:(id)classOrProtocol;
 

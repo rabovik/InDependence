@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorBindingEntry.h"
+#import "InDependenceBindingEntry.h"
 
-@implementation RSInjectorBindingEntry{
+@implementation InDependenceBindingEntry{
     NSMutableDictionary *_storage;
 }
 

@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@class RSInjector,RSInjectorSession;
+@class InDependenceInjector,InDependenceSession;
 
-@protocol RSInjectorExtensionDelegate <NSObject>
+@protocol InDependenceExtensionDelegate <NSObject>
 
 -(Class)resolveClass:(id)classOrProtocol;
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(RSInjector*)injector
-                 session:(RSInjectorSession*)session
+                injector:(InDependenceInjector*)injector
+                 session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors;
 
 -(void)informObjectsCreatedInSessionThatTheyAreReady;
 
 @end
 
-@interface RSInjectorExtension : NSObject <RSInjectorExtensionDelegate>
-@property (nonatomic,weak) id<RSInjectorExtensionDelegate> delegate;
+@interface InDependenceExtension : NSObject <InDependenceExtensionDelegate>
+@property (nonatomic,weak) id<InDependenceExtensionDelegate> delegate;
 @end

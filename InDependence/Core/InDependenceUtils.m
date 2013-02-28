@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorUtils.h"
+#import "InDependenceUtils.h"
 
 static NSString *const RSInjectorException = @"RSInjectorException";
 
-@implementation RSInjectorUtils
+@implementation InDependenceUtils
 
 +(NSString *)key:(id)classOrProtocol{
     NSString *key = nil;

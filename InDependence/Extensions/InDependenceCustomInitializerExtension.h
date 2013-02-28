@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "RSInjectorExtension.h"
+#import "InDependenceExtension.h"
 
 #define rs_initializer(selectorSymbols, args...) \
 +(NSString *)rs_initializer { \
@@ -17,6 +17,6 @@
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }
 
-@interface RSInjectorCustomInitializerExtension : RSInjectorExtension
+@interface InDependenceCustomInitializerExtension : InDependenceExtension
 
 @end

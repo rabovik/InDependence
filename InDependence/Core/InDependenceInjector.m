@@ -73,31 +73,27 @@ static InDependenceInjector *gSharedInjector;
     self = [super init];
     if (!self) return nil;
     
-    _bindings = [NSMutableDictionary new];
+    [self reset];
     
     return self;
 }
 
 +(InDependenceInjector *)sharedInjector{
-    @synchronized(self) {
-        if (nil == gSharedInjector) {
-            [self setDefaultInjector:[[self class] new]];
+    static dispatch_once_t predicate;
+	dispatch_once(&predicate, ^{
+        gSharedInjector = [[self class] new];
+        if (gExtensions.count > 0) {
+            InDependenceExtension *firstExtension = [gExtensions objectAtIndex:0];
+            firstExtension.delegate = gSharedInjector;
         }
-    }
+	});
     return gSharedInjector;
 }
 
-+(void)setDefaultInjector:(InDependenceInjector *)injector{
-    @synchronized(self) {
-        if (gSharedInjector != injector) {
-            gSharedInjector = injector;
-            if (gExtensions.count > 0) {
-                InDependenceExtension *firstExtension = [gExtensions objectAtIndex:0];
-                firstExtension.delegate = gSharedInjector;
-            }
-        }
-    }
+-(void)reset{
+    _bindings = [NSMutableDictionary new];
 }
+
 
 #pragma mark - Object Factory
 -(id)getObject:(id)classOrProtocol{

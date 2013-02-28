@@ -12,17 +12,14 @@
 #import "InDependence.h"
 
 @implementation InDependenceTests{
-    InDependenceInjector *injector;
 }
 
 - (void)setUp{
     [super setUp];
-    injector = [InDependenceInjector new];
-    [InDependenceInjector setDefaultInjector:injector];
 }
 
 - (void)tearDown{
-    injector = nil;
+    [[InDependenceInjector sharedInjector] reset];
     [super tearDown];
 }
 
@@ -48,10 +45,10 @@
 }
 
 -(void)testClassToClassBinding{
-    [injector bindClass:[RenaultClio class] toClass:[Renault class]];
-    Renault *car = [injector getObject:[Renault class]];
-    STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"], @"");
-    Garage *garage = [injector getObject:[Garage class]];
+    [[InDependenceInjector sharedInjector] bindClass:[RenaultClio class] toClass:[Renault class]];
+    Renault *car = [[InDependenceInjector sharedInjector] getObject:[Renault class]];
+    STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"], @"Class is %@",NSStringFromClass([car class]));
+    Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
     STAssertTrue([NSStringFromClass([garage.renaultCar class]) isEqualToString:@"RenaultClio"], @"");
 }
 

@@ -16,6 +16,7 @@
 
 - (void)setUp{
     [super setUp];
+    [[InDependenceInjector sharedInjector] bindClass:[SportSteeringWheel class] toProtocol:@protocol(SteeringWheel)];
 }
 
 - (void)tearDown{
@@ -50,6 +51,10 @@
     STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"], @"Class is %@",NSStringFromClass([car class]));
     Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
     STAssertTrue([NSStringFromClass([garage.renaultCar class]) isEqualToString:@"RenaultClio"], @"");
+}
+-(void)testClassToProtocolBinding{
+    Ford *car = [[InDependenceInjector sharedInjector] getObject:[Ford class]];
+    STAssertTrue([NSStringFromClass([car.steeringWheel class]) isEqualToString:@"SportSteeringWheel"], @"Class is %@",NSStringFromClass([car.steeringWheel class]));
 }
 
 @end

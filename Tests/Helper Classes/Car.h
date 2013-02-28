@@ -10,9 +10,16 @@
 
 @class Engine,Road;
 
+@protocol SteeringWheel <NSObject>
+@end
+
 @interface Car : NSObject
 
 @property (nonatomic,strong) Engine *engine;
 @property (nonatomic,strong) Road *road;
+@property (nonatomic,strong) id<SteeringWheel> steeringWheel;
 
+@end
+
+@interface SportSteeringWheel : NSObject<SteeringWheel>
 @end

@@ -116,6 +116,7 @@ static InDependenceInjector *gSharedInjector;
                                                    session:session
                                                  ancestors:ancestors
                                                       info:info];
+    NSLog(@"Resolved class for %@ is %@",[InDependenceUtils key:classOrProtocol],NSStringFromClass(resolvedClass));
     
     id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
                                                                 injector:self
@@ -192,6 +193,7 @@ static InDependenceInjector *gSharedInjector;
     if (!binding) {
         binding = [InDependenceBindingEntry new];
         [_bindings setObject:binding forKey:key];
+        NSLog(@"NEW BINDING FOR KEY %@",key);
     }
     return binding;
 }

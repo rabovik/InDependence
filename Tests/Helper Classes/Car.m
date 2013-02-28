@@ -11,10 +11,13 @@
 
 @implementation Car
 
-independence_requires(@"engine",@"road");
+independence_requires(@"engine",@"road",@"steeringWheel");
 
 -(void)awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }
 
+@end
+
+@implementation SportSteeringWheel
 @end

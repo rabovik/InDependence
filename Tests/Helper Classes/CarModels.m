@@ -30,3 +30,6 @@ independence_initializer(initWithYear:,@"2010");
 
 @implementation Renault
 @end
+
+@implementation RenaultClio
+@end

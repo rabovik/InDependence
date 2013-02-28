@@ -22,3 +22,6 @@
 
 @interface Renault : Car
 @end
+
+@interface RenaultClio : Renault
+@end

@@ -167,6 +167,11 @@ static InDependenceInjector *gSharedInjector;
              session:(InDependenceSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info{
+    InDependenceBindingEntry *binding = [self getBinding:classOrProtocol];
+    if (binding.bindedClass) {
+        return binding.bindedClass;
+    }
+
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
     if (isClass) {
         return classOrProtocol;
@@ -196,8 +201,17 @@ static InDependenceInjector *gSharedInjector;
 }
 
 -(void)bindClass:(Class)aClass toClass:(Class)toClass{
-    // todo
+    [self bindClass:aClass to:toClass];
 }
+-(void)bindClass:(Class)aClass toProtocol:(Protocol *)toProtocol{
+    [self bindClass:aClass to:toProtocol];
+}
+
+-(void)bindClass:(Class)aClass to:(id)classOrProtocol{
+    InDependenceBindingEntry *binding = [self getBinding:classOrProtocol];
+    binding.bindedClass = aClass;
+}
+
 
 
 @end

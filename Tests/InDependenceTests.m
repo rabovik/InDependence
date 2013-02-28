@@ -11,34 +11,28 @@
 #import "Garage.h"
 #import "InDependence.h"
 
-@implementation InDependenceTests
-
-- (void)setUp
-{
-    [super setUp];
-    
-    // Set-up code here.
+@implementation InDependenceTests{
+    InDependenceInjector *injector;
 }
 
-- (void)tearDown
-{
-    // Tear-down code here.
-    
+- (void)setUp{
+    [super setUp];
+    injector = [InDependenceInjector new];
+    [InDependenceInjector setDefaultInjector:injector];
+}
+
+- (void)tearDown{
+    injector = nil;
     [super tearDown];
 }
 
 - (void)testInjectEngineToCar{
-    
     Ford *fordCar = [[InDependenceInjector sharedInjector] getObject:[FordFocus class]];
     STAssertNotNil(fordCar.engine, @"");
 }
 
 -(void)testSingletonRoad{
-    NSDate *d0 = [NSDate date];
     Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
-    NSTimeInterval t = [[NSDate date] timeIntervalSinceDate:d0];
-    NSLog(@"Garage took %f for build.",t);
-    
     STAssertNotNil(garage.fordCar.road, @"");
     STAssertNotNil(garage.renaultCar.road, @"");
     STAssertEqualObjects(garage.fordCar.road, garage.renaultCar.road, @"");
@@ -51,6 +45,14 @@
     FordFocus *car2013 = [[InDependenceInjector sharedInjector] getObjectWithArgs:[FordFocus class],@"2013",nil];
     STAssertTrue([car2013.year isEqualToString:@"2013"], @"");
 
+}
+
+-(void)testClassToClassBinding{
+    [injector bindClass:[RenaultClio class] toClass:[Renault class]];
+    Renault *car = [injector getObject:[Renault class]];
+    STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"], @"");
+    Garage *garage = [injector getObject:[Garage class]];
+    STAssertTrue([NSStringFromClass([garage.renaultCar class]) isEqualToString:@"RenaultClio"], @"");
 }
 
 @end

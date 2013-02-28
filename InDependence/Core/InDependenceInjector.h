@@ -34,5 +34,6 @@
 #pragma mark - Bindings
 -(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
 -(void)bindClass:(Class)aClass toClass:(Class)toClass;
+-(void)bindClass:(Class)aClass toProtocol:(Protocol *)toProtocol;
 
 @end

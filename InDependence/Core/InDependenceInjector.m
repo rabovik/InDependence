@@ -104,10 +104,13 @@ static NSMutableArray *gExtensions;
 
 #pragma mark - Object factory
 -(id)getObject:(id)klass{
-    return [self getObject:klass session:nil ancestors:[NSArray array]];
+    return [self getObject:klass session:nil ancestors:nil info:nil];
 }
 
--(id)getObject:(id)klass session:(InDependenceSession *)session ancestors:(NSArray *)ancestors{
+-(id)getObject:(id)klass
+       session:(InDependenceSession *)session
+     ancestors:(NSArray *)ancestors
+          info:(NSDictionary *)info{
     NSLog(@"GET OBJECT class %@. ANCESTORS %@",klass,ancestors);
     
     BOOL isRootObjectInSession = NO;
@@ -134,7 +137,10 @@ static NSMutableArray *gExtensions;
             RSInjectorPropertyInfo propertyInfo = [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
-            id theObject = [self getObject:desiredClassOrProtocol session:session ancestors:ancestorsForProperties];
+            id theObject = [self getObject:desiredClassOrProtocol
+                                   session:session
+                                 ancestors:ancestorsForProperties
+                                      info:nil];
             
             if (nil == theObject) {
                 theObject = [NSNull null];

@@ -164,17 +164,26 @@ static InDependenceInjector *gSharedInjector;
              session:(InDependenceSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info{
+    BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
+
     InDependenceBindingEntry *binding = [self getBinding:classOrProtocol];
     if (binding.bindedClass) {
-        return binding.bindedClass;
+        Class resolvedClass = binding.bindedClass;
+        if (isClass && resolvedClass != classOrProtocol) {
+            return [self resolveClass:resolvedClass
+                             injector:injector
+                              session:session
+                            ancestors:ancestors
+                                 info:info];
+        }
+        return resolvedClass;
     }
 
-    BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
     if (isClass) {
         return classOrProtocol;
-    }else{
-        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find class for protocol: <%@>", NSStringFromProtocol(classOrProtocol)] userInfo:nil];
     }
+    
+    @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find class for protocol: <%@>", NSStringFromProtocol(classOrProtocol)] userInfo:nil];
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass

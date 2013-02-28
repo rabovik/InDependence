@@ -108,7 +108,6 @@ static InDependenceInjector *gSharedInjector;
        session:(InDependenceSession *)session
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info{
-    //NSLog(@"GET OBJECT class %@. ANCESTORS %@",classOrProtocol,ancestors);
     
     BOOL isRootObjectInSession = NO;
     if (nil == session) {
@@ -160,8 +159,12 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark Extension delegate
 -(Class)resolveClass:(id)classOrProtocol{
-    return classOrProtocol;
-    //return [self.delegate resolveClass:classOrProtocol];
+    BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
+    if (isClass) {
+        return classOrProtocol;
+    }else{
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find class for protocol: %@", classOrProtocol] userInfo:nil];
+    }
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass

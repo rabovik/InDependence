@@ -8,7 +8,7 @@
 
 #import "InDependenceUtils.h"
 
-static NSString *const RSInjectorException = @"RSInjectorException";
+NSString *const InDependenceException = @"InDependenceException";
 
 @implementation InDependenceUtils
 
@@ -74,14 +74,14 @@ static NSString *const RSInjectorException = @"RSInjectorException";
     
     NSRange startRange = [attributes rangeOfString:@"T@\""];
     if (startRange.location == NSNotFound) {
-        @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Unable to determine class type for property declaration: '%@'", propertyName] userInfo:nil];
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to determine class type for property declaration: '%@'", propertyName] userInfo:nil];
     }
     
     NSString *startOfClassName = [attributes substringFromIndex:startRange.length];
     NSRange endRange = [startOfClassName rangeOfString:@"\""];
     
     if (endRange.location == NSNotFound) {
-        @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Unable to determine class type for property declaration: '%@'", propertyName] userInfo:nil];
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to determine class type for property declaration: '%@'", propertyName] userInfo:nil];
     }
     
     NSString *classOrProtocolName = [startOfClassName substringToIndex:endRange.location];
@@ -99,7 +99,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
     }
     
     if(!classOrProtocol) {
-        @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Unable get class for name '%@' for property '%@'", classOrProtocolName, propertyName] userInfo:nil];
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable get class for name '%@' for property '%@'", classOrProtocolName, propertyName] userInfo:nil];
     }
     propertyInfo.value = (__bridge void *)(classOrProtocol);
     
@@ -109,7 +109,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass{
     objc_property_t property = class_getProperty(klass, (const char *)[propertyName UTF8String]);
     if (property == NULL) {
-        @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Unable to find property declaration: '%@'", propertyName] userInfo:nil];
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find property declaration: '%@'", propertyName] userInfo:nil];
     }
     return property;
 }
@@ -130,7 +130,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
         return instance;
     } else {
         instance = nil;
-        @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Could not find initializer '%@' on %@", NSStringFromSelector(initializer), NSStringFromClass(klass)] userInfo:nil];
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Could not find initializer '%@' on %@", NSStringFromSelector(initializer), NSStringFromClass(klass)] userInfo:nil];
     }
     return nil;
 }

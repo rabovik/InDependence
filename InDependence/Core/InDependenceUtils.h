@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+extern NSString *const InDependenceException;
+
 typedef enum {
     RSInjectorTypeClass,
     RSInjectorTypeProtocol

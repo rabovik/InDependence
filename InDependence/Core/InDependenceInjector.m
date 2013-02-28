@@ -29,6 +29,11 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass{
+    if (![extensionClass isSubclassOfClass:[InDependenceExtension class]]) {
+        @throw [NSException exceptionWithName:InDependenceException
+                                       reason:[NSString stringWithFormat:@"Can not register %@ extension because it is not a subclass of InDependenceExtension", NSStringFromClass(extensionClass)]
+                                     userInfo:nil];
+    }
     [gExtensions addObject:extensionClass];
 }
 

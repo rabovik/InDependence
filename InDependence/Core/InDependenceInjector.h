@@ -20,7 +20,8 @@
 +(void)registerExtensions:(InDependenceExtension *)first, ... NS_REQUIRES_NIL_TERMINATION;
 
 #pragma mark - Initializing
-+(id)sharedInjector;
++(InDependenceInjector *)sharedInjector;
++(void)setDefaultInjector:(InDependenceInjector *)injector;
 
 #pragma mark - Object Factory
 -(id)getObject:(id)klass;

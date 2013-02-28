@@ -16,6 +16,7 @@
 #import "InDependenceSingletonExtension.h"
 
 static NSMutableArray *gExtensions;
+static InDependenceInjector *gSharedInjector;
 
 @interface InDependenceInjector () <InDependenceExtensionDelegate>
 @property (nonatomic,readonly) id<InDependenceExtensionDelegate> lastExtension;
@@ -77,17 +78,25 @@ static NSMutableArray *gExtensions;
     return self;
 }
 
-+(id)sharedInjector{
-    static dispatch_once_t once;
-    static id sharedInstance;
-    dispatch_once(&once, ^{
-        sharedInstance = [[self class] new];
-        if (gExtensions.count > 0) {
-            InDependenceExtension *firstExtension = [gExtensions objectAtIndex:0];
-            firstExtension.delegate = sharedInstance;
++(InDependenceInjector *)sharedInjector{
+    @synchronized(self) {
+        if (nil == gSharedInjector) {
+            [self setDefaultInjector:[[self class] new]];
         }
-    });
-    return sharedInstance;
+    }
+    return gSharedInjector;
+}
+
++(void)setDefaultInjector:(InDependenceInjector *)injector{
+    @synchronized(self) {
+        if (gSharedInjector != injector) {
+            gSharedInjector = injector;
+            if (gExtensions.count > 0) {
+                InDependenceExtension *firstExtension = [gExtensions objectAtIndex:0];
+                firstExtension.delegate = gSharedInjector;
+            }
+        }
+    }
 }
 
 #pragma mark - Object Factory

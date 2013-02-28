@@ -100,8 +100,8 @@ static InDependenceInjector *gSharedInjector;
 }
 
 #pragma mark - Object Factory
--(id)getObject:(id)klass{
-    return [self getObject:klass session:nil ancestors:nil info:nil];
+-(id)getObject:(id)classOrProtocol{
+    return [self getObject:classOrProtocol session:nil ancestors:nil info:nil];
 }
 
 -(id)getObject:(id)classOrProtocol

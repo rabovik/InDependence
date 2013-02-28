@@ -24,7 +24,7 @@
 +(void)setDefaultInjector:(InDependenceInjector *)injector;
 
 #pragma mark - Object Factory
--(id)getObject:(id)klass;
+-(id)getObject:(id)classOrProtocol;
 -(id)getObject:(id)classOrProtocol
        session:(InDependenceSession *)session
      ancestors:(NSArray *)ancestors

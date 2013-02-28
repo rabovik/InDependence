@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@class InDependenceBindingEntry,InDependenceExtension,InDependenceSession;
+@class
+    InDependenceBindingEntry,
+    InDependenceExtension,
+    InDependenceSession;
 
 @interface InDependenceInjector : NSObject
 

@@ -12,6 +12,5 @@
 
 -(void)registerInstantiatedObject:(id)object;
 -(void)notifyObjectsThatTheyAreReady;
-//@property (nonatomic,readonly) NSArray *instantiatedObjects;
 
 @end

@@ -25,6 +25,7 @@
 		1A1DFDC316DE864900658409 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC216DE864900658409 /* Road.m */; };
 		1A1DFDC616DE86D500658409 /* Garage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC516DE86D500658409 /* Garage.m */; };
 		1A1DFDC916DF46F500658409 /* InDependenceCustomInitializerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */; };
+		1A1DFDCC16DFE6E500658409 /* InDependenceAncestorsExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDCB16DFE6E400658409 /* InDependenceAncestorsExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		1A1DFDC516DE86D500658409 /* Garage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Garage.m; path = "Helper Classes/Garage.m"; sourceTree = "<group>"; };
 		1A1DFDC716DF46F500658409 /* InDependenceCustomInitializerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceCustomInitializerExtension.h; path = Extensions/InDependenceCustomInitializerExtension.h; sourceTree = "<group>"; };
 		1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceCustomInitializerExtension.m; path = Extensions/InDependenceCustomInitializerExtension.m; sourceTree = "<group>"; };
+		1A1DFDCA16DFE6E400658409 /* InDependenceAncestorsExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceAncestorsExtension.h; path = Extensions/InDependenceAncestorsExtension.h; sourceTree = "<group>"; };
+		1A1DFDCB16DFE6E400658409 /* InDependenceAncestorsExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceAncestorsExtension.m; path = Extensions/InDependenceAncestorsExtension.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +170,8 @@
 				1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */,
 				1A1DFDBE16DE7C9200658409 /* InDependenceSingletonExtension.h */,
 				1A1DFDBF16DE7C9200658409 /* InDependenceSingletonExtension.m */,
+				1A1DFDCA16DFE6E400658409 /* InDependenceAncestorsExtension.h */,
+				1A1DFDCB16DFE6E400658409 /* InDependenceAncestorsExtension.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 				1A1DFDC316DE864900658409 /* Road.m in Sources */,
 				1A1DFDC616DE86D500658409 /* Garage.m in Sources */,
 				1A1DFDC916DF46F500658409 /* InDependenceCustomInitializerExtension.m in Sources */,
+				1A1DFDCC16DFE6E500658409 /* InDependenceAncestorsExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

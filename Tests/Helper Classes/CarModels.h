@@ -12,6 +12,7 @@
 @end
 
 @interface FordFocusLogo : NSObject
+@property (nonatomic,weak) Car *parentCar;
 @end
 
 @interface FordFocus : Ford

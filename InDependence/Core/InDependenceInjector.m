@@ -14,6 +14,7 @@
 
 #import "InDependenceCustomInitializerExtension.h"
 #import "InDependenceSingletonExtension.h"
+#import "InDependenceAncestorsExtension.h"
 
 static NSMutableArray *gExtensions;
 static InDependenceInjector *gSharedInjector;
@@ -58,6 +59,7 @@ static InDependenceInjector *gSharedInjector;
 +(void)registerDefaultExtensions{
     [self registerExtensionClass:[InDependenceCustomInitializerExtension class]];
     [self registerExtensionClass:[InDependenceSingletonExtension class]];
+    [self registerExtensionClass:[InDependenceAncestorsExtension class]];
 }
 
 -(id)init{

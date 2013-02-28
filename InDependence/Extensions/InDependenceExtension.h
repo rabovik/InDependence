@@ -12,7 +12,11 @@
 
 @protocol InDependenceExtensionDelegate <NSObject>
 
--(Class)resolveClass:(id)classOrProtocol;
+-(Class)resolveClass:(id)classOrProtocol
+            injector:(InDependenceInjector*)injector
+             session:(InDependenceSession*)session
+           ancestors:(NSArray *)ancestors
+                info:(NSDictionary *)info;
 
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector*)injector

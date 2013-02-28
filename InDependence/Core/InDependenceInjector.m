@@ -115,7 +115,11 @@ static InDependenceInjector *gSharedInjector;
         session = [InDependenceSession new];
     }
     
-    Class resolvedClass = [self.lastExtension resolveClass:classOrProtocol];
+    Class resolvedClass = [self.lastExtension resolveClass:classOrProtocol
+                                                  injector:self
+                                                   session:session
+                                                 ancestors:ancestors
+                                                      info:info];
     
     id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
                                                                 injector:self
@@ -158,7 +162,11 @@ static InDependenceInjector *gSharedInjector;
 }
 
 #pragma mark Extension delegate
--(Class)resolveClass:(id)classOrProtocol{
+-(Class)resolveClass:(id)classOrProtocol
+            injector:(InDependenceInjector*)injector
+             session:(InDependenceSession*)session
+           ancestors:(NSArray *)ancestors
+                info:(NSDictionary *)info{
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
     if (isClass) {
         return classOrProtocol;

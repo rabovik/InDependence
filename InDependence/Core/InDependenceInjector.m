@@ -52,7 +52,7 @@ static NSMutableArray *gExtensions;
 
 #pragma mark - Initializing
 
-+ (void)initialize  {
++(void)initialize  {
     if (self != [InDependenceInjector class]) return;
 
     gExtensions = [NSMutableArray new];

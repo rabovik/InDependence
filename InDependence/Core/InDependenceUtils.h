@@ -32,6 +32,7 @@ typedef struct rsinjector_property_info {
 +(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector;
 +(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector;
 
++(BOOL)propertyIsWeak:(objc_property_t)property;
 +(RSInjectorPropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;

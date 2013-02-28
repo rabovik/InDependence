@@ -10,7 +10,10 @@
 
 @class Ford,FordFocus,Renault;
 
-@interface Garage : NSObject
+@protocol Garage <NSObject>
+@end
+
+@interface Garage : NSObject<Garage>
 
 @property (nonatomic,strong) FordFocus *fordCar;
 @property (nonatomic,strong) Renault *renaultCar;

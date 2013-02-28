@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class Engine,Road;
+@protocol Garage;
 
 @protocol SteeringWheel <NSObject>
 @end
 
-@interface Car : NSObject
+@protocol CarProtocol <NSObject>
+@end
+
+@interface Car : NSObject <CarProtocol>
 
 @property (nonatomic,strong) Engine *engine;
 @property (nonatomic,strong) Road *road;
@@ -22,4 +26,5 @@
 @end
 
 @interface SportSteeringWheel : NSObject<SteeringWheel>
+@property (nonatomic,weak) id<Garage> garage;
 @end

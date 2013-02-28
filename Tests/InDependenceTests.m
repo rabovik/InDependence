@@ -63,4 +63,12 @@
     STAssertTrue([car class] == [FordFocus class], @"Class is %@",[car class]);
 }
 
+-(void)testRequiredAncestors{
+    Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
+    FordFocus *focus = garage.fordCar;
+    STAssertEqualObjects(focus.logo.parentCar, focus, @"");
+    SportSteeringWheel *wheel = (SportSteeringWheel *)focus.steeringWheel;
+    STAssertEqualObjects(wheel.garage, garage, @"");
+}
+
 @end

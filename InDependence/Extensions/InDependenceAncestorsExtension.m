@@ -21,28 +21,40 @@
         NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];        
         for (NSString *propertyName in properties) {
             objc_property_t property = [InDependenceUtils getProperty:propertyName fromClass:resolvedClass];
+            if (![InDependenceUtils propertyIsWeak:property]) {
+                @throw [NSException exceptionWithName:InDependenceException
+                                               reason:[NSString stringWithFormat:@"Required ancestor property '%@' of class '%@' must be weak",propertyName,[InDependenceUtils key:resolvedClass]]
+                                             userInfo:nil];
+            }
+            
             RSInjectorPropertyInfo propertyInfo = [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
-            NSString *attributes = [NSString stringWithCString: property_getAttributes(property) encoding: NSASCIIStringEncoding];
+            id resolvedAncestor = nil;
+                        
+            for (int i = ancestors.count - 1; i>=0; --i) {
+                id ancestor = [ancestors objectAtIndex:i];
+                if (propertyInfo.type == RSInjectorTypeClass) {
+                    if ([ancestor isKindOfClass:desiredClassOrProtocol]) {
+                        resolvedAncestor = ancestor;
+                        break;
+                    }
+                }else{
+                    if ([ancestor conformsToProtocol:desiredClassOrProtocol]) {
+                        resolvedAncestor = ancestor;
+                        break;
+                    }
+                }
 
-
-            NSLog(@"ANCESTOR PROP %@ DESIRED %@ Attr %@",propertyName,[InDependenceUtils key:desiredClassOrProtocol],attributes);
-            
-            /*
-            id theObject = [self getObject:desiredClassOrProtocol
-                                   session:session
-                                 ancestors:ancestorsForProperties
-                                      info:nil];
-            
-            if (nil == theObject) {
-                theObject = [NSNull null];
             }
-             */
+                        
+            if (nil == resolvedAncestor) {
+                resolvedAncestor = [NSNull null];
+            }
             
-            //[propertiesDictionary setObject:theObject forKey:propertyName];
+            [propertiesDictionary setObject:resolvedAncestor forKey:propertyName];
         }
-        //[objectUnderConstruction setValuesForKeysWithDictionary:propertiesDictionary];
+        [createdObject setValuesForKeysWithDictionary:propertiesDictionary];
     }
     
     return createdObject;

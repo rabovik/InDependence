@@ -68,6 +68,18 @@ NSString *const InDependenceException = @"InDependenceException";
     return requirements;
 }
 
++(BOOL)propertyIsWeak:(objc_property_t)property{
+    NSString *attributes = [NSString stringWithCString: property_getAttributes(property) encoding: NSASCIIStringEncoding];
+    NSArray *components = [attributes componentsSeparatedByString:@","];
+    for (NSString *component in components) {
+        if ([component isEqualToString:@"W"]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
 +(RSInjectorPropertyInfo)classOrProtocolForProperty:(objc_property_t)property{
     NSString *attributes = [NSString stringWithCString: property_getAttributes(property) encoding: NSASCIIStringEncoding];
     NSString *propertyName = [NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding];

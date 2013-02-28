@@ -10,14 +10,12 @@
 #import "InDependence.h"
 
 @implementation Car
-
 independence_requires(@"engine",@"road",@"steeringWheel");
-
 -(void)awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }
-
 @end
 
 @implementation SportSteeringWheel
+independence_requires_ancestors(@"garage")
 @end

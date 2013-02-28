@@ -20,7 +20,8 @@
 
 #pragma mark - Initializing
 +(InDependenceInjector *)sharedInjector;
--(void)reset;
++(InDependenceInjector *)createInjector;
++(void)setSharedInjector:(InDependenceInjector *)injector;
 
 #pragma mark - Object Factory
 -(id)getObject:(id)classOrProtocol;

@@ -20,7 +20,7 @@
 }
 
 - (void)tearDown{
-    [[InDependenceInjector sharedInjector] reset];
+    [InDependenceInjector setSharedInjector:nil];
     [super tearDown];
 }
 

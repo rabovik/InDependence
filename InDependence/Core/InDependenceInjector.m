@@ -60,11 +60,11 @@ static InDependenceInjector *gSharedInjector;
     [self registerExtensionClass:[InDependenceSingletonExtension class]];
 }
 
-- (id)init{
+-(id)init{
     self = [super init];
     if (!self) return nil;
 
-    [self reset];
+    _bindings = [NSMutableDictionary new];
     
     _extensions = [NSMutableArray new];
     for (Class extensionClass in gExtensions) {
@@ -77,16 +77,28 @@ static InDependenceInjector *gSharedInjector;
         [_extensions addObject:extension];
     }
     
-    
     return self;
 }
 
 +(InDependenceInjector *)sharedInjector{
-    static dispatch_once_t predicate;
-	dispatch_once(&predicate, ^{
-        gSharedInjector = [[self class] new];
-	});
+    @synchronized(self){
+        if (nil == gSharedInjector) {
+            gSharedInjector = [self createInjector];
+        }
+    }
     return gSharedInjector;
+}
+
++(InDependenceInjector *)createInjector{
+    return [[self class] new];
+}
+
++(void)setSharedInjector:(InDependenceInjector *)injector{
+    @synchronized(self) {
+        if (gSharedInjector != injector) {
+            gSharedInjector = injector;
+        }
+    }
 }
 
 -(void)reset{

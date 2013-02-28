@@ -17,11 +17,13 @@
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
-               ancestors:(NSArray *)ancestors{
+               ancestors:(NSArray *)ancestors
+                    info:(NSDictionary *)info{
     return [self.delegate createObjectOfClass:resolvedClass
                                      injector:injector
                                       session:session
-                                    ancestors:ancestors];
+                                    ancestors:ancestors
+                                         info:info];
 }
 
 @end

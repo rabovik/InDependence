@@ -17,7 +17,8 @@
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
-               ancestors:(NSArray *)ancestors;
+               ancestors:(NSArray *)ancestors
+                    info:(NSDictionary *)info;
 
 @end
 

@@ -124,7 +124,8 @@ static NSMutableArray *gExtensions;
     id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
                                                                 injector:self
                                                                  session:session
-                                                               ancestors:ancestors];
+                                                               ancestors:ancestors
+                                                                    info:info];
     
     NSSet *properties = [InDependenceUtils requirementsForClass:klass selector:@selector(independence_requires)];
     if (properties) {
@@ -170,7 +171,8 @@ static NSMutableArray *gExtensions;
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
-               ancestors:(NSArray *)ancestors{
+               ancestors:(NSArray *)ancestors
+                    info:(NSDictionary *)info{
     
     return [resolvedClass new];
 }

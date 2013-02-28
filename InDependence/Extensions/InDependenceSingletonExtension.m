@@ -13,7 +13,12 @@ static NSString *const RSInjectorBindingSingletonStorageKey = @"RSInjectorBindin
 
 @implementation InDependenceSingletonExtension
 
--(id)createObjectOfClass:(Class)resolvedClass injector:(InDependenceInjector *)injector session:(InDependenceSession *)session ancestors:(NSArray *)ancestors{
+-(id)createObjectOfClass:(Class)resolvedClass
+                injector:(InDependenceInjector*)injector
+                 session:(InDependenceSession*)session
+               ancestors:(NSArray *)ancestors
+                    info:(NSDictionary *)info
+{
     
     if ([InDependenceUtils requiredInstructionForClass:resolvedClass selector:@selector(independence_register_singleton)]) {
         
@@ -21,14 +26,22 @@ static NSString *const RSInjectorBindingSingletonStorageKey = @"RSInjectorBindin
         
         id object = [binding objectForKey:RSInjectorBindingSingletonStorageKey];
         if (!object) {
-            object = [super createObjectOfClass:resolvedClass injector:injector session:session ancestors:ancestors];
+            object = [super createObjectOfClass:resolvedClass
+                                       injector:injector
+                                        session:session
+                                      ancestors:ancestors
+                                           info:info];
             [binding setObject:object forKey:RSInjectorBindingSingletonStorageKey];
         }
         
         return object;
     }
         
-    return [super createObjectOfClass:resolvedClass injector:injector session:session ancestors:ancestors];
+    return [super createObjectOfClass:resolvedClass
+                             injector:injector
+                              session:session
+                            ancestors:ancestors
+                                 info:info];
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "Road.h"
+#import "InDependence.h"
 
 @implementation Road
 independence_register_singleton()

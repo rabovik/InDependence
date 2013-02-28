@@ -7,6 +7,7 @@
 //
 
 #import "InDependenceExtension.h"
+#import "InDependenceInjector.h"
 
 #define independence_initializer(selectorSymbols, args...) \
 +(NSString *)independence_initializer { \
@@ -17,7 +18,6 @@
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }
 
-@class InDependenceInjector;
 
 @interface InDependenceInjector (CustomInitializer)
 -(id)getObjectWithArgs:(id)classOrProtocol, ... NS_REQUIRES_NIL_TERMINATION;

@@ -8,6 +8,7 @@
 
 #import "InDependenceCustomInitializerExtension.h"
 #import "InDependenceInjector.h"
+#import "InDependenceUtils.h"
 
 static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgumentsKey";
 

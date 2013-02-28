@@ -7,6 +7,7 @@
 //
 
 #import "Car.h"
+#import "InDependence.h"
 
 @implementation Car
 

@@ -7,6 +7,7 @@
 //
 
 #import "Garage.h"
+#import "InDependence.h"
 
 @implementation Garage
 independence_requires(@"fordCar",@"renaultCar");

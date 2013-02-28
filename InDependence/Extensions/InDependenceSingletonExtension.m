@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
+#import "InDependenceInjector.h"
 #import "InDependenceSingletonExtension.h"
 #import "InDependenceBindingEntry.h"
+#import "InDependenceUtils.h"
 
 static NSString *const InDependenceSingletonStorageKey = @"InDependenceSingletonStorageKey";
 

@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import "InDependenceBindingEntry.h"
 #import "InDependenceSession.h"
+#import "InDependenceUtils.h"
 
 #import "InDependenceCustomInitializerExtension.h"
 #import "InDependenceSingletonExtension.h"

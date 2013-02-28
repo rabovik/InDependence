@@ -9,6 +9,7 @@
 #import "InDependenceTests.h"
 #import "CarModels.h"
 #import "Garage.h"
+#import "InDependence.h"
 
 @implementation InDependenceTests
 
@@ -45,7 +46,7 @@
 
 -(void)testCustomInitializer{
     FordFocus *car = [[InDependenceInjector sharedInjector] getObject:[FordFocus class]];
-    STAssertTrue([car.year isEqualToString:@"2010"], @"");
+    STAssertTrue([car.year isEqualToString:@"2010"], @"Year is %@",car.year);
     
     FordFocus *car2013 = [[InDependenceInjector sharedInjector] getObjectWithArgs:[FordFocus class],@"2013",nil];
     STAssertTrue([car2013.year isEqualToString:@"2013"], @"");

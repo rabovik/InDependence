@@ -163,7 +163,7 @@ static InDependenceInjector *gSharedInjector;
     if (isClass) {
         return classOrProtocol;
     }else{
-        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find class for protocol: %@", classOrProtocol] userInfo:nil];
+        @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find class for protocol: <%@>", NSStringFromProtocol(classOrProtocol)] userInfo:nil];
     }
 }
 

@@ -9,7 +9,7 @@
 #import "InDependenceSingletonExtension.h"
 #import "InDependenceBindingEntry.h"
 
-static NSString *const RSInjectorBindingSingletonStorageKey = @"RSInjectorBindingSingletonStorageKey";
+static NSString *const InDependenceSingletonStorageKey = @"InDependenceSingletonStorageKey";
 
 @implementation InDependenceSingletonExtension
 
@@ -24,14 +24,14 @@ static NSString *const RSInjectorBindingSingletonStorageKey = @"RSInjectorBindin
         
         InDependenceBindingEntry *binding = [injector getBinding:resolvedClass];
         
-        id object = [binding objectForKey:RSInjectorBindingSingletonStorageKey];
+        id object = [binding objectForKey:InDependenceSingletonStorageKey];
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
                                        injector:injector
                                         session:session
                                       ancestors:ancestors
                                            info:info];
-            [binding setObject:object forKey:RSInjectorBindingSingletonStorageKey];
+            [binding setObject:object forKey:InDependenceSingletonStorageKey];
         }
         
         return object;

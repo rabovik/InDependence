@@ -107,11 +107,11 @@ static NSMutableArray *gExtensions;
     return [self getObject:klass session:nil ancestors:nil info:nil];
 }
 
--(id)getObject:(id)klass
+-(id)getObject:(id)classOrProtocol
        session:(InDependenceSession *)session
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info{
-    NSLog(@"GET OBJECT class %@. ANCESTORS %@",klass,ancestors);
+    NSLog(@"GET OBJECT class %@. ANCESTORS %@",classOrProtocol,ancestors);
     
     BOOL isRootObjectInSession = NO;
     if (nil == session) {
@@ -119,7 +119,7 @@ static NSMutableArray *gExtensions;
         session = [InDependenceSession new];
     }
     
-    Class resolvedClass = [self.lastExtension resolveClass:klass];
+    Class resolvedClass = [self.lastExtension resolveClass:classOrProtocol];
     
     id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
                                                                 injector:self
@@ -127,14 +127,14 @@ static NSMutableArray *gExtensions;
                                                                ancestors:ancestors
                                                                     info:info];
     
-    NSSet *properties = [InDependenceUtils requirementsForClass:klass selector:@selector(independence_requires)];
+    NSSet *properties = [InDependenceUtils requirementsForClass:classOrProtocol selector:@selector(independence_requires)];
     if (properties) {
         NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
         NSMutableArray *ancestorsForProperties = [NSMutableArray arrayWithArray:ancestors];
         [ancestorsForProperties addObject:objectUnderConstruction];
 
         for (NSString *propertyName in properties) {
-            objc_property_t property = [InDependenceUtils getProperty:propertyName fromClass:klass];
+            objc_property_t property = [InDependenceUtils getProperty:propertyName fromClass:classOrProtocol];
             RSInjectorPropertyInfo propertyInfo = [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             

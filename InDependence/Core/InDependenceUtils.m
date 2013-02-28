@@ -51,7 +51,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
     return nil;
 }
 
-+(NSSet *)collectRequirementsForClass:(Class)klass requirements:(NSSet *)requirements selector:(SEL)selector{
++(NSSet *)unionRequirementSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector{
     Class superClass = class_getSuperclass([klass class]);
     if([superClass respondsToSelector:selector]) {
 #pragma clang diagnostic push
@@ -130,6 +130,15 @@ static NSString *const RSInjectorException = @"RSInjectorException";
         @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Could not find initializer '%@' on %@", NSStringFromSelector(initializer), NSStringFromClass(klass)] userInfo:nil];
     }
     return nil;
+}
+
++(NSArray*)transformVariadicArgsToArray:(va_list)va_arguments{
+    NSMutableArray *arguments = [NSMutableArray array];
+    id object;
+    while ((object = va_arg( va_arguments, id ))) {
+        [arguments addObject:object];
+    }
+    return arguments;
 }
 
 @end

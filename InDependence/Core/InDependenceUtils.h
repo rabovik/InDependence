@@ -26,12 +26,14 @@ typedef struct rsinjector_property_info {
 +(BOOL)requiredInstructionForClass:(Class)klass selector:(SEL)selector;
 
 +(NSSet *)requirementsForClass:(Class)klass selector:(SEL)selector;
-+(NSSet *)collectRequirementsForClass:(Class)klass requirements:(NSSet *)requirements selector:(SEL)selector;
++(NSSet *)unionRequirementSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector;
 
 +(RSInjectorPropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;
 
 +(id)buildObjectWithInitializer:(Class)klass initializer:(SEL)initializer arguments:(NSArray *)arguments;
+
++(NSArray*)transformVariadicArgsToArray:(va_list)va_arguments;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class InDependenceBindingEntry,InDependenceExtension;
+@class InDependenceBindingEntry,InDependenceExtension,InDependenceSession;
 
 @interface InDependenceInjector : NSObject
 
@@ -18,6 +18,10 @@
 +(id)sharedInjector;
 
 -(id)getObject:(id)klass;
+-(id)getObject:(id)classOrProtocol
+       session:(InDependenceSession *)session
+     ancestors:(NSArray *)ancestors
+          info:(NSDictionary *)info;
 
 -(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
 

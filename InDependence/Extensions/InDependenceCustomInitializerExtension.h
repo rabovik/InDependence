@@ -17,6 +17,12 @@
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }
 
+@class InDependenceInjector;
+
+@interface InDependenceInjector (CustomInitializer)
+-(id)getObjectWithArgs:(id)classOrProtocol, ... NS_REQUIRES_NIL_TERMINATION;
+@end
+
 @interface InDependenceCustomInitializerExtension : InDependenceExtension
 
 @end

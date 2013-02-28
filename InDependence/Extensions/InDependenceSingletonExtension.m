@@ -15,7 +15,7 @@ static NSString *const RSInjectorBindingSingletonStorageKey = @"RSInjectorBindin
 
 -(id)createObjectOfClass:(Class)resolvedClass injector:(InDependenceInjector *)injector session:(InDependenceSession *)session ancestors:(NSArray *)ancestors{
     
-    if ([InDependenceUtils requiredInstructionForClass:resolvedClass selector:@selector(rs_register_singleton)]) {
+    if ([InDependenceUtils requiredInstructionForClass:resolvedClass selector:@selector(independence_register_singleton)]) {
         
         InDependenceBindingEntry *binding = [injector getBinding:resolvedClass];
         

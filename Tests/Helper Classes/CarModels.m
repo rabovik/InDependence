@@ -16,7 +16,7 @@
 
 @implementation FordFocus
 independence_requires(@"logo");
-rs_initializer(initWithYear:,@"2010");
+independence_initializer(initWithYear:,@"2010");
 
 -(id)initWithYear:(NSString *)year{
 	self = [super init];

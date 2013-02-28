@@ -8,11 +8,11 @@
 
 #import "InDependenceExtension.h"
 
-#define rs_initializer(selectorSymbols, args...) \
-+(NSString *)rs_initializer { \
+#define independence_initializer(selectorSymbols, args...) \
++(NSString *)independence_initializer { \
     return NSStringFromSelector(@selector(selectorSymbols)); \
 } \
-+(NSArray *)rs_initializer_arguments { \
++(NSArray *)independence_initializer_arguments { \
     id objs[]= {args}; \
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }

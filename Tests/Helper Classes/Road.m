@@ -9,5 +9,5 @@
 #import "Road.h"
 
 @implementation Road
-rs_register_singleton();
+independence_register_singleton()
 @end

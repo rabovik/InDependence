@@ -8,8 +8,8 @@
 
 #import "InDependenceExtension.h"
 
-#define rs_register_singleton() \
-+(BOOL)rs_register_singleton { \
+#define independence_register_singleton() \
++(BOOL)independence_register_singleton { \
     return YES; \
 }
 

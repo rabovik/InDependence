@@ -24,30 +24,19 @@ static InDependenceInjector *gSharedInjector;
 
 @implementation InDependenceInjector{
     NSMutableDictionary *_bindings;
+    NSMutableArray *_extensions;
 }
 
 #pragma mark - Extensions
-+(void)registerExtension:(InDependenceExtension *)extension{
-    extension.delegate = [gExtensions lastObject];
-    [gExtensions addObject:extension];
-}
-
-+(void)registerExtensions:(InDependenceExtension *)first, ... NS_REQUIRES_NIL_TERMINATION{
-    va_list extensions;
-    [self registerExtension:first];
-    va_start(extensions, first);
-    InDependenceExtension *extension;
-    while ((extension = va_arg( extensions, InDependenceExtension *) )) {
-        [self registerExtension:extension];
-    }
-    va_end(extensions);
++(void)registerExtensionClass:(Class)extensionClass{
+    [gExtensions addObject:extensionClass];
 }
 
 -(id<InDependenceExtensionDelegate>)lastExtension{
-    if (gExtensions.count == 0) {
+    if (_extensions.count == 0) {
         return self;
     }else{
-        return [gExtensions lastObject];
+        return [_extensions lastObject];
     }
 }
 
@@ -62,18 +51,27 @@ static InDependenceInjector *gSharedInjector;
 }
 
 +(void)registerDefaultExtensions{
-    [self registerExtensions:
-        [InDependenceCustomInitializerExtension new],
-        [InDependenceSingletonExtension new],
-        nil
-     ];
+    [self registerExtensionClass:[InDependenceCustomInitializerExtension class]];
+    [self registerExtensionClass:[InDependenceSingletonExtension class]];
 }
 
 - (id)init{
     self = [super init];
     if (!self) return nil;
-    
+
     [self reset];
+    
+    _extensions = [NSMutableArray new];
+    for (Class extensionClass in gExtensions) {
+        InDependenceExtension *extension = [self getObject:extensionClass];
+        id delegate = [_extensions lastObject];
+        if (nil == delegate) {
+            delegate = self;
+        }
+        extension.delegate = delegate;
+        [_extensions addObject:extension];
+    }
+    
     
     return self;
 }
@@ -82,10 +80,6 @@ static InDependenceInjector *gSharedInjector;
     static dispatch_once_t predicate;
 	dispatch_once(&predicate, ^{
         gSharedInjector = [[self class] new];
-        if (gExtensions.count > 0) {
-            InDependenceExtension *firstExtension = [gExtensions objectAtIndex:0];
-            firstExtension.delegate = gSharedInjector;
-        }
 	});
     return gSharedInjector;
 }

@@ -16,8 +16,7 @@
 @interface InDependenceInjector : NSObject
 
 #pragma mark - Extensions
-+(void)registerExtension:(InDependenceExtension *)extension;
-+(void)registerExtensions:(InDependenceExtension *)first, ... NS_REQUIRES_NIL_TERMINATION;
++(void)registerExtensionClass:(Class)extensionClass;
 
 #pragma mark - Initializing
 +(InDependenceInjector *)sharedInjector;

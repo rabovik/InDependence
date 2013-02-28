@@ -110,4 +110,26 @@ static NSString *const RSInjectorException = @"RSInjectorException";
     }
     return property;
 }
+
++(id)buildObjectWithInitializer:(Class)klass initializer:(SEL)initializer arguments:(NSArray *)arguments{
+    id instance = [klass alloc];
+    NSMethodSignature *signature = [klass instanceMethodSignatureForSelector:initializer];
+    if (signature) {
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+        [invocation setTarget:instance];
+        [invocation setSelector:initializer];
+        for (int i = 0; i < arguments.count; i++) {
+            id argument = [arguments objectAtIndex:i];
+            [invocation setArgument:&argument atIndex:i + 2];
+        }
+        [invocation invoke];
+        [invocation getReturnValue:&instance];
+        return instance;
+    } else {
+        instance = nil;
+        @throw [NSException exceptionWithName:RSInjectorException reason:[NSString stringWithFormat:@"Could not find initializer '%@' on %@", NSStringFromSelector(initializer), NSStringFromClass(klass)] userInfo:nil];
+    }
+    return nil;
+}
+
 @end

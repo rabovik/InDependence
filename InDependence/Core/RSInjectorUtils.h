@@ -32,4 +32,6 @@ typedef struct rsinjector_property_info {
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;
 
++(id)buildObjectWithInitializer:(Class)klass initializer:(SEL)initializer arguments:(NSArray *)arguments;
+
 @end

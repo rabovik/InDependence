@@ -9,6 +9,7 @@
 #import "RSInjector.h"
 #import "RSInjectorUtils.h"
 
+#import "RSInjectorCustomInitializerExtension.h"
 #import "RSInjectorSingletonExtension.h"
 
 #define rs_requires(args...) \

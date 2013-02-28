@@ -39,4 +39,13 @@
     STAssertEqualObjects(garage.fordCar.road, garage.renaultCar.road, @"");
 }
 
+-(void)testCustomInitializer{
+    FordFocus *car = [[RSInjector sharedInjector] getObject:[FordFocus class]];
+    STAssertTrue([car.year isEqualToString:@"2010"], @"");
+    
+    FordFocus *car2013 = [[RSInjector sharedInjector] getObject:[FordFocus class]];
+    STAssertTrue([car2013.year isEqualToString:@"2013"], @"");
+
+}
+
 @end

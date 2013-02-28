@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class RSInjectorBindingEntry;
+@class RSInjectorBindingEntry,RSInjectorExtension;
 
 @interface RSInjector : NSObject
+
++(void)registerExtension:(RSInjectorExtension *)extension;
++(void)registerExtensions:(RSInjectorExtension *)first, ... NS_REQUIRES_NIL_TERMINATION;
 
 +(id)sharedInjector;
 

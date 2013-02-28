@@ -24,6 +24,7 @@
 		1A1DFDC016DE7C9200658409 /* RSInjectorSingletonExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */; };
 		1A1DFDC316DE864900658409 /* Road.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC216DE864900658409 /* Road.m */; };
 		1A1DFDC616DE86D500658409 /* Garage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC516DE86D500658409 /* Garage.m */; };
+		1A1DFDC916DF46F500658409 /* RSInjectorCustomInitializerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC816DF46F500658409 /* RSInjectorCustomInitializerExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		1A1DFDC216DE864900658409 /* Road.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Road.m; path = "Helper Classes/Road.m"; sourceTree = "<group>"; };
 		1A1DFDC416DE86D500658409 /* Garage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Garage.h; path = "Helper Classes/Garage.h"; sourceTree = "<group>"; };
 		1A1DFDC516DE86D500658409 /* Garage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Garage.m; path = "Helper Classes/Garage.m"; sourceTree = "<group>"; };
+		1A1DFDC716DF46F500658409 /* RSInjectorCustomInitializerExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSInjectorCustomInitializerExtension.h; path = Extensions/RSInjectorCustomInitializerExtension.h; sourceTree = "<group>"; };
+		1A1DFDC816DF46F500658409 /* RSInjectorCustomInitializerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSInjectorCustomInitializerExtension.m; path = Extensions/RSInjectorCustomInitializerExtension.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +163,8 @@
 			children = (
 				1A1DFDBB16DE78E900658409 /* RSInjectorExtension.h */,
 				1A1DFDBC16DE78E900658409 /* RSInjectorExtension.m */,
+				1A1DFDC716DF46F500658409 /* RSInjectorCustomInitializerExtension.h */,
+				1A1DFDC816DF46F500658409 /* RSInjectorCustomInitializerExtension.m */,
 				1A1DFDBE16DE7C9200658409 /* RSInjectorSingletonExtension.h */,
 				1A1DFDBF16DE7C9200658409 /* RSInjectorSingletonExtension.m */,
 			);
@@ -276,6 +281,7 @@
 				1A1DFDC016DE7C9200658409 /* RSInjectorSingletonExtension.m in Sources */,
 				1A1DFDC316DE864900658409 /* Road.m in Sources */,
 				1A1DFDC616DE86D500658409 /* Garage.m in Sources */,
+				1A1DFDC916DF46F500658409 /* RSInjectorCustomInitializerExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

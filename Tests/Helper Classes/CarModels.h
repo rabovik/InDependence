@@ -15,6 +15,8 @@
 @end
 
 @interface FordFocus : Ford
+-(id)initWithYear:(NSString *)year;
+@property (nonatomic,readonly) NSString *year;
 @property (nonatomic,strong) FordFocusLogo *logo;
 @end
 

@@ -10,6 +10,8 @@
 #import <objc/runtime.h>
 #import "RSInjectorBindingEntry.h"
 #import "RSInjectorSession.h"
+
+#import "RSInjectorCustomInitializerExtension.h"
 #import "RSInjectorSingletonExtension.h"
 
 static NSMutableArray *gExtensions;
@@ -26,6 +28,17 @@ static NSMutableArray *gExtensions;
 +(void)registerExtension:(RSInjectorExtension *)extension{
     extension.delegate = [gExtensions lastObject];
     [gExtensions addObject:extension];
+}
+
++(void)registerExtensions:(RSInjectorExtension *)first, ... NS_REQUIRES_NIL_TERMINATION{
+    va_list extensions;
+    [self registerExtension:first];
+    va_start(extensions, first);
+    RSInjectorExtension *extension;
+    while ((extension = va_arg( extensions, RSInjectorExtension *) )) {
+        [self registerExtension:extension];
+    }
+    va_end(extensions);
 }
 
 -(id<RSInjectorExtensionDelegate>)lastExtension{
@@ -47,7 +60,11 @@ static NSMutableArray *gExtensions;
 }
 
 +(void)registerDefaultExtensions{
-    [self registerExtension:[RSInjectorSingletonExtension new]];
+    [self registerExtensions:
+        [RSInjectorCustomInitializerExtension new],
+        [RSInjectorSingletonExtension new],
+        nil
+     ];
 }
 
 - (id)init{

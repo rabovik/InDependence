@@ -24,7 +24,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
 }
 
 
-+(BOOL)requiredInstructionForClass:(Class)klass selector:(SEL)selector{
++(BOOL)isInstructionRequiredForClass:(Class)klass selector:(SEL)selector{
     if ([klass respondsToSelector:selector]) {
         NSMethodSignature *signature = [klass methodSignatureForSelector:selector];
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -40,15 +40,18 @@ static NSString *const RSInjectorException = @"RSInjectorException";
     return NO;
 }
 
-
-+(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector{
-    if ([klass respondsToSelector:selector]){
++(id)requirementObjectForClass:(Class)klass selector:(SEL)selector{
+    if ([klass respondsToSelector:selector]) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
         return [klass performSelector:selector];
 #pragma clang diagnostic pop
     }
     return nil;
+}
+
++(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector{
+    return [self requirementObjectForClass:klass selector:selector];
 }
 
 +(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector{

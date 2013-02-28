@@ -34,6 +34,18 @@ static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgument
                  session:(InDependenceSession *)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info{
+    
+    NSString *customInitializerName = [InDependenceUtils requirementObjectForClass:resolvedClass selector:@selector(independence_initializer)];
+    if (customInitializerName) {
+        NSArray *resolvedArguments = [info objectForKey:InDependenceInfoArgumentsKey];
+        if (!resolvedArguments) {
+            resolvedArguments = [InDependenceUtils
+                                    requirementObjectForClass:resolvedClass
+                                 selector:@selector(independence_initializer_arguments)];
+        }
+        return [InDependenceUtils buildObjectWithInitializer:resolvedClass initializer:NSSelectorFromString(customInitializerName) arguments:resolvedArguments];
+    }
+    
     return [super createObjectOfClass:resolvedClass injector:injector session:session ancestors:ancestors info:info];
 }
 

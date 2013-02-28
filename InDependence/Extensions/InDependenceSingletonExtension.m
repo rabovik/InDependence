@@ -20,7 +20,7 @@ static NSString *const InDependenceSingletonStorageKey = @"InDependenceSingleton
                     info:(NSDictionary *)info
 {
     
-    if ([InDependenceUtils requiredInstructionForClass:resolvedClass selector:@selector(independence_register_singleton)]) {
+    if ([InDependenceUtils isInstructionRequiredForClass:resolvedClass selector:@selector(independence_register_singleton)]) {
         
         InDependenceBindingEntry *binding = [injector getBinding:resolvedClass];
         

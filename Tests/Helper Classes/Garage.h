@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class Ford,Renault;
+@class Ford,FordFocus,Renault;
 
 @interface Garage : NSObject
 
-@property (nonatomic,strong) Ford *fordCar;
+@property (nonatomic,strong) FordFocus *fordCar;
 @property (nonatomic,strong) Renault *renaultCar;
 
 @end

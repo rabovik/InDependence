@@ -12,7 +12,7 @@
 independence_requires(@"fordCar",@"renaultCar");
 
 -(void)awakeFromInjector{
-    NSLog(@"AWAKE %@",self);
+    //NSLog(@"AWAKE %@",self);
 }
 
 @end

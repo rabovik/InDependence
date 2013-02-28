@@ -13,7 +13,7 @@
 independence_requires(@"engine",@"road");
 
 -(void)awakeFromInjector{
-    NSLog(@"AWAKE %@",self);
+    //NSLog(@"AWAKE %@",self);
 }
 
 @end

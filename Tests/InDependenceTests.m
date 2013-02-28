@@ -33,7 +33,11 @@
 }
 
 -(void)testSingletonRoad{
+    NSDate *d0 = [NSDate date];
     Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
+    NSTimeInterval t = [[NSDate date] timeIntervalSinceDate:d0];
+    NSLog(@"Garage took %f for build.",t);
+    
     STAssertNotNil(garage.fordCar.road, @"");
     STAssertNotNil(garage.renaultCar.road, @"");
     STAssertEqualObjects(garage.fordCar.road, garage.renaultCar.road, @"");
@@ -43,8 +47,8 @@
     FordFocus *car = [[InDependenceInjector sharedInjector] getObject:[FordFocus class]];
     STAssertTrue([car.year isEqualToString:@"2010"], @"");
     
-    //FordFocus *car2013 = [[RSInjector sharedInjector] getObject:[FordFocus class]];
-    //STAssertTrue([car2013.year isEqualToString:@"2013"], @"");
+    FordFocus *car2013 = [[InDependenceInjector sharedInjector] getObjectWithArgs:[FordFocus class],@"2013",nil];
+    STAssertTrue([car2013.year isEqualToString:@"2013"], @"");
 
 }
 

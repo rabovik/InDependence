@@ -27,7 +27,7 @@
 }
 
 -(void)notifyObjectsThatTheyAreReady{
-    NSLog(@"INForming %@",_instantiatedObjects);
+    //NSLog(@"INForming %@",_instantiatedObjects);
     
     for (id object in _instantiatedObjects) {
         SEL selector = @selector(awakeFromInjector);

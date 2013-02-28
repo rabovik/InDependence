@@ -111,7 +111,7 @@ static NSMutableArray *gExtensions;
        session:(InDependenceSession *)session
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info{
-    NSLog(@"GET OBJECT class %@. ANCESTORS %@",classOrProtocol,ancestors);
+    //NSLog(@"GET OBJECT class %@. ANCESTORS %@",classOrProtocol,ancestors);
     
     BOOL isRootObjectInSession = NO;
     if (nil == session) {

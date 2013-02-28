@@ -50,7 +50,7 @@ static NSMutableArray *gExtensions;
     }
 }
 
-#pragma mark - Init
+#pragma mark - Initializing
 
 + (void)initialize  {
     if (self != [InDependenceInjector class]) return;
@@ -90,20 +90,7 @@ static NSMutableArray *gExtensions;
     return sharedInstance;
 }
 
-#pragma mark - Bindings
--(InDependenceBindingEntry *)getBinding:(id)classOrProtocol{
-    NSString *key = [InDependenceUtils key:classOrProtocol];
-    InDependenceBindingEntry *binding = [_bindings objectForKey:key];
-    if (!binding) {
-        binding = [InDependenceBindingEntry new];
-        [_bindings setObject:binding forKey:key];
-    }
-    return binding;
-}
-
-
-
-#pragma mark - Object factory
+#pragma mark - Object Factory
 -(id)getObject:(id)klass{
     return [self getObject:klass session:nil ancestors:nil info:nil];
 }
@@ -162,8 +149,7 @@ static NSMutableArray *gExtensions;
     return objectUnderConstruction;
 }
 
-#pragma mark - Extension delegate
-
+#pragma mark Extension delegate
 -(Class)resolveClass:(id)classOrProtocol{
     return classOrProtocol;
     //return [self.delegate resolveClass:classOrProtocol];
@@ -179,6 +165,15 @@ static NSMutableArray *gExtensions;
 }
 
 #pragma mark - Bindings
+-(InDependenceBindingEntry *)getBinding:(id)classOrProtocol{
+    NSString *key = [InDependenceUtils key:classOrProtocol];
+    InDependenceBindingEntry *binding = [_bindings objectForKey:key];
+    if (!binding) {
+        binding = [InDependenceBindingEntry new];
+        [_bindings setObject:binding forKey:key];
+    }
+    return binding;
+}
 
 -(void)bindClass:(Class)aClass toClass:(Class)toClass{
     // todo

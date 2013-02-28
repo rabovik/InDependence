@@ -12,19 +12,23 @@
 
 @interface InDependenceInjector : NSObject
 
+#pragma mark - Extensions
 +(void)registerExtension:(InDependenceExtension *)extension;
 +(void)registerExtensions:(InDependenceExtension *)first, ... NS_REQUIRES_NIL_TERMINATION;
 
+#pragma mark - Initializing
 +(id)sharedInjector;
 
+#pragma mark - Object Factory
 -(id)getObject:(id)klass;
 -(id)getObject:(id)classOrProtocol
        session:(InDependenceSession *)session
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info;
 
--(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
 
+#pragma mark - Bindings
+-(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
 -(void)bindClass:(Class)aClass toClass:(Class)toClass;
 
 @end

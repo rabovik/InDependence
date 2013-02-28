@@ -41,7 +41,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
 }
 
 
-+(NSSet *)requirementsForClass:(Class)klass selector:(SEL)selector{
++(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector{
     if ([klass respondsToSelector:selector]){
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
@@ -51,7 +51,7 @@ static NSString *const RSInjectorException = @"RSInjectorException";
     return nil;
 }
 
-+(NSSet *)unionRequirementSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector{
++(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector{
     Class superClass = class_getSuperclass([klass class]);
     if([superClass respondsToSelector:selector]) {
 #pragma clang diagnostic push

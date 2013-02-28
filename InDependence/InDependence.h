@@ -15,7 +15,7 @@
 #define independence_requires(args...) \
 +(NSSet *)independence_requires{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
-    return [InDependenceUtils unionRequirementSetForClass:self \
-                                                  withSet:requirements \
-                                                 selector:@selector(independence_requires)]; \
+    return [InDependenceUtils unionRequirementsSetForClass:self \
+                                                   withSet:requirements \
+                                                  selector:@selector(independence_requires)]; \
 }

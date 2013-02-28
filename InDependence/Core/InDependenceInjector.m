@@ -127,7 +127,7 @@ static NSMutableArray *gExtensions;
                                                                ancestors:ancestors
                                                                     info:info];
     
-    NSSet *properties = [InDependenceUtils requirementsForClass:classOrProtocol selector:@selector(independence_requires)];
+    NSSet *properties = [InDependenceUtils requirementsSetForClass:classOrProtocol selector:@selector(independence_requires)];
     if (properties) {
         NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
         NSMutableArray *ancestorsForProperties = [NSMutableArray arrayWithArray:ancestors];

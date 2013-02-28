@@ -34,7 +34,6 @@ static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgument
                  session:(InDependenceSession *)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info{
-    
     return [super createObjectOfClass:resolvedClass injector:injector session:session ancestors:ancestors info:info];
 }
 

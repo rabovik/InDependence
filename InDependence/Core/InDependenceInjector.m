@@ -175,10 +175,6 @@ static NSMutableArray *gExtensions;
     return [resolvedClass new];
 }
 
--(void)informObjectsCreatedInSessionThatTheyAreReady{
-    // todo
-}
-
 #pragma mark - Bindings
 
 -(void)bindClass:(Class)aClass toClass:(Class)toClass{

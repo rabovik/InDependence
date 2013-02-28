@@ -19,8 +19,6 @@
                  session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors;
 
--(void)informObjectsCreatedInSessionThatTheyAreReady;
-
 @end
 
 @interface InDependenceExtension : NSObject <InDependenceExtensionDelegate>

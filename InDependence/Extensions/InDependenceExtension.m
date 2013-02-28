@@ -24,9 +24,4 @@
                                     ancestors:ancestors];
 }
 
--(void)informObjectsCreatedInSessionThatTheyAreReady{
-    [self.delegate informObjectsCreatedInSessionThatTheyAreReady];
-}
-
-
 @end

@@ -103,11 +103,6 @@ static InDependenceInjector *gSharedInjector;
     }
 }
 
--(void)reset{
-    _bindings = [NSMutableDictionary new];
-}
-
-
 #pragma mark - Object Factory
 -(id)getObject:(id)classOrProtocol{
     return [self getObject:classOrProtocol session:nil ancestors:nil info:nil];

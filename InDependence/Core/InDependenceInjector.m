@@ -166,7 +166,7 @@ static InDependenceInjector *gSharedInjector;
     return objectUnderConstruction;
 }
 
-#pragma mark Extension delegate
+#pragma mark └ extension delegate
 -(Class)resolveClass:(id)classOrProtocol
             injector:(InDependenceInjector*)injector
              session:(InDependenceSession*)session

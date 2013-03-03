@@ -36,14 +36,14 @@ static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgument
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info{
     
-    NSString *customInitializerName =
-        [InDependenceUtils requirementObjectForClass:resolvedClass
-                                            selector:@selector(independence_initializer)];
+    NSString *customInitializerName = [InDependenceUtils
+                                       requirementObjectForClass:resolvedClass
+                                       selector:@selector(independence_initializer)];
     if (customInitializerName) {
         NSArray *resolvedArguments = [info objectForKey:InDependenceInfoArgumentsKey];
         if (!resolvedArguments) {
             resolvedArguments = [InDependenceUtils
-                                    requirementObjectForClass:resolvedClass
+                                 requirementObjectForClass:resolvedClass
                                  selector:@selector(independence_initializer_arguments)];
         }
         return [InDependenceUtils

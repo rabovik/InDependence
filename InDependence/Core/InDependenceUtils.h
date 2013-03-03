@@ -12,14 +12,14 @@
 extern NSString *const InDependenceException;
 
 typedef enum {
-    RSInjectorTypeClass,
-    RSInjectorTypeProtocol
-} RSInjectorType;
+    InDependenceInterfaceTypeClass,
+    InDependenceInterfaceTypeProtocol
+} InDependenceInterfaceType;
 
-typedef struct rsinjector_property_info {
+typedef struct InDependencePropertyInfo {
     void *value;
-    RSInjectorType type;
-} RSInjectorPropertyInfo;
+    InDependenceInterfaceType type;
+} InDependencePropertyInfo;
 
 @interface InDependenceUtils : NSObject
 
@@ -33,7 +33,7 @@ typedef struct rsinjector_property_info {
 +(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector;
 
 +(BOOL)propertyIsWeak:(objc_property_t)property;
-+(RSInjectorPropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
++(InDependencePropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;
 

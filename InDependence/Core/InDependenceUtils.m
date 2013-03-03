@@ -84,7 +84,7 @@ NSString *const InDependenceException = @"InDependenceException";
 }
 
 
-+(RSInjectorPropertyInfo)classOrProtocolForProperty:(objc_property_t)property{
++(InDependencePropertyInfo)classOrProtocolForProperty:(objc_property_t)property{
     NSString *attributes = [NSString stringWithCString: property_getAttributes(property)
                                               encoding: NSASCIIStringEncoding];
     NSString *propertyName = [NSString stringWithCString:property_getName(property)
@@ -113,7 +113,7 @@ NSString *const InDependenceException = @"InDependenceException";
     
     NSString *classOrProtocolName = [startOfClassName substringToIndex:endRange.location];
     id classOrProtocol = nil;
-    RSInjectorPropertyInfo propertyInfo;
+    InDependencePropertyInfo propertyInfo;
     
     if ([classOrProtocolName hasPrefix:@"<"] && [classOrProtocolName hasSuffix:@">"]) {
         classOrProtocolName = [classOrProtocolName
@@ -123,10 +123,10 @@ NSString *const InDependenceException = @"InDependenceException";
                                stringByReplacingOccurrencesOfString:@">"
                                withString:@""];
         classOrProtocol = objc_getProtocol([classOrProtocolName UTF8String]);
-        propertyInfo.type = RSInjectorTypeProtocol;
+        propertyInfo.type = InDependenceInterfaceTypeProtocol;
     } else {
         classOrProtocol = NSClassFromString(classOrProtocolName);
-        propertyInfo.type = RSInjectorTypeClass;
+        propertyInfo.type = InDependenceInterfaceTypeClass;
     }
     
     if(!classOrProtocol) {

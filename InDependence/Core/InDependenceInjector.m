@@ -152,7 +152,7 @@ static InDependenceInjector *gSharedInjector;
             objc_property_t property = [InDependenceUtils
                                         getProperty:propertyName
                                         fromClass:classOrProtocol];
-            RSInjectorPropertyInfo propertyInfo =
+            InDependencePropertyInfo propertyInfo =
                 [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             

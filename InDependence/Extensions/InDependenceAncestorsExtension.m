@@ -40,7 +40,7 @@
                         userInfo:nil];
             }
             
-            RSInjectorPropertyInfo propertyInfo =
+            InDependencePropertyInfo propertyInfo =
                 [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
@@ -48,7 +48,7 @@
                         
             for (int i = ancestors.count - 1; i>=0; --i) {
                 id ancestor = [ancestors objectAtIndex:i];
-                if (propertyInfo.type == RSInjectorTypeClass) {
+                if (propertyInfo.type == InDependenceInterfaceTypeClass) {
                     if ([ancestor isKindOfClass:desiredClassOrProtocol]) {
                         resolvedAncestor = ancestor;
                         break;

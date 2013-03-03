@@ -11,9 +11,10 @@
 #define independence_requires_ancestors(args...) \
 +(NSSet *)independence_requires_ancestors{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
-    return [InDependenceUtils unionRequirementsSetForClass:self \
-                                                   withSet:requirements \
-                                                  selector:@selector(independence_requires_ancestors)]; \
+    return [InDependenceUtils \
+            unionRequirementsSetForClass:self \
+            withSet:requirements \
+            selector:@selector(independence_requires_ancestors)]; \
 }
 
 @interface InDependenceAncestorsExtension : InDependenceExtension

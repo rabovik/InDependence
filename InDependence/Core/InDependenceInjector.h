@@ -30,7 +30,6 @@
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info;
 
-
 #pragma mark - Bindings
 -(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
 -(void)bindClass:(Class)aClass toClass:(Class)toClass;

@@ -16,7 +16,8 @@
 
 - (void)setUp{
     [super setUp];
-    [[InDependenceInjector sharedInjector] bindClass:[SportSteeringWheel class] toProtocol:@protocol(SteeringWheel)];
+    [[InDependenceInjector sharedInjector] bindClass:[SportSteeringWheel class]
+                                          toProtocol:@protocol(SteeringWheel)];
 }
 
 - (void)tearDown{
@@ -40,25 +41,36 @@
     FordFocus *car = [[InDependenceInjector sharedInjector] getObject:[FordFocus class]];
     STAssertTrue([car.year isEqualToString:@"2010"], @"Year is %@",car.year);
     
-    FordFocus *car2013 = [[InDependenceInjector sharedInjector] getObjectWithArgs:[FordFocus class],@"2013",nil];
+    FordFocus *car2013 = [[InDependenceInjector sharedInjector]
+                          getObjectWithArgs:[FordFocus class],
+                          @"2013",
+                          nil];
     STAssertTrue([car2013.year isEqualToString:@"2013"], @"");
 
 }
 
 -(void)testClassToClassBinding{
-    [[InDependenceInjector sharedInjector] bindClass:[RenaultClio class] toClass:[Renault class]];
+    [[InDependenceInjector sharedInjector] bindClass:[RenaultClio class]
+                                             toClass:[Renault class]];
     Renault *car = [[InDependenceInjector sharedInjector] getObject:[Renault class]];
-    STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"], @"Class is %@",NSStringFromClass([car class]));
+    STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"],
+                 @"Class is %@",NSStringFromClass([car class]));
     Garage *garage = [[InDependenceInjector sharedInjector] getObject:[Garage class]];
-    STAssertTrue([NSStringFromClass([garage.renaultCar class]) isEqualToString:@"RenaultClio"], @"");
+    STAssertTrue([NSStringFromClass([garage.renaultCar class])
+                  isEqualToString:@"RenaultClio"],
+                 @"");
 }
 -(void)testClassToProtocolBinding{
     Ford *car = [[InDependenceInjector sharedInjector] getObject:[Ford class]];
-    STAssertTrue([NSStringFromClass([car.steeringWheel class]) isEqualToString:@"SportSteeringWheel"], @"Class is %@",NSStringFromClass([car.steeringWheel class]));
+    STAssertTrue([NSStringFromClass([car.steeringWheel class])
+                  isEqualToString:@"SportSteeringWheel"],
+                 @"Class is %@",NSStringFromClass([car.steeringWheel class]));
 }
 -(void)testRecursiveBindings{
-    [[InDependenceInjector sharedInjector] bindClass:[Ford class] toClass:[Car class]];
-    [[InDependenceInjector sharedInjector] bindClass:[FordFocus class] toClass:[Ford class]];
+    [[InDependenceInjector sharedInjector] bindClass:[Ford class]
+                                             toClass:[Car class]];
+    [[InDependenceInjector sharedInjector] bindClass:[FordFocus class]
+                                             toClass:[Ford class]];
     Car *car = [[InDependenceInjector sharedInjector] getObject:[Car class]];
     STAssertTrue([car class] == [FordFocus class], @"Class is %@",[car class]);
 }

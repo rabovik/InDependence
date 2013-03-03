@@ -11,23 +11,37 @@
 
 @implementation InDependenceAncestorsExtension
 
--(id)createObjectOfClass:(Class)resolvedClass injector:(InDependenceInjector *)injector session:(InDependenceSession *)session ancestors:(NSArray *)ancestors info:(NSDictionary *)info{
+-(id)createObjectOfClass:(Class)resolvedClass
+                injector:(InDependenceInjector *)injector
+                 session:(InDependenceSession *)session
+               ancestors:(NSArray *)ancestors
+                    info:(NSDictionary *)info
+{
     id createdObject = [super createObjectOfClass:resolvedClass
-                                         injector:injector session:session ancestors:ancestors info:info];
-    
-    NSSet *properties = [InDependenceUtils requirementsSetForClass:resolvedClass
-                                                          selector:@selector(independence_requires_ancestors)];
+                                         injector:injector session:session
+                                        ancestors:ancestors
+                                             info:info];
+    NSSet *properties = [InDependenceUtils
+                         requirementsSetForClass:resolvedClass
+                         selector:@selector(independence_requires_ancestors)];
     if (properties) {
-        NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];        
+        NSMutableDictionary *propertiesDictionary =
+            [NSMutableDictionary dictionaryWithCapacity:properties.count];
         for (NSString *propertyName in properties) {
-            objc_property_t property = [InDependenceUtils getProperty:propertyName fromClass:resolvedClass];
+            objc_property_t property = [InDependenceUtils getProperty:propertyName
+                                                            fromClass:resolvedClass];
             if (![InDependenceUtils propertyIsWeak:property]) {
-                @throw [NSException exceptionWithName:InDependenceException
-                                               reason:[NSString stringWithFormat:@"Required ancestor property '%@' of class '%@' must be weak",propertyName,[InDependenceUtils key:resolvedClass]]
-                                             userInfo:nil];
+                @throw [NSException
+                        exceptionWithName:InDependenceException
+                        reason:[NSString
+                                stringWithFormat:@"Required ancestor property '%@' of class '%@' must be weak",
+                                propertyName,
+                                [InDependenceUtils key:resolvedClass]]
+                        userInfo:nil];
             }
             
-            RSInjectorPropertyInfo propertyInfo = [InDependenceUtils classOrProtocolForProperty:property];
+            RSInjectorPropertyInfo propertyInfo =
+                [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
             id resolvedAncestor = nil;

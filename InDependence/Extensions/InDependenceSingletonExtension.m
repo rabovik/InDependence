@@ -11,7 +11,8 @@
 #import "InDependenceBindingEntry.h"
 #import "InDependenceUtils.h"
 
-static NSString *const InDependenceSingletonStorageKey = @"InDependenceSingletonStorageKey";
+static NSString *const InDependenceSingletonStorageKey =
+    @"InDependenceSingletonStorageKey";
 
 @implementation InDependenceSingletonExtension
 
@@ -22,8 +23,10 @@ static NSString *const InDependenceSingletonStorageKey = @"InDependenceSingleton
                     info:(NSDictionary *)info
 {
     
-    if ([InDependenceUtils isInstructionRequiredForClass:resolvedClass selector:@selector(independence_register_singleton)]) {
-        
+    if ([InDependenceUtils
+         isInstructionRequiredForClass:resolvedClass
+         selector:@selector(independence_register_singleton)])
+    {
         InDependenceBindingEntry *binding = [injector getBinding:resolvedClass];
         
         id object = [binding objectForKey:InDependenceSingletonStorageKey];

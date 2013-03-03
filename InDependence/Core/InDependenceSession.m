@@ -31,7 +31,8 @@
         SEL selector = @selector(awakeFromInjector);
         if([object respondsToSelector:selector]) {
             NSMethodSignature *signature = [object methodSignatureForSelector:selector];
-            NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+            NSInvocation *invocation =
+                [NSInvocation invocationWithMethodSignature:signature];
             [invocation setTarget:object];
             [invocation setSelector:selector];
             [invocation invoke];

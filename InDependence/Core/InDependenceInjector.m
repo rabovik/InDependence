@@ -31,9 +31,13 @@ static InDependenceInjector *gSharedInjector;
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass{
     if (![extensionClass isSubclassOfClass:[InDependenceExtension class]]) {
-        @throw [NSException exceptionWithName:InDependenceException
-                                       reason:[NSString stringWithFormat:@"Can not register %@ extension because it is not a subclass of InDependenceExtension", NSStringFromClass(extensionClass)]
-                                     userInfo:nil];
+        @throw [NSException
+                exceptionWithName:InDependenceException
+                reason:[NSString
+                        stringWithFormat:
+                        @"Can not register %@ extension because it is not a subclass of InDependenceExtension",
+                        NSStringFromClass(extensionClass)]
+                userInfo:nil];
     }
     [gExtensions addObject:extensionClass];
 }
@@ -111,36 +115,45 @@ static InDependenceInjector *gSharedInjector;
 -(id)getObject:(id)classOrProtocol
        session:(InDependenceSession *)session
      ancestors:(NSArray *)ancestors
-          info:(NSDictionary *)info{
-    
+          info:(NSDictionary *)info
+{
     BOOL isRootObjectInSession = NO;
     if (nil == session) {
         isRootObjectInSession = YES;
         session = [InDependenceSession new];
     }
     
-    Class resolvedClass = [self.lastExtension resolveClass:classOrProtocol
-                                                  injector:self
-                                                   session:session
-                                                 ancestors:ancestors
-                                                      info:info];
+    Class resolvedClass =
+        [self.lastExtension resolveClass:classOrProtocol
+                                injector:self
+                                 session:session
+                               ancestors:ancestors
+                                    info:info];
     NSLog(@"Resolved class for %@ is %@",[InDependenceUtils key:classOrProtocol],NSStringFromClass(resolvedClass));
     
-    id objectUnderConstruction = [self.lastExtension createObjectOfClass:resolvedClass
-                                                                injector:self
-                                                                 session:session
-                                                               ancestors:ancestors
-                                                                    info:info];
+    id objectUnderConstruction =
+        [self.lastExtension createObjectOfClass:resolvedClass
+                                       injector:self
+                                        session:session
+                                      ancestors:ancestors
+                                           info:info];
     
-    NSSet *properties = [InDependenceUtils requirementsSetForClass:classOrProtocol selector:@selector(independence_requires)];
+    NSSet *properties = [InDependenceUtils
+                         requirementsSetForClass:classOrProtocol
+                         selector:@selector(independence_requires)];
     if (properties) {
-        NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
-        NSMutableArray *ancestorsForProperties = [NSMutableArray arrayWithArray:ancestors];
+        NSMutableDictionary *propertiesDictionary =
+            [NSMutableDictionary dictionaryWithCapacity:properties.count];
+        NSMutableArray *ancestorsForProperties =
+            [NSMutableArray arrayWithArray:ancestors];
         [ancestorsForProperties addObject:objectUnderConstruction];
 
         for (NSString *propertyName in properties) {
-            objc_property_t property = [InDependenceUtils getProperty:propertyName fromClass:classOrProtocol];
-            RSInjectorPropertyInfo propertyInfo = [InDependenceUtils classOrProtocolForProperty:property];
+            objc_property_t property = [InDependenceUtils
+                                        getProperty:propertyName
+                                        fromClass:classOrProtocol];
+            RSInjectorPropertyInfo propertyInfo =
+                [InDependenceUtils classOrProtocolForProperty:property];
             id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
             id theObject = [self getObject:desiredClassOrProtocol
@@ -171,7 +184,8 @@ static InDependenceInjector *gSharedInjector;
             injector:(InDependenceInjector*)injector
              session:(InDependenceSession*)session
            ancestors:(NSArray *)ancestors
-                info:(NSDictionary *)info{
+                info:(NSDictionary *)info
+{
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
 
     InDependenceBindingEntry *binding = [self getBinding:classOrProtocol];
@@ -191,15 +205,20 @@ static InDependenceInjector *gSharedInjector;
         return classOrProtocol;
     }
     
-    @throw [NSException exceptionWithName:InDependenceException reason:[NSString stringWithFormat:@"Unable to find class for protocol: <%@>", NSStringFromProtocol(classOrProtocol)] userInfo:nil];
+    @throw [NSException
+            exceptionWithName:InDependenceException
+            reason:[NSString
+                    stringWithFormat:@"Unable to find class for protocol: <%@>",
+                    NSStringFromProtocol(classOrProtocol)]
+            userInfo:nil];
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors
-                    info:(NSDictionary *)info{
-    
+                    info:(NSDictionary *)info
+{    
     return [resolvedClass new];
 }
 

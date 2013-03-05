@@ -34,8 +34,8 @@ static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgument
                 injector:(InDependenceInjector *)injector
                  session:(InDependenceSession *)session
                ancestors:(NSArray *)ancestors
-                    info:(NSDictionary *)info{
-    
+                    info:(NSDictionary *)info
+{    
     NSString *customInitializerName = [InDependenceUtils
                                        requirementObjectForClass:resolvedClass
                                        selector:@selector(independence_initializer)];

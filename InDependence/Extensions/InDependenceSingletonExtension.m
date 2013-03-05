@@ -8,7 +8,6 @@
 
 #import "InDependenceInjector.h"
 #import "InDependenceSingletonExtension.h"
-#import "InDependenceBindingEntry.h"
 #import "InDependenceUtils.h"
 
 static NSString *const InDependenceSingletonStorageKey =
@@ -27,16 +26,17 @@ static NSString *const InDependenceSingletonStorageKey =
          isInstructionRequiredForClass:resolvedClass
          selector:@selector(independence_register_singleton)])
     {
-        InDependenceBindingEntry *binding = [injector getBinding:resolvedClass];
-        
-        id object = [binding objectForKey:InDependenceSingletonStorageKey];
+        id object = [injector objectForKey:InDependenceSingletonStorageKey
+                           classOrProtocol:resolvedClass];
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
                                        injector:injector
                                         session:session
                                       ancestors:ancestors
                                            info:info];
-            [binding setObject:object forKey:InDependenceSingletonStorageKey];
+            [injector setObject:object
+                         forKey:InDependenceSingletonStorageKey
+                classOrProtocol:resolvedClass];
         }
         
         return object;

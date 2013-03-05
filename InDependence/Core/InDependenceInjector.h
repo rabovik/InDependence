@@ -30,6 +30,10 @@
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info;
 
+#pragma mark - Storage
+-(void)setObject:(id)object forKey:(NSString *)key classOrProtocol:(id)classOrProtocol;
+-(id)objectForKey:(NSString *)key classOrProtocol:(id)classOrProtocol;
+
 #pragma mark - Bindings
 -(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
 -(void)bindClass:(Class)aClass toClass:(Class)toClass;

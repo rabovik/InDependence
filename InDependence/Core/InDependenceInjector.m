@@ -26,6 +26,7 @@ static InDependenceInjector *gSharedInjector;
 @implementation InDependenceInjector{
     NSMutableDictionary *_bindings;
     NSMutableArray *_extensions;
+    NSMutableDictionary *_storage;
 }
 
 #pragma mark - Extensions
@@ -82,6 +83,8 @@ static InDependenceInjector *gSharedInjector;
         extension.delegate = delegate;
         [_extensions addObject:extension];
     }
+    
+    _storage = [NSMutableDictionary new];
     
     return self;
 }
@@ -220,6 +223,25 @@ static InDependenceInjector *gSharedInjector;
                     info:(NSDictionary *)info
 {    
     return [resolvedClass new];
+}
+
+#pragma mark - Storage
+-(void)setObject:(id)object forKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
+    if (nil != classOrProtocol) {
+        key = [NSString stringWithFormat:@"%@_%@",
+               [InDependenceUtils key:classOrProtocol],
+               key];
+    }
+    [_storage setObject:object forKey:key];
+}
+
+-(id)objectForKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
+    if (nil != classOrProtocol) {
+        key = [NSString stringWithFormat:@"%@_%@",
+               [InDependenceUtils key:classOrProtocol],
+               key];
+    }
+    return [_storage objectForKey:key];
 }
 
 #pragma mark - Bindings

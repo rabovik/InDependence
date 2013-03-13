@@ -8,6 +8,10 @@
 
 #import "InDependenceSession.h"
 
+@interface NSObject ()
+-(void)awakeFromInjector;
+@end
+
 @implementation InDependenceSession{
     NSMutableArray *_instantiatedObjects;
 }
@@ -30,12 +34,7 @@
     for (id object in _instantiatedObjects) {
         SEL selector = @selector(awakeFromInjector);
         if([object respondsToSelector:selector]) {
-            NSMethodSignature *signature = [object methodSignatureForSelector:selector];
-            NSInvocation *invocation =
-                [NSInvocation invocationWithMethodSignature:signature];
-            [invocation setTarget:object];
-            [invocation setSelector:selector];
-            [invocation invoke];
+            [object awakeFromInjector];
         }
     }
 }

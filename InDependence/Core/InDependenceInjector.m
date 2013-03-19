@@ -9,6 +9,7 @@
 #import "InDependenceInjector.h"
 #import <objc/runtime.h>
 #import "InDependenceBindingEntry.h"
+#import "InDependenceModule.h"
 #import "InDependenceSession.h"
 #import "InDependenceUtils.h"
 
@@ -26,6 +27,7 @@ static InDependenceInjector *gSharedInjector;
 @implementation InDependenceInjector{
     NSMutableDictionary *_bindings;
     NSMutableArray *_extensions;
+    NSMutableArray *_modules;
 }
 
 #pragma mark - Extensions
@@ -82,6 +84,8 @@ static InDependenceInjector *gSharedInjector;
         extension.delegate = delegate;
         [_extensions addObject:extension];
     }
+    
+    _modules = [NSMutableArray new];
         
     return self;
 }
@@ -222,30 +226,33 @@ static InDependenceInjector *gSharedInjector;
     return [resolvedClass new];
 }
 
-#pragma mark - Bindings
--(InDependenceBindingEntry *)getBinding:(id)classOrProtocol{
-    NSString *key = [InDependenceUtils key:classOrProtocol];
-    InDependenceBindingEntry *binding = [_bindings objectForKey:key];
-    if (!binding) {
-        binding = [InDependenceBindingEntry new];
-        [_bindings setObject:binding forKey:key];
-        NSLog(@"NEW BINDING FOR KEY %@",key);
+#pragma mark - Modules
+-(void)addModule:(InDependenceModule *)module{
+    [_modules addObject:module];
+}
+
+-(void)removeModule:(InDependenceModule *)module{
+    [_modules removeObject:module];
+}
+
+-(void)removeModuleOfClass:(Class)moduleClass{
+    NSArray *currentModules = [_modules copy];
+    for (InDependenceModule *module in currentModules) {
+        if ([module isKindOfClass:moduleClass]) {
+            [_modules removeObject:module];
+        }
     }
-    return binding;
 }
 
--(void)bindClass:(Class)aClass toClass:(Class)toClass{
-    [self bindClass:aClass to:toClass];
+#pragma mark - Bindings
+-(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
+    for (InDependenceModule *module in _modules) {
+        id binding = [module bindingForKey:key classOrProtocol:classOrProtocol];
+        if (binding) {
+            return binding;
+        }
+    }
+    return nil;
 }
--(void)bindClass:(Class)aClass toProtocol:(Protocol *)toProtocol{
-    [self bindClass:aClass to:toProtocol];
-}
-
--(void)bindClass:(Class)aClass to:(id)classOrProtocol{
-    InDependenceBindingEntry *binding = [self getBinding:classOrProtocol];
-    binding.bindedClass = aClass;
-}
-
-
 
 @end

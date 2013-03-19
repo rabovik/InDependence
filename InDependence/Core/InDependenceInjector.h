@@ -11,7 +11,8 @@
 @class
     InDependenceBindingEntry,
     InDependenceExtension,
-    InDependenceSession;
+    InDependenceSession,
+    InDependenceModule;
 
 @interface InDependenceInjector : NSObject
 
@@ -30,9 +31,12 @@
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info;
 
+#pragma mark - Modules
+-(void)addModule:(InDependenceModule *)module;
+-(void)removeModule:(InDependenceModule *)module;
+-(void)removeModuleOfClass:(Class)moduleClass;
+
 #pragma mark - Bindings
--(InDependenceBindingEntry *)getBinding:(id)classOrProtocol;
--(void)bindClass:(Class)aClass toClass:(Class)toClass;
--(void)bindClass:(Class)aClass toProtocol:(Protocol *)toProtocol;
+-(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol;
 
 @end

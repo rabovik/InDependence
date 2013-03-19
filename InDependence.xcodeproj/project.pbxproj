@@ -13,7 +13,6 @@
 		1A1DFD9616DC921300658409 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9416DC921300658409 /* InfoPlist.strings */; };
 		1A1DFD9916DC921300658409 /* InDependenceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFD9816DC921300658409 /* InDependenceTests.m */; };
 		1A1DFDA316DC972C00658409 /* InDependenceInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA216DC972C00658409 /* InDependenceInjector.m */; };
-		1A1DFDA616DDF84300658409 /* InDependenceBindingEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */; };
 		1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDA916DDFE8D00658409 /* Car.m */; };
 		1A1DFDAD16DDFE9D00658409 /* Engine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAC16DDFE9D00658409 /* Engine.m */; };
 		1A1DFDB016DDFEBA00658409 /* CarModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDAF16DDFEBA00658409 /* CarModels.m */; };
@@ -44,8 +43,6 @@
 		1A1DFDA016DC963300658409 /* InDependence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InDependence.h; sourceTree = "<group>"; };
 		1A1DFDA116DC972C00658409 /* InDependenceInjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceInjector.h; path = Core/InDependenceInjector.h; sourceTree = "<group>"; };
 		1A1DFDA216DC972C00658409 /* InDependenceInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceInjector.m; path = Core/InDependenceInjector.m; sourceTree = "<group>"; };
-		1A1DFDA416DDF84300658409 /* InDependenceBindingEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceBindingEntry.h; path = Core/InDependenceBindingEntry.h; sourceTree = "<group>"; };
-		1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceBindingEntry.m; path = Core/InDependenceBindingEntry.m; sourceTree = "<group>"; };
 		1A1DFDA816DDFE8D00658409 /* Car.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Car.h; path = "Helper Classes/Car.h"; sourceTree = "<group>"; };
 		1A1DFDA916DDFE8D00658409 /* Car.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Car.m; path = "Helper Classes/Car.m"; sourceTree = "<group>"; };
 		1A1DFDAB16DDFE9D00658409 /* Engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Engine.h; path = "Helper Classes/Engine.h"; sourceTree = "<group>"; };
@@ -155,8 +152,6 @@
 		1A1DFD9E16DC947B00658409 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				1A1DFDA416DDF84300658409 /* InDependenceBindingEntry.h */,
-				1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */,
 				1A1DFDA116DC972C00658409 /* InDependenceInjector.h */,
 				1A1DFDA216DC972C00658409 /* InDependenceInjector.m */,
 				1A1DFDB816DE6B9100658409 /* InDependenceSession.h */,
@@ -294,7 +289,6 @@
 			files = (
 				1A1DFD9916DC921300658409 /* InDependenceTests.m in Sources */,
 				1A1DFDA316DC972C00658409 /* InDependenceInjector.m in Sources */,
-				1A1DFDA616DDF84300658409 /* InDependenceBindingEntry.m in Sources */,
 				1A1DFDAA16DDFE8D00658409 /* Car.m in Sources */,
 				1A1DFDAD16DDFE9D00658409 /* Engine.m in Sources */,
 				1A1DFDB016DDFEBA00658409 /* CarModels.m in Sources */,

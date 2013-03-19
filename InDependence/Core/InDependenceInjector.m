@@ -8,7 +8,6 @@
 
 #import "InDependenceInjector.h"
 #import <objc/runtime.h>
-#import "InDependenceBindingEntry.h"
 #import "InDependenceModule.h"
 #import "InDependenceSession.h"
 #import "InDependenceUtils.h"

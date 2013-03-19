@@ -10,14 +10,19 @@
 #import "CarModels.h"
 #import "Garage.h"
 #import "InDependence.h"
+#import "InDependenceModuleWithBlock.h"
 
 @implementation InDependenceTests{
 }
 
 - (void)setUp{
     [super setUp];
-    [[InDependenceInjector sharedInjector] bindClass:[SportSteeringWheel class]
-                                          toProtocol:@protocol(SteeringWheel)];
+    [[InDependenceInjector sharedInjector]
+     addModule:[[InDependenceModuleWithBlock alloc]
+                initWithBlock:^(InDependenceModule *module){
+                    [module bindClass:[SportSteeringWheel class]
+                           toProtocol:@protocol(SteeringWheel)];
+                }]];
 }
 
 - (void)tearDown{
@@ -50,8 +55,12 @@
 }
 
 -(void)testClassToClassBinding{
-    [[InDependenceInjector sharedInjector] bindClass:[RenaultClio class]
-                                             toClass:[Renault class]];
+    [[InDependenceInjector sharedInjector]
+     addModule:[[InDependenceModuleWithBlock alloc]
+                initWithBlock:^(InDependenceModule *module){
+                    [module bindClass:[RenaultClio class]
+                              toClass:[Renault class]];
+                }]];    
     Renault *car = [[InDependenceInjector sharedInjector] getObject:[Renault class]];
     STAssertTrue([NSStringFromClass([car class]) isEqualToString:@"RenaultClio"],
                  @"Class is %@",NSStringFromClass([car class]));
@@ -67,10 +76,14 @@
                  @"Class is %@",NSStringFromClass([car.steeringWheel class]));
 }
 -(void)testRecursiveBindings{
-    [[InDependenceInjector sharedInjector] bindClass:[Ford class]
-                                             toClass:[Car class]];
-    [[InDependenceInjector sharedInjector] bindClass:[FordFocus class]
-                                             toClass:[Ford class]];
+    [[InDependenceInjector sharedInjector]
+     addModule:[[InDependenceModuleWithBlock alloc]
+                initWithBlock:^(InDependenceModule *module){
+                    [module bindClass:[Ford class]
+                              toClass:[Car class]];
+                    [module bindClass:[FordFocus class]
+                              toClass:[Ford class]];
+                }]];
     Car *car = [[InDependenceInjector sharedInjector] getObject:[Car class]];
     STAssertTrue([car class] == [FordFocus class], @"Class is %@",[car class]);
 }

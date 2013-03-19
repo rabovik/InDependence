@@ -8,6 +8,8 @@
 
 #import "InDependenceInjector.h"
 #import "InDependenceUtils.h"
+#import "InDependenceModule.h"
+#import "InDependenceModuleWithBlock.h"
 
 #import "InDependenceCustomInitializerExtension.h"
 #import "InDependenceSingletonExtension.h"

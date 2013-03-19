@@ -26,7 +26,8 @@
 		1A1DFDC616DE86D500658409 /* Garage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC516DE86D500658409 /* Garage.m */; };
 		1A1DFDC916DF46F500658409 /* InDependenceCustomInitializerExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */; };
 		1A1DFDCC16DFE6E500658409 /* InDependenceAncestorsExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDCB16DFE6E400658409 /* InDependenceAncestorsExtension.m */; };
-		1A3C347B16F87835008EE0AD /* InDependenceModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C347A16F87835008EE0AD /* InDependenceModule.m */; };
+		1A3C348416F887FC008EE0AD /* InDependenceModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C348116F887FC008EE0AD /* InDependenceModule.m */; };
+		1A3C348516F887FC008EE0AD /* InDependenceModuleWithBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C348316F887FC008EE0AD /* InDependenceModuleWithBlock.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,8 +70,10 @@
 		1A1DFDC816DF46F500658409 /* InDependenceCustomInitializerExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceCustomInitializerExtension.m; path = Extensions/InDependenceCustomInitializerExtension.m; sourceTree = "<group>"; };
 		1A1DFDCA16DFE6E400658409 /* InDependenceAncestorsExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceAncestorsExtension.h; path = Extensions/InDependenceAncestorsExtension.h; sourceTree = "<group>"; };
 		1A1DFDCB16DFE6E400658409 /* InDependenceAncestorsExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceAncestorsExtension.m; path = Extensions/InDependenceAncestorsExtension.m; sourceTree = "<group>"; };
-		1A3C347916F87835008EE0AD /* InDependenceModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InDependenceModule.h; path = Core/InDependenceModule.h; sourceTree = "<group>"; };
-		1A3C347A16F87835008EE0AD /* InDependenceModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InDependenceModule.m; path = Core/InDependenceModule.m; sourceTree = "<group>"; };
+		1A3C348016F887FC008EE0AD /* InDependenceModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InDependenceModule.h; sourceTree = "<group>"; };
+		1A3C348116F887FC008EE0AD /* InDependenceModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InDependenceModule.m; sourceTree = "<group>"; };
+		1A3C348216F887FC008EE0AD /* InDependenceModuleWithBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InDependenceModuleWithBlock.h; sourceTree = "<group>"; };
+		1A3C348316F887FC008EE0AD /* InDependenceModuleWithBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InDependenceModuleWithBlock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,12 +159,11 @@
 				1A1DFDA516DDF84300658409 /* InDependenceBindingEntry.m */,
 				1A1DFDA116DC972C00658409 /* InDependenceInjector.h */,
 				1A1DFDA216DC972C00658409 /* InDependenceInjector.m */,
-				1A3C347916F87835008EE0AD /* InDependenceModule.h */,
-				1A3C347A16F87835008EE0AD /* InDependenceModule.m */,
 				1A1DFDB816DE6B9100658409 /* InDependenceSession.h */,
 				1A1DFDB916DE6B9200658409 /* InDependenceSession.m */,
 				1A1DFDB116DE19CA00658409 /* InDependenceUtils.h */,
 				1A1DFDB216DE19CA00658409 /* InDependenceUtils.m */,
+				1A3C347F16F887FC008EE0AD /* Modules */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -196,6 +198,18 @@
 				1A1DFDC216DE864900658409 /* Road.m */,
 			);
 			name = "Helper Classes";
+			sourceTree = "<group>";
+		};
+		1A3C347F16F887FC008EE0AD /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				1A3C348016F887FC008EE0AD /* InDependenceModule.h */,
+				1A3C348116F887FC008EE0AD /* InDependenceModule.m */,
+				1A3C348216F887FC008EE0AD /* InDependenceModuleWithBlock.h */,
+				1A3C348316F887FC008EE0AD /* InDependenceModuleWithBlock.m */,
+			);
+			name = Modules;
+			path = Core/Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,7 +307,8 @@
 				1A1DFDC616DE86D500658409 /* Garage.m in Sources */,
 				1A1DFDC916DF46F500658409 /* InDependenceCustomInitializerExtension.m in Sources */,
 				1A1DFDCC16DFE6E500658409 /* InDependenceAncestorsExtension.m in Sources */,
-				1A3C347B16F87835008EE0AD /* InDependenceModule.m in Sources */,
+				1A3C348416F887FC008EE0AD /* InDependenceModule.m in Sources */,
+				1A3C348516F887FC008EE0AD /* InDependenceModuleWithBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

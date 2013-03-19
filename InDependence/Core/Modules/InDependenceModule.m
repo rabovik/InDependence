@@ -12,13 +12,6 @@
 
 NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
 
-@interface InDependenceBindedClassEntry : NSObject
-@property (nonatomic,unsafe_unretained) Class bindedClass;
-@end
-
-@implementation InDependenceBindedClassEntry
-@end
-
 @implementation InDependenceModule{
     NSMutableDictionary *_bindings;
 }

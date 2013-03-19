@@ -10,10 +10,19 @@
 #import "InDependenceSingletonExtension.h"
 #import "InDependenceUtils.h"
 
-static NSString *const InDependenceSingletonStorageKey =
-    @"InDependenceSingletonStorageKey";
 
-@implementation InDependenceSingletonExtension
+@implementation InDependenceSingletonExtension{
+    NSMutableDictionary *_singletonsStorage;
+}
+
+-(id)init{
+	self = [super init];
+	if (nil == self) return nil;
+    
+	_singletonsStorage = [NSMutableDictionary new];
+    
+	return self;
+}
 
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector*)injector
@@ -26,17 +35,15 @@ static NSString *const InDependenceSingletonStorageKey =
          isInstructionRequiredForClass:resolvedClass
          selector:@selector(independence_register_singleton)])
     {
-        id object = [injector objectForKey:InDependenceSingletonStorageKey
-                           classOrProtocol:resolvedClass];
+        NSString *key = [InDependenceUtils key:resolvedClass];
+        id object = [_singletonsStorage objectForKey:key];
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
                                        injector:injector
                                         session:session
                                       ancestors:ancestors
                                            info:info];
-            [injector setObject:object
-                         forKey:InDependenceSingletonStorageKey
-                classOrProtocol:resolvedClass];
+            [_singletonsStorage setObject:object forKey:key];
         }
         
         return object;

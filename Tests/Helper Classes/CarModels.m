@@ -13,7 +13,7 @@
 @end
 
 @implementation FordFocusLogo
-independence_requires_ancestors(@"parentCar")
+independence_references(@"parentCar")
 @end
 
 @implementation FordFocus

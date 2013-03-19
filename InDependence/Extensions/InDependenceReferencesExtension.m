@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceAncestorsExtension.h"
+#import "InDependenceReferencesExtension.h"
 #import "InDependenceUtils.h"
 
-@implementation InDependenceAncestorsExtension
+@implementation InDependenceReferencesExtension
 
 -(id)createObjectOfClass:(Class)resolvedClass
                 injector:(InDependenceInjector *)injector
@@ -23,7 +23,7 @@
                                              info:info];
     NSSet *properties = [InDependenceUtils
                          requirementsSetForClass:resolvedClass
-                         selector:@selector(independence_requires_ancestors)];
+                         selector:@selector(independence_references)];
     if (properties) {
         NSMutableDictionary *propertiesDictionary =
             [NSMutableDictionary dictionaryWithCapacity:properties.count];

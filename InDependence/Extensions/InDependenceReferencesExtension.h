@@ -8,15 +8,15 @@
 
 #import "InDependenceExtension.h"
 
-#define independence_requires_ancestors(args...) \
-+(NSSet *)independence_requires_ancestors{ \
+#define independence_references(args...) \
++(NSSet *)independence_references{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
     return [InDependenceUtils \
             unionRequirementsSetForClass:self \
             withSet:requirements \
-            selector:@selector(independence_requires_ancestors)]; \
+            selector:@selector(independence_references)]; \
 }
 
-@interface InDependenceAncestorsExtension : InDependenceExtension
+@interface InDependenceReferencesExtension : InDependenceExtension
 
 @end

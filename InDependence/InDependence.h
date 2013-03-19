@@ -13,7 +13,7 @@
 
 #import "InDependenceCustomInitializerExtension.h"
 #import "InDependenceSingletonExtension.h"
-#import "InDependenceAncestorsExtension.h"
+#import "InDependenceReferencesExtension.h"
 
 #define independence_requires(args...) \
 +(NSSet *)independence_requires{ \

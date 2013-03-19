@@ -17,5 +17,5 @@ independence_requires(@"engine",@"road",@"steeringWheel");
 @end
 
 @implementation SportSteeringWheel
-independence_requires_ancestors(@"garage")
+independence_references(@"garage")
 @end

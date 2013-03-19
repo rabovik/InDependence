@@ -34,7 +34,7 @@
                 @throw [NSException
                         exceptionWithName:InDependenceException
                         reason:[NSString
-                                stringWithFormat:@"Required ancestor property '%@' of class '%@' must be weak",
+                                stringWithFormat:@"Required reference '%@' of class '%@' must be weak",
                                 propertyName,
                                 [InDependenceUtils key:resolvedClass]]
                         userInfo:nil];

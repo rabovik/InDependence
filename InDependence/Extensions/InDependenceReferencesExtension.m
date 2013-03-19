@@ -18,15 +18,14 @@
                     info:(NSDictionary *)info
 {
     id createdObject = [super createObjectOfClass:resolvedClass
-                                         injector:injector session:session
+                                         injector:injector
+                                          session:session
                                         ancestors:ancestors
                                              info:info];
     NSSet *properties = [InDependenceUtils
                          requirementsSetForClass:resolvedClass
                          selector:@selector(independence_references)];
     if (properties) {
-        NSMutableDictionary *propertiesDictionary =
-            [NSMutableDictionary dictionaryWithCapacity:properties.count];
         for (NSString *propertyName in properties) {
             objc_property_t property = [InDependenceUtils getProperty:propertyName
                                                             fromClass:resolvedClass];
@@ -42,36 +41,35 @@
             
             InDependencePropertyInfo propertyInfo =
                 [InDependenceUtils classOrProtocolForProperty:property];
-            id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
             
             id resolvedAncestor = nil;
                         
             for (int i = ancestors.count - 1; i>=0; --i) {
                 id ancestor = [ancestors objectAtIndex:i];
-                if (propertyInfo.type == InDependenceInterfaceTypeClass) {
-                    if ([ancestor isKindOfClass:desiredClassOrProtocol]) {
-                        resolvedAncestor = ancestor;
-                        break;
-                    }
-                }else{
-                    if ([ancestor conformsToProtocol:desiredClassOrProtocol]) {
-                        resolvedAncestor = ancestor;
-                        break;
-                    }
+                if ([self
+                     object:ancestor
+                     conformsToPropertyInfo:propertyInfo])
+                {
+                    resolvedAncestor = ancestor;
+                    break;
                 }
-
-            }
-                        
-            if (nil == resolvedAncestor) {
-                resolvedAncestor = [NSNull null];
             }
             
-            [propertiesDictionary setObject:resolvedAncestor forKey:propertyName];
+            [createdObject setValue:resolvedAncestor forKey:propertyName];
         }
-        [createdObject setValuesForKeysWithDictionary:propertiesDictionary];
     }
     
     return createdObject;
+}
+
+-(BOOL)object:(id)object conformsToPropertyInfo:(InDependencePropertyInfo)propertyInfo{
+    id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
+    if (propertyInfo.type == InDependenceInterfaceTypeClass) {
+        return [object isKindOfClass:desiredClassOrProtocol];
+    }else{
+        return [object conformsToProtocol:desiredClassOrProtocol];
+    }
+    return NO;
 }
 
 @end

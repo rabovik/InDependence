@@ -7,6 +7,7 @@
 //
 
 #import "InDependenceModule.h"
+#import "InDependenceInjector.h"
 #import "InDependenceUtils.h"
 
 NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
@@ -44,7 +45,18 @@ NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
            forKey:(NSString *)key
   classOrProtocol:(id)classOrProtocol
 {
-    // assert binding is unique
+    id existingBinding =
+        [self.injector bindingForKey:key classOrProtocol:classOrProtocol];
+    if (nil != existingBinding) {
+        @throw [NSException
+                exceptionWithName:InDependenceException
+                reason:[NSString stringWithFormat:
+                        @"Duplicate binding '%@' for %@",
+                        InDependenceBindedClassKey,
+                        [InDependenceUtils key:classOrProtocol]]
+                userInfo:nil];
+    }
+    
     key = [NSString stringWithFormat:@"%@_%@",
            key,
            [InDependenceUtils key:classOrProtocol]];

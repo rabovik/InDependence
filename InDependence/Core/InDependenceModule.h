@@ -10,6 +10,8 @@
 
 extern NSString *const InDependenceBindedClassKey;
 
+@class InDependenceInjector;
+
 @interface InDependenceModule : NSObject
 
 #pragma mark - Bindings storage
@@ -24,5 +26,8 @@ extern NSString *const InDependenceBindedClassKey;
 
 #pragma mark - For overriding
 -(void)configure;
+
+#pragma mark - Properties
+@property (nonatomic,weak) InDependenceInjector *injector;
 
 @end

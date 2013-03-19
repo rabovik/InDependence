@@ -191,10 +191,11 @@ static InDependenceInjector *gSharedInjector;
                 info:(NSDictionary *)info
 {
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
-
-    InDependenceBindingEntry *binding = [self getBinding:classOrProtocol];
-    if (binding.bindedClass) {
-        Class resolvedClass = binding.bindedClass;
+    
+    Class bindedClass = [self bindingForKey:InDependenceBindedClassKey
+                            classOrProtocol:classOrProtocol];
+    if (bindedClass) {
+        Class resolvedClass = bindedClass;
         if (isClass && resolvedClass != classOrProtocol) {
             return [self resolveClass:resolvedClass
                              injector:injector
@@ -229,9 +230,12 @@ static InDependenceInjector *gSharedInjector;
 #pragma mark - Modules
 -(void)addModule:(InDependenceModule *)module{
     [_modules addObject:module];
+    module.injector = self;
+    [module configure];
 }
 
 -(void)removeModule:(InDependenceModule *)module{
+    module.injector = nil;
     [_modules removeObject:module];
 }
 
@@ -239,7 +243,7 @@ static InDependenceInjector *gSharedInjector;
     NSArray *currentModules = [_modules copy];
     for (InDependenceModule *module in currentModules) {
         if ([module isKindOfClass:moduleClass]) {
-            [_modules removeObject:module];
+            [self removeModule:module];
         }
     }
 }

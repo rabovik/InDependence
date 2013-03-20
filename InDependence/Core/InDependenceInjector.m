@@ -143,7 +143,7 @@ static InDependenceInjector *gSharedInjector;
     
     NSSet *properties = [InDependenceUtils
                          requirementsSetForClass:classOrProtocol
-                         selector:@selector(independence_requires)];
+                         selector:@selector(independence_requirements)];
     if (properties) {
         NSMutableDictionary *propertiesDictionary =
             [NSMutableDictionary dictionaryWithCapacity:properties.count];

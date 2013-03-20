@@ -17,7 +17,7 @@ independence_references(@"parentCar")
 @end
 
 @implementation FordFocus
-independence_requires(@"logo");
+independence_requirements(@"logo");
 independence_initializer(initWithYear:,@"2010");
 
 -(id)initWithYear:(NSString *)year{

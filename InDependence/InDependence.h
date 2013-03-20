@@ -15,11 +15,11 @@
 #import "InDependenceSingletonExtension.h"
 #import "InDependenceReferencesExtension.h"
 
-#define independence_requires(args...) \
-+(NSSet *)independence_requires{ \
+#define independence_requirements(args...) \
++(NSSet *)independence_requirements{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
     return [InDependenceUtils \
             unionRequirementsSetForClass:self \
             withSet:requirements \
-            selector:@selector(independence_requires)]; \
+            selector:@selector(independence_requirements)]; \
 }

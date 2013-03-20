@@ -12,7 +12,8 @@
 @implementation InDependenceUtilsTests
 
 -(void)testEntriesFromClassAndSuperClasses{
-    NSSet *requiredSet = [FordFocus performSelector:@selector(independence_requires)];
+    NSSet *requiredSet =
+        [FordFocus performSelector:@selector(independence_requirements)];
     NSSet *etalonSet =
         [NSSet setWithObjects:@"logo",@"engine",@"road",@"steeringWheel",nil];
     

@@ -121,64 +121,70 @@ static InDependenceInjector *gSharedInjector;
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info
 {
-    BOOL isRootObjectInSession = NO;
-    if (nil == session) {
-        isRootObjectInSession = YES;
-        session = [InDependenceSession new];
-    }
-    
-    Class resolvedClass =
+    @synchronized(self){
+        BOOL isRootObjectInSession = NO;
+        if (nil == session) {
+            isRootObjectInSession = YES;
+            session = [InDependenceSession new];
+        }
+        
+        // 1. Resolve class
+        Class resolvedClass =
         [self.lastExtension resolveClass:classOrProtocol
                                  session:session
                                ancestors:ancestors
                                     info:info];
-    NSLog(@"Resolved class for %@ is %@",[InDependenceUtils key:classOrProtocol],NSStringFromClass(resolvedClass));
-    
-    id objectUnderConstruction =
+        
+        // 2. Construct object
+        id objectUnderConstruction =
         [self.lastExtension createObjectOfClass:resolvedClass
                                         session:session
                                       ancestors:ancestors
                                            info:info];
-    
-    NSSet *properties = [InDependenceUtils
-                         requirementsSetForClass:classOrProtocol
-                         selector:@selector(independence_requirements)];
-    if (properties) {
-        NSMutableDictionary *propertiesDictionary =
+        
+        [session registerInstantiatedObject:objectUnderConstruction];
+        
+        // 3. Satisfy requirements
+        NSSet *properties = [InDependenceUtils
+                             requirementsSetForClass:classOrProtocol
+                             selector:@selector(independence_requirements)];
+        if (properties) {
+            NSMutableDictionary *propertiesDictionary =
             [NSMutableDictionary dictionaryWithCapacity:properties.count];
-        NSMutableArray *ancestorsForProperties =
+            NSMutableArray *ancestorsForProperties =
             [NSMutableArray arrayWithArray:ancestors];
-        [ancestorsForProperties addObject:objectUnderConstruction];
-
-        for (NSString *propertyName in properties) {
-            objc_property_t property = [InDependenceUtils
-                                        getProperty:propertyName
-                                        fromClass:classOrProtocol];
-            InDependencePropertyInfo propertyInfo =
+            [ancestorsForProperties addObject:objectUnderConstruction];
+            
+            for (NSString *propertyName in properties) {
+                objc_property_t property = [InDependenceUtils
+                                            getProperty:propertyName
+                                            fromClass:classOrProtocol];
+                InDependencePropertyInfo propertyInfo =
                 [InDependenceUtils classOrProtocolForProperty:property];
-            id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
-            
-            id theObject = [self getObject:desiredClassOrProtocol
-                                   session:session
-                                 ancestors:ancestorsForProperties
-                                      info:nil];
-            
-            if (nil == theObject) {
-                theObject = [NSNull null];
+                id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
+                
+                id theObject = [self getObject:desiredClassOrProtocol
+                                       session:session
+                                     ancestors:ancestorsForProperties
+                                          info:nil];
+                
+                if (nil == theObject) {
+                    theObject = [NSNull null];
+                }
+                
+                [propertiesDictionary setObject:theObject forKey:propertyName];
             }
-            
-            [propertiesDictionary setObject:theObject forKey:propertyName];
+            [objectUnderConstruction
+             setValuesForKeysWithDictionary:propertiesDictionary];
         }
-        [objectUnderConstruction setValuesForKeysWithDictionary:propertiesDictionary];
+        
+        // 4. Notify objects
+        if (isRootObjectInSession) {
+            [session notifyObjectsThatTheyAreReady];
+        }
+        
+        return objectUnderConstruction;
     }
-    
-    [session registerInstantiatedObject:objectUnderConstruction];
-    
-    if (isRootObjectInSession) {
-        [session notifyObjectsThatTheyAreReady];
-    }
-    
-    return objectUnderConstruction;
 }
 
 #pragma mark └ extension delegate
@@ -224,21 +230,27 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark - Modules
 -(void)addModule:(InDependenceModule *)module{
-    [_modules addObject:module];
-    module.injector = self;
-    [module configure];
+    @synchronized(self){
+        [_modules addObject:module];
+        module.injector = self;
+        [module configure];
+    }
 }
 
 -(void)removeModule:(InDependenceModule *)module{
-    module.injector = nil;
-    [_modules removeObject:module];
+    @synchronized(self){
+        module.injector = nil;
+        [_modules removeObject:module];
+    }
 }
 
 -(void)removeModuleOfClass:(Class)moduleClass{
-    NSArray *currentModules = [_modules copy];
-    for (InDependenceModule *module in currentModules) {
-        if ([module isKindOfClass:moduleClass]) {
-            [self removeModule:module];
+    @synchronized(self){
+        NSArray *currentModules = [_modules copy];
+        for (InDependenceModule *module in currentModules) {
+            if ([module isKindOfClass:moduleClass]) {
+                [self removeModule:module];
+            }
         }
     }
 }

@@ -81,6 +81,7 @@ static InDependenceInjector *gSharedInjector;
             delegate = self;
         }
         extension.delegate = delegate;
+        extension.injector = self;
         [_extensions addObject:extension];
     }
     
@@ -128,7 +129,6 @@ static InDependenceInjector *gSharedInjector;
     
     Class resolvedClass =
         [self.lastExtension resolveClass:classOrProtocol
-                                injector:self
                                  session:session
                                ancestors:ancestors
                                     info:info];
@@ -136,7 +136,6 @@ static InDependenceInjector *gSharedInjector;
     
     id objectUnderConstruction =
         [self.lastExtension createObjectOfClass:resolvedClass
-                                       injector:self
                                         session:session
                                       ancestors:ancestors
                                            info:info];
@@ -184,7 +183,6 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark └ extension delegate
 -(Class)resolveClass:(id)classOrProtocol
-            injector:(InDependenceInjector*)injector
              session:(InDependenceSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info
@@ -197,7 +195,6 @@ static InDependenceInjector *gSharedInjector;
         Class resolvedClass = bindedClass;
         if (isClass && resolvedClass != classOrProtocol) {
             return [self resolveClass:resolvedClass
-                             injector:injector
                               session:session
                             ancestors:ancestors
                                  info:info];
@@ -218,7 +215,6 @@ static InDependenceInjector *gSharedInjector;
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info

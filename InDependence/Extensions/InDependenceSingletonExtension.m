@@ -25,7 +25,6 @@
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
@@ -39,7 +38,6 @@
         id object = [_singletonsStorage objectForKey:key];
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
-                                       injector:injector
                                         session:session
                                       ancestors:ancestors
                                            info:info];
@@ -50,7 +48,6 @@
     }
         
     return [super createObjectOfClass:resolvedClass
-                             injector:injector
                               session:session
                             ancestors:ancestors
                                  info:info];

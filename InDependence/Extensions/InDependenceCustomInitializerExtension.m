@@ -31,7 +31,6 @@ static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgument
 @implementation InDependenceCustomInitializerExtension
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(InDependenceInjector *)injector
                  session:(InDependenceSession *)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
@@ -54,7 +53,6 @@ static NSString *const InDependenceInfoArgumentsKey = @"InDependenceInfoArgument
     
     return [super
             createObjectOfClass:resolvedClass
-            injector:injector
             session:session
             ancestors:ancestors
             info:info];

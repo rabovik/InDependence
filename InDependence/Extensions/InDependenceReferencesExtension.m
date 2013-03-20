@@ -12,13 +12,11 @@
 @implementation InDependenceReferencesExtension
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(InDependenceInjector *)injector
                  session:(InDependenceSession *)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
 {
     id createdObject = [super createObjectOfClass:resolvedClass
-                                         injector:injector
                                           session:session
                                         ancestors:ancestors
                                              info:info];

@@ -13,13 +13,11 @@
 @protocol InDependenceExtensionDelegate <NSObject>
 
 -(Class)resolveClass:(id)classOrProtocol
-            injector:(InDependenceInjector*)injector
              session:(InDependenceSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info;
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                injector:(InDependenceInjector*)injector
                  session:(InDependenceSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info;
@@ -28,4 +26,5 @@
 
 @interface InDependenceExtension : NSObject <InDependenceExtensionDelegate>
 @property (nonatomic,weak) id<InDependenceExtensionDelegate> delegate;
+@property (nonatomic,weak) InDependenceInjector *injector;
 @end

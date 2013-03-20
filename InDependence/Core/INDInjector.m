@@ -160,7 +160,7 @@ static INDInjector *gSharedInjector;
                                             getProperty:propertyName
                                             fromClass:classOrProtocol];
                 INDPropertyInfo propertyInfo =
-                [INDUtils classOrProtocolForProperty:property];
+                    [INDUtils classOrProtocolForProperty:property];
                 id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
                 
                 id theObject = [self getObject:desiredClassOrProtocol

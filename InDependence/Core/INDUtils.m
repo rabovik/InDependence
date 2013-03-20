@@ -27,7 +27,8 @@ NSString *const INDException = @"INDException";
 +(BOOL)isInstructionRequiredForClass:(Class)klass selector:(SEL)selector{
     if ([klass respondsToSelector:selector]) {
         NSMethodSignature *signature = [klass methodSignatureForSelector:selector];
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+        NSInvocation *invocation =
+            [NSInvocation invocationWithMethodSignature:signature];
         [invocation setTarget:klass];
         [invocation setSelector:selector];
         [invocation invoke];

@@ -8,23 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class InDependenceInjector,InDependenceSession;
+@class INDInjector,INDSession;
 
-@protocol InDependenceExtensionDelegate <NSObject>
+@protocol INDExtensionDelegate <NSObject>
 
 -(Class)resolveClass:(id)classOrProtocol
-             session:(InDependenceSession*)session
+             session:(INDSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info;
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                 session:(InDependenceSession*)session
+                 session:(INDSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info;
 
 @end
 
-@interface InDependenceExtension : NSObject <InDependenceExtensionDelegate>
-@property (nonatomic,weak) id<InDependenceExtensionDelegate> delegate;
-@property (nonatomic,weak) InDependenceInjector *injector;
+@interface INDExtension : NSObject <INDExtensionDelegate>
+@property (nonatomic,weak) id<INDExtensionDelegate> delegate;
+@property (nonatomic,weak) INDInjector *injector;
 @end

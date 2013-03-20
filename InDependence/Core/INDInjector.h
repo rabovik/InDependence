@@ -9,31 +9,30 @@
 #import <Foundation/Foundation.h>
 
 @class
-    InDependenceBindingEntry,
-    InDependenceExtension,
-    InDependenceSession,
-    InDependenceModule;
+    INDExtension,
+    INDSession,
+    INDModule;
 
-@interface InDependenceInjector : NSObject
+@interface INDInjector : NSObject
 
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass;
 
 #pragma mark - Initializing
-+(InDependenceInjector *)sharedInjector;
-+(InDependenceInjector *)createInjector;
-+(void)setSharedInjector:(InDependenceInjector *)injector;
++(INDInjector *)sharedInjector;
++(INDInjector *)createInjector;
++(void)setSharedInjector:(INDInjector *)injector;
 
 #pragma mark - Object Factory
 -(id)getObject:(id)classOrProtocol;
 -(id)getObject:(id)classOrProtocol
-       session:(InDependenceSession *)session
+       session:(INDSession *)session
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info;
 
 #pragma mark - Modules
--(void)addModule:(InDependenceModule *)module;
--(void)removeModule:(InDependenceModule *)module;
+-(void)addModule:(INDModule *)module;
+-(void)removeModule:(INDModule *)module;
 -(void)removeModuleOfClass:(Class)moduleClass;
 
 #pragma mark - Bindings

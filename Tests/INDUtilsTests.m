@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceUtilsTests.h"
+#import "INDUtilsTests.h"
 #import "CarModels.h"
 
-@implementation InDependenceUtilsTests
+@implementation INDUtilsTests
 
 -(void)testEntriesFromClassAndSuperClasses{
     NSSet *requiredSet =

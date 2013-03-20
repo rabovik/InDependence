@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceInjector.h"
-#import "InDependenceSingletonExtension.h"
-#import "InDependenceUtils.h"
+#import "INDInjector.h"
+#import "INDSingletonExtension.h"
+#import "INDUtils.h"
 
 
-@implementation InDependenceSingletonExtension{
+@implementation INDSingletonExtension{
     NSMutableDictionary *_singletonsStorage;
 }
 
@@ -25,16 +25,16 @@
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                 session:(InDependenceSession*)session
+                 session:(INDSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
 {
     
-    if ([InDependenceUtils
+    if ([INDUtils
          isInstructionRequiredForClass:resolvedClass
          selector:@selector(independence_register_singleton)])
     {
-        NSString *key = [InDependenceUtils key:resolvedClass];
+        NSString *key = [INDUtils key:resolvedClass];
         id object = [_singletonsStorage objectForKey:key];
         if (!object) {
             object = [super createObjectOfClass:resolvedClass

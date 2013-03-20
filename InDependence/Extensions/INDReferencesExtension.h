@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceExtension.h"
+#import "INDExtension.h"
 
 #define independence_references(args...) \
 +(NSSet *)independence_references{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
-    return [InDependenceUtils \
+    return [INDUtils \
             unionRequirementsSetForClass:self \
             withSet:requirements \
             selector:@selector(independence_references)]; \
 }
 
-@interface InDependenceReferencesExtension : InDependenceExtension
+@interface INDReferencesExtension : INDExtension
 
 @end

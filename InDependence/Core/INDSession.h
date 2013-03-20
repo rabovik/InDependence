@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface InDependenceSession : NSObject
+@interface INDSession : NSObject
 
 -(void)registerInstantiatedObject:(id)object;
 -(void)notifyObjectsThatTheyAreReady;

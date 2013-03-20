@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceExtension.h"
+#import "INDExtension.h"
 
 #define independence_register_singleton() \
 +(BOOL)independence_register_singleton { \
     return YES; \
 }
 
-@interface InDependenceSingletonExtension : InDependenceExtension
+@interface INDSingletonExtension : INDExtension
 
 @end

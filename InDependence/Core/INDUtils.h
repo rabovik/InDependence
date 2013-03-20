@@ -9,19 +9,19 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
-extern NSString *const InDependenceException;
+extern NSString *const INDException;
 
 typedef enum {
-    InDependenceInterfaceTypeClass,
-    InDependenceInterfaceTypeProtocol
-} InDependenceInterfaceType;
+    INDInterfaceTypeClass,
+    INDInterfaceTypeProtocol
+} INDInterfaceType;
 
-typedef struct InDependencePropertyInfo {
+typedef struct INDPropertyInfo {
     void *value;
-    InDependenceInterfaceType type;
-} InDependencePropertyInfo;
+    INDInterfaceType type;
+} INDPropertyInfo;
 
-@interface InDependenceUtils : NSObject
+@interface INDUtils : NSObject
 
 +(NSString *)key:(id)classOrProtocol;
 
@@ -33,7 +33,7 @@ typedef struct InDependencePropertyInfo {
 +(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector;
 
 +(BOOL)propertyIsWeak:(objc_property_t)property;
-+(InDependencePropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
++(INDPropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;
 

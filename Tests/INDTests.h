@@ -8,6 +8,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface InDependenceTests : SenTestCase
+@interface INDTests : SenTestCase
 
 @end

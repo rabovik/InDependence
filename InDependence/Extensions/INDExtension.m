@@ -6,12 +6,12 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceExtension.h"
+#import "INDExtension.h"
 
-@implementation InDependenceExtension
+@implementation INDExtension
 
 -(Class)resolveClass:(id)classOrProtocol
-             session:(InDependenceSession*)session
+             session:(INDSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info
 {
@@ -23,7 +23,7 @@
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                 session:(InDependenceSession*)session
+                 session:(INDSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
 {

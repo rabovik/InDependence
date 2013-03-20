@@ -6,24 +6,24 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceInjector.h"
+#import "INDInjector.h"
 #import <objc/runtime.h>
-#import "InDependenceModule.h"
-#import "InDependenceSession.h"
-#import "InDependenceUtils.h"
+#import "INDModule.h"
+#import "INDSession.h"
+#import "INDUtils.h"
 
-#import "InDependenceCustomInitializerExtension.h"
-#import "InDependenceSingletonExtension.h"
-#import "InDependenceReferencesExtension.h"
+#import "INDCustomInitializerExtension.h"
+#import "INDSingletonExtension.h"
+#import "INDReferencesExtension.h"
 
 static NSMutableArray *gExtensions;
-static InDependenceInjector *gSharedInjector;
+static INDInjector *gSharedInjector;
 
-@interface InDependenceInjector () <InDependenceExtensionDelegate>
-@property (nonatomic,readonly) id<InDependenceExtensionDelegate> lastExtension;
+@interface INDInjector () <INDExtensionDelegate>
+@property (nonatomic,readonly) id<INDExtensionDelegate> lastExtension;
 @end
 
-@implementation InDependenceInjector{
+@implementation INDInjector{
     NSMutableDictionary *_bindings;
     NSMutableArray *_extensions;
     NSMutableArray *_modules;
@@ -31,19 +31,19 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass{
-    if (![extensionClass isSubclassOfClass:[InDependenceExtension class]]) {
+    if (![extensionClass isSubclassOfClass:[INDExtension class]]) {
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString
                         stringWithFormat:
-                        @"Can not register %@ extension because it is not a subclass of InDependenceExtension",
+                        @"Can not register %@ extension because it is not a subclass of INDExtension",
                         NSStringFromClass(extensionClass)]
                 userInfo:nil];
     }
     [gExtensions addObject:extensionClass];
 }
 
--(id<InDependenceExtensionDelegate>)lastExtension{
+-(id<INDExtensionDelegate>)lastExtension{
     if (_extensions.count == 0) {
         return self;
     }else{
@@ -54,7 +54,7 @@ static InDependenceInjector *gSharedInjector;
 #pragma mark - Initializing
 
 +(void)initialize  {
-    if (self != [InDependenceInjector class]) return;
+    if (self != [INDInjector class]) return;
 
     gExtensions = [NSMutableArray new];
     
@@ -62,9 +62,9 @@ static InDependenceInjector *gSharedInjector;
 }
 
 +(void)registerDefaultExtensions{
-    [self registerExtensionClass:[InDependenceCustomInitializerExtension class]];
-    [self registerExtensionClass:[InDependenceSingletonExtension class]];
-    [self registerExtensionClass:[InDependenceReferencesExtension class]];
+    [self registerExtensionClass:[INDCustomInitializerExtension class]];
+    [self registerExtensionClass:[INDSingletonExtension class]];
+    [self registerExtensionClass:[INDReferencesExtension class]];
 }
 
 -(id)init{
@@ -75,7 +75,7 @@ static InDependenceInjector *gSharedInjector;
     
     _extensions = [NSMutableArray new];
     for (Class extensionClass in gExtensions) {
-        InDependenceExtension *extension = [self getObject:extensionClass];
+        INDExtension *extension = [self getObject:extensionClass];
         id delegate = [_extensions lastObject];
         if (nil == delegate) {
             delegate = self;
@@ -90,7 +90,7 @@ static InDependenceInjector *gSharedInjector;
     return self;
 }
 
-+(InDependenceInjector *)sharedInjector{
++(INDInjector *)sharedInjector{
     @synchronized(self){
         if (nil == gSharedInjector) {
             gSharedInjector = [self createInjector];
@@ -99,11 +99,11 @@ static InDependenceInjector *gSharedInjector;
     return gSharedInjector;
 }
 
-+(InDependenceInjector *)createInjector{
++(INDInjector *)createInjector{
     return [[self class] new];
 }
 
-+(void)setSharedInjector:(InDependenceInjector *)injector{
++(void)setSharedInjector:(INDInjector *)injector{
     @synchronized(self) {
         if (gSharedInjector != injector) {
             gSharedInjector = injector;
@@ -117,7 +117,7 @@ static InDependenceInjector *gSharedInjector;
 }
 
 -(id)getObject:(id)classOrProtocol
-       session:(InDependenceSession *)session
+       session:(INDSession *)session
      ancestors:(NSArray *)ancestors
           info:(NSDictionary *)info
 {
@@ -125,7 +125,7 @@ static InDependenceInjector *gSharedInjector;
         BOOL isRootObjectInSession = NO;
         if (nil == session) {
             isRootObjectInSession = YES;
-            session = [InDependenceSession new];
+            session = [INDSession new];
         }
         
         // 1. Resolve class
@@ -145,7 +145,7 @@ static InDependenceInjector *gSharedInjector;
         [session registerInstantiatedObject:objectUnderConstruction];
         
         // 3. Satisfy requirements
-        NSSet *properties = [InDependenceUtils
+        NSSet *properties = [INDUtils
                              requirementsSetForClass:classOrProtocol
                              selector:@selector(independence_requirements)];
         if (properties) {
@@ -156,11 +156,11 @@ static InDependenceInjector *gSharedInjector;
             [ancestorsForProperties addObject:objectUnderConstruction];
             
             for (NSString *propertyName in properties) {
-                objc_property_t property = [InDependenceUtils
+                objc_property_t property = [INDUtils
                                             getProperty:propertyName
                                             fromClass:classOrProtocol];
-                InDependencePropertyInfo propertyInfo =
-                [InDependenceUtils classOrProtocolForProperty:property];
+                INDPropertyInfo propertyInfo =
+                [INDUtils classOrProtocolForProperty:property];
                 id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
                 
                 id theObject = [self getObject:desiredClassOrProtocol
@@ -189,13 +189,13 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark └ extension delegate
 -(Class)resolveClass:(id)classOrProtocol
-             session:(InDependenceSession*)session
+             session:(INDSession*)session
            ancestors:(NSArray *)ancestors
                 info:(NSDictionary *)info
 {
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
     
-    Class bindedClass = [self bindingForKey:InDependenceBindedClassKey
+    Class bindedClass = [self bindingForKey:INDBindedClassKey
                             classOrProtocol:classOrProtocol];
     if (bindedClass) {
         Class resolvedClass = bindedClass;
@@ -213,7 +213,7 @@ static InDependenceInjector *gSharedInjector;
     }
     
     @throw [NSException
-            exceptionWithName:InDependenceException
+            exceptionWithName:INDException
             reason:[NSString
                     stringWithFormat:@"Unable to find class for protocol: <%@>",
                     NSStringFromProtocol(classOrProtocol)]
@@ -221,7 +221,7 @@ static InDependenceInjector *gSharedInjector;
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                 session:(InDependenceSession*)session
+                 session:(INDSession*)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
 {    
@@ -229,7 +229,7 @@ static InDependenceInjector *gSharedInjector;
 }
 
 #pragma mark - Modules
--(void)addModule:(InDependenceModule *)module{
+-(void)addModule:(INDModule *)module{
     @synchronized(self){
         [_modules addObject:module];
         module.injector = self;
@@ -237,7 +237,7 @@ static InDependenceInjector *gSharedInjector;
     }
 }
 
--(void)removeModule:(InDependenceModule *)module{
+-(void)removeModule:(INDModule *)module{
     @synchronized(self){
         module.injector = nil;
         [_modules removeObject:module];
@@ -247,7 +247,7 @@ static InDependenceInjector *gSharedInjector;
 -(void)removeModuleOfClass:(Class)moduleClass{
     @synchronized(self){
         NSArray *currentModules = [_modules copy];
-        for (InDependenceModule *module in currentModules) {
+        for (INDModule *module in currentModules) {
             if ([module isKindOfClass:moduleClass]) {
                 [self removeModule:module];
             }
@@ -257,7 +257,7 @@ static InDependenceInjector *gSharedInjector;
 
 #pragma mark - Bindings
 -(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
-    for (InDependenceModule *module in _modules) {
+    for (INDModule *module in _modules) {
         id binding = [module bindingForKey:key classOrProtocol:classOrProtocol];
         if (binding) {
             return binding;

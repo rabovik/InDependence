@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const InDependenceBindedClassKey;
+extern NSString *const INDBindedClassKey;
 
-@class InDependenceInjector;
+@class INDInjector;
 
-@interface InDependenceModule : NSObject
+@interface INDModule : NSObject
 
 #pragma mark - Bindings storage
 -(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol;
@@ -28,6 +28,6 @@ extern NSString *const InDependenceBindedClassKey;
 -(void)configure;
 
 #pragma mark - Properties
-@property (nonatomic,weak) InDependenceInjector *injector;
+@property (nonatomic,weak) INDInjector *injector;
 
 @end

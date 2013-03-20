@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceModule.h"
-#import "InDependenceInjector.h"
-#import "InDependenceUtils.h"
+#import "INDModule.h"
+#import "INDInjector.h"
+#import "INDUtils.h"
 
-NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
+NSString *const INDBindedClassKey = @"INDBindedClassKey";
 
-@implementation InDependenceModule{
+@implementation INDModule{
     NSMutableDictionary *_bindings;
 }
 
@@ -30,7 +30,7 @@ NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
 -(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
     key = [NSString stringWithFormat:@"%@_%@",
            key,
-           [InDependenceUtils key:classOrProtocol]];
+           [INDUtils key:classOrProtocol]];
     return [_bindings objectForKey:key];
 }
 
@@ -42,17 +42,17 @@ NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
         [self.injector bindingForKey:key classOrProtocol:classOrProtocol];
     if (nil != existingBinding) {
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString stringWithFormat:
                         @"Duplicate binding '%@' for %@",
-                        InDependenceBindedClassKey,
-                        [InDependenceUtils key:classOrProtocol]]
+                        INDBindedClassKey,
+                        [INDUtils key:classOrProtocol]]
                 userInfo:nil];
     }
     
     key = [NSString stringWithFormat:@"%@_%@",
            key,
-           [InDependenceUtils key:classOrProtocol]];
+           [INDUtils key:classOrProtocol]];
     [_bindings setObject:bindingEntry forKey:key];
 }
 
@@ -67,7 +67,7 @@ NSString *const InDependenceBindedClassKey = @"InDependenceBindedClassKey";
 
 -(void)bindClass:(Class)aClass to:(id)classOrProtocol{
     [self setBinding:aClass
-              forKey:InDependenceBindedClassKey
+              forKey:INDBindedClassKey
      classOrProtocol:classOrProtocol];
 }
 

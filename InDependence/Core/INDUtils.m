@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceUtils.h"
+#import "INDUtils.h"
 
-NSString *const InDependenceException = @"InDependenceException";
+NSString *const INDException = @"INDException";
 
-@implementation InDependenceUtils
+@implementation INDUtils
 
 +(NSString *)key:(id)classOrProtocol{
     NSString *key = nil;
@@ -84,7 +84,7 @@ NSString *const InDependenceException = @"InDependenceException";
 }
 
 
-+(InDependencePropertyInfo)classOrProtocolForProperty:(objc_property_t)property{
++(INDPropertyInfo)classOrProtocolForProperty:(objc_property_t)property{
     NSString *attributes = [NSString stringWithCString: property_getAttributes(property)
                                               encoding: NSASCIIStringEncoding];
     NSString *propertyName = [NSString stringWithCString:property_getName(property)
@@ -92,7 +92,7 @@ NSString *const InDependenceException = @"InDependenceException";
     NSRange startRange = [attributes rangeOfString:@"T@\""];
     if (startRange.location == NSNotFound) {
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString
                         stringWithFormat:@"Unable to determine class type for property declaration: '%@'",
                         propertyName]
@@ -104,7 +104,7 @@ NSString *const InDependenceException = @"InDependenceException";
     
     if (endRange.location == NSNotFound) {
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString
                         stringWithFormat:@"Unable to determine class type for property declaration: '%@'",
                         propertyName]
@@ -113,7 +113,7 @@ NSString *const InDependenceException = @"InDependenceException";
     
     NSString *classOrProtocolName = [startOfClassName substringToIndex:endRange.location];
     id classOrProtocol = nil;
-    InDependencePropertyInfo propertyInfo;
+    INDPropertyInfo propertyInfo;
     
     if ([classOrProtocolName hasPrefix:@"<"] && [classOrProtocolName hasSuffix:@">"]) {
         classOrProtocolName = [classOrProtocolName
@@ -123,15 +123,15 @@ NSString *const InDependenceException = @"InDependenceException";
                                stringByReplacingOccurrencesOfString:@">"
                                withString:@""];
         classOrProtocol = objc_getProtocol([classOrProtocolName UTF8String]);
-        propertyInfo.type = InDependenceInterfaceTypeProtocol;
+        propertyInfo.type = INDInterfaceTypeProtocol;
     } else {
         classOrProtocol = NSClassFromString(classOrProtocolName);
-        propertyInfo.type = InDependenceInterfaceTypeClass;
+        propertyInfo.type = INDInterfaceTypeClass;
     }
     
     if(!classOrProtocol) {
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString
                         stringWithFormat:@"Unable get class for name '%@' for property '%@'",
                         classOrProtocolName,
@@ -148,7 +148,7 @@ NSString *const InDependenceException = @"InDependenceException";
         class_getProperty(klass, (const char *)[propertyName UTF8String]);
     if (property == NULL) {
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString
                         stringWithFormat:@"Unable to find property declaration: '%@'",
                         propertyName]
@@ -177,7 +177,7 @@ NSString *const InDependenceException = @"InDependenceException";
     } else {
         instance = nil;
         @throw [NSException
-                exceptionWithName:InDependenceException
+                exceptionWithName:INDException
                 reason:[NSString
                         stringWithFormat:@"Could not find initializer '%@' on %@",
                         NSStringFromSelector(initializer),

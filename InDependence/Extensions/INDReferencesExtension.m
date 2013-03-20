@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceReferencesExtension.h"
-#import "InDependenceUtils.h"
+#import "INDReferencesExtension.h"
+#import "INDUtils.h"
 
-@implementation InDependenceReferencesExtension
+@implementation INDReferencesExtension
 
 -(id)createObjectOfClass:(Class)resolvedClass
-                 session:(InDependenceSession *)session
+                 session:(INDSession *)session
                ancestors:(NSArray *)ancestors
                     info:(NSDictionary *)info
 {
@@ -20,25 +20,25 @@
                                           session:session
                                         ancestors:ancestors
                                              info:info];
-    NSSet *properties = [InDependenceUtils
+    NSSet *properties = [INDUtils
                          requirementsSetForClass:resolvedClass
                          selector:@selector(independence_references)];
     if (properties) {
         for (NSString *propertyName in properties) {
-            objc_property_t property = [InDependenceUtils getProperty:propertyName
+            objc_property_t property = [INDUtils getProperty:propertyName
                                                             fromClass:resolvedClass];
-            if (![InDependenceUtils propertyIsWeak:property]) {
+            if (![INDUtils propertyIsWeak:property]) {
                 @throw [NSException
-                        exceptionWithName:InDependenceException
+                        exceptionWithName:INDException
                         reason:[NSString
                                 stringWithFormat:@"Required reference '%@' of class '%@' must be weak",
                                 propertyName,
-                                [InDependenceUtils key:resolvedClass]]
+                                [INDUtils key:resolvedClass]]
                         userInfo:nil];
             }
             
-            InDependencePropertyInfo propertyInfo =
-                [InDependenceUtils classOrProtocolForProperty:property];
+            INDPropertyInfo propertyInfo =
+                [INDUtils classOrProtocolForProperty:property];
             
             id resolvedAncestor = nil;
                         
@@ -60,9 +60,9 @@
     return createdObject;
 }
 
--(BOOL)object:(id)object conformsToPropertyInfo:(InDependencePropertyInfo)propertyInfo{
+-(BOOL)object:(id)object conformsToPropertyInfo:(INDPropertyInfo)propertyInfo{
     id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
-    if (propertyInfo.type == InDependenceInterfaceTypeClass) {
+    if (propertyInfo.type == INDInterfaceTypeClass) {
         return [object isKindOfClass:desiredClassOrProtocol];
     }else{
         return [object conformsToProtocol:desiredClassOrProtocol];

@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceModuleWithBlock.h"
+#import "INDModuleWithBlock.h"
 
-@implementation InDependenceModuleWithBlock{
-    InDependenceModuleBlock _block;
+@implementation INDModuleWithBlock{
+    INDModuleBlock _block;
 }
 
 #pragma mark - Initialization
--(id)initWithBlock:(InDependenceModuleBlock)block{
+-(id)initWithBlock:(INDModuleBlock)block{
 	self = [super init];
 	if (nil == self) return nil;
     

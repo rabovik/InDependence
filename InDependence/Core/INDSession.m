@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "InDependenceSession.h"
+#import "INDSession.h"
 
 @interface NSObject ()
 -(void)awakeFromInjector;
 @end
 
-@implementation InDependenceSession{
+@implementation INDSession{
     NSMutableArray *_instantiatedObjects;
 }
 

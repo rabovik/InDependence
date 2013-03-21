@@ -20,7 +20,10 @@
 
 
 @interface INDInjector (CustomInitializer)
--(id)getObjectWithArgs:(id)classOrProtocol, ... NS_REQUIRES_NIL_TERMINATION;
+-(id)getObject:(id)classOrProtocol
+        parent:(id)parent
+     arguments:(id)firstArgument, ...NS_REQUIRES_NIL_TERMINATION;
+
 @end
 
 @interface INDCustomInitializerExtension : INDExtension

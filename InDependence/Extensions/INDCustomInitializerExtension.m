@@ -14,15 +14,23 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
 
 @implementation INDInjector (CustomInitializer)
 
--(id)getObjectWithArgs:(id)classOrProtocol, ...{
+-(id)getObject:(id)classOrProtocol
+        parent:(id)parent
+     arguments:(id)firstArgument, ...NS_REQUIRES_NIL_TERMINATION
+{
     va_list va_arguments;
-    va_start(va_arguments, classOrProtocol);
-    NSArray *arguments = [INDUtils transformVariadicArgsToArray:va_arguments];
+    va_start(va_arguments, firstArgument);
+    NSMutableArray *arguments = [NSMutableArray arrayWithObject:firstArgument];
+    id argument;
+    while ((argument = va_arg( va_arguments, id ))) {
+        [arguments addObject:argument];
+    }
+    va_end(va_arguments);
+    
     id object = [self getObject:classOrProtocol
                         session:nil
-                      ancestors:nil
+                         parent:(id)parent
                            info:@{INDInfoArgumentsKey: arguments}];
-    va_end(va_arguments);
     return object;
 }
 
@@ -32,7 +40,7 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
 
 -(id)createObjectOfClass:(Class)resolvedClass
                  session:(INDSession *)session
-               ancestors:(NSArray *)ancestors
+                  parent:(id)parent
                     info:(NSDictionary *)info
 {    
     NSString *customInitializerName = [INDUtils
@@ -54,7 +62,7 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
     return [super
             createObjectOfClass:resolvedClass
             session:session
-            ancestors:ancestors
+            parent:(id)parent
             info:info];
 }
 

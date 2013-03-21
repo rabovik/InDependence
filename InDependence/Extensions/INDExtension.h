@@ -14,12 +14,12 @@
 
 -(Class)resolveClass:(id)classOrProtocol
              session:(INDSession*)session
-           ancestors:(NSArray *)ancestors
+              parent:(id)parent
                 info:(NSDictionary *)info;
 
 -(id)createObjectOfClass:(Class)resolvedClass
                  session:(INDSession*)session
-               ancestors:(NSArray *)ancestors
+                  parent:(id)parent
                     info:(NSDictionary *)info;
 
 @end

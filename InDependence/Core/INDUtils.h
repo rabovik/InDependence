@@ -39,6 +39,4 @@ typedef struct INDPropertyInfo {
 
 +(id)buildObjectWithInitializer:(Class)klass initializer:(SEL)initializer arguments:(NSArray *)arguments;
 
-+(NSArray*)transformVariadicArgsToArray:(va_list)va_arguments;
-
 @end

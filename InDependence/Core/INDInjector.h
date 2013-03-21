@@ -24,10 +24,10 @@
 +(void)setSharedInjector:(INDInjector *)injector;
 
 #pragma mark - Object Factory
--(id)getObject:(id)classOrProtocol;
+-(id)getObject:(id)classOrProtocol parent:(id)parent;
 -(id)getObject:(id)classOrProtocol
        session:(INDSession *)session
-     ancestors:(NSArray *)ancestors
+        parent:(id)parent
           info:(NSDictionary *)info;
 
 #pragma mark - Modules

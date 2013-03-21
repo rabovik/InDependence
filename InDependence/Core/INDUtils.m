@@ -188,13 +188,4 @@ NSString *const INDException = @"INDException";
     return nil;
 }
 
-+(NSArray*)transformVariadicArgsToArray:(va_list)va_arguments{
-    NSMutableArray *arguments = [NSMutableArray array];
-    id object;
-    while ((object = va_arg( va_arguments, id ))) {
-        [arguments addObject:object];
-    }
-    return arguments;
-}
-
 @end

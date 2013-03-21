@@ -11,6 +11,7 @@
 #import "INDModule.h"
 #import "INDSession.h"
 #import "INDUtils.h"
+#import "NSObject+INDObjectsTree.h"
 
 #import "INDCustomInitializerExtension.h"
 #import "INDSingletonExtension.h"
@@ -75,7 +76,7 @@ static INDInjector *gSharedInjector;
     
     _extensions = [NSMutableArray new];
     for (Class extensionClass in gExtensions) {
-        INDExtension *extension = [self getObject:extensionClass];
+        INDExtension *extension = [self getObject:extensionClass parent:self];
         id delegate = [_extensions lastObject];
         if (nil == delegate) {
             delegate = self;
@@ -112,13 +113,13 @@ static INDInjector *gSharedInjector;
 }
 
 #pragma mark - Object Factory
--(id)getObject:(id)classOrProtocol{
-    return [self getObject:classOrProtocol session:nil ancestors:nil info:nil];
+-(id)getObject:(id)classOrProtocol parent:(id)parent{
+    return [self getObject:classOrProtocol session:nil parent:parent info:nil];
 }
 
 -(id)getObject:(id)classOrProtocol
        session:(INDSession *)session
-     ancestors:(NSArray *)ancestors
+        parent:(id)parent
           info:(NSDictionary *)info
 {
     @synchronized(self){
@@ -132,14 +133,14 @@ static INDInjector *gSharedInjector;
         Class resolvedClass =
         [self.lastExtension resolveClass:classOrProtocol
                                  session:session
-                               ancestors:ancestors
+                                  parent:parent
                                     info:info];
         
         // 2. Construct object
         id objectUnderConstruction =
         [self.lastExtension createObjectOfClass:resolvedClass
                                         session:session
-                                      ancestors:ancestors
+                                         parent:parent
                                            info:info];
         
         [session registerInstantiatedObject:objectUnderConstruction];
@@ -151,9 +152,6 @@ static INDInjector *gSharedInjector;
         if (properties) {
             NSMutableDictionary *propertiesDictionary =
             [NSMutableDictionary dictionaryWithCapacity:properties.count];
-            NSMutableArray *ancestorsForProperties =
-            [NSMutableArray arrayWithArray:ancestors];
-            [ancestorsForProperties addObject:objectUnderConstruction];
             
             for (NSString *propertyName in properties) {
                 objc_property_t property = [INDUtils
@@ -165,7 +163,7 @@ static INDInjector *gSharedInjector;
                 
                 id theObject = [self getObject:desiredClassOrProtocol
                                        session:session
-                                     ancestors:ancestorsForProperties
+                                        parent:parent
                                           info:nil];
                 
                 if (nil == theObject) {
@@ -190,7 +188,7 @@ static INDInjector *gSharedInjector;
 #pragma mark └ extension delegate
 -(Class)resolveClass:(id)classOrProtocol
              session:(INDSession*)session
-           ancestors:(NSArray *)ancestors
+              parent:(id)parent
                 info:(NSDictionary *)info
 {
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
@@ -202,7 +200,7 @@ static INDInjector *gSharedInjector;
         if (isClass && resolvedClass != classOrProtocol) {
             return [self resolveClass:resolvedClass
                               session:session
-                            ancestors:ancestors
+                               parent:parent
                                  info:info];
         }
         return resolvedClass;
@@ -222,7 +220,7 @@ static INDInjector *gSharedInjector;
 
 -(id)createObjectOfClass:(Class)resolvedClass
                  session:(INDSession*)session
-               ancestors:(NSArray *)ancestors
+                  parent:(id)parent
                     info:(NSDictionary *)info
 {    
     return [resolvedClass new];

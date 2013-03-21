@@ -26,7 +26,7 @@
 
 -(id)createObjectOfClass:(Class)resolvedClass
                  session:(INDSession*)session
-               ancestors:(NSArray *)ancestors
+                  parent:(id)parent
                     info:(NSDictionary *)info
 {
     
@@ -39,7 +39,7 @@
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
                                         session:session
-                                      ancestors:ancestors
+                                         parent:(id)parent
                                            info:info];
             [_singletonsStorage setObject:object forKey:key];
         }
@@ -49,7 +49,7 @@
         
     return [super createObjectOfClass:resolvedClass
                               session:session
-                            ancestors:ancestors
+                               parent:(id)parent
                                  info:info];
 }
 

@@ -13,13 +13,14 @@
 
 -(id)createObjectOfClass:(Class)resolvedClass
                  session:(INDSession *)session
-               ancestors:(NSArray *)ancestors
+                  parent:(id)parent
                     info:(NSDictionary *)info
 {
     id createdObject = [super createObjectOfClass:resolvedClass
                                           session:session
-                                        ancestors:ancestors
+                                           parent:(id)parent
                                              info:info];
+    /*
     NSSet *properties = [INDUtils
                          requirementsSetForClass:resolvedClass
                          selector:@selector(independence_references)];
@@ -56,6 +57,7 @@
             [createdObject setValue:resolvedAncestor forKey:propertyName];
         }
     }
+     */
     
     return createdObject;
 }

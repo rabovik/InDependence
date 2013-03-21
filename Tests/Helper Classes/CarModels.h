@@ -16,8 +16,9 @@
 @end
 
 @interface FordFocus : Ford
--(id)initWithYear:(NSString *)year;
+-(id)initWithYear:(NSString *)year color:(UIColor *)color;
 @property (nonatomic,readonly) NSString *year;
+@property (nonatomic,readonly) UIColor *color;
 @property (nonatomic,strong) FordFocusLogo *logo;
 @end
 

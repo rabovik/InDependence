@@ -12,25 +12,25 @@
 
 -(Class)resolveClass:(id)classOrProtocol
              session:(INDSession*)session
-           ancestors:(NSArray *)ancestors
+              parent:(id)parent
                 info:(NSDictionary *)info
 {
     return [self.delegate
             resolveClass:classOrProtocol
             session:session
-            ancestors:ancestors
+            parent:(id)parent
             info:info];
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass
                  session:(INDSession*)session
-               ancestors:(NSArray *)ancestors
+                  parent:(id)parent
                     info:(NSDictionary *)info
 {
     return [self.delegate
             createObjectOfClass:resolvedClass
             session:session
-            ancestors:ancestors
+            parent:(id)parent
             info:info];
 }
 

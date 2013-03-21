@@ -131,6 +131,10 @@
     STAssertEqualObjects(focus.neighboringCarSteeringWheel,
                          renault.steeringWheel, @"");
     
+    Car *someCar = [[INDInjector sharedInjector] getObject:[Car class]
+                                                    parent:nil];
+    // reference via injector
+    STAssertEqualObjects(someCar.road, focus.road, @"");
 }
 
 #pragma mark - Objects tree

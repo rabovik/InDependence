@@ -24,6 +24,7 @@
 	return self;
 }
 
+#pragma mark - Objects management
 -(void)addObject:(id)object{
     @synchronized(self){
         INDWeakObjectContainer *container = [INDWeakObjectContainer new];

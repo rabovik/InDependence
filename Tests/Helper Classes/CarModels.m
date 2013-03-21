@@ -19,6 +19,10 @@ independence_references(@"parentCar")
 @implementation FordFocus
 independence_requirements(@"logo");
 independence_initializer(initWithYear:color:,@"2010",[UIColor blackColor]);
+independence_references(@"neighboringCar",
+                        @"neighboringCarEngine",
+                        @"neighboringCarSteeringWheel");
+
 
 -(id)initWithYear:(NSString *)year color:(UIColor *)color{
 	self = [super init];
@@ -31,6 +35,7 @@ independence_initializer(initWithYear:color:,@"2010",[UIColor blackColor]);
 @end
 
 @implementation Renault
+independence_references(@"neighboringCar");
 @end
 
 @implementation RenaultClio

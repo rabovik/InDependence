@@ -105,13 +105,32 @@
 }
 
 #pragma mark - References
--(void)testRequiredAncestors{
+-(void)testReferences{
     Garage *garage = [[INDInjector sharedInjector] getObject:[Garage class]
                                                       parent:nil];
     FordFocus *focus = garage.fordCar;
+    Renault *renault = garage.renaultCar;
+    NSLog(@"FOCUS:\nengine: %@\nsteering: %@",
+          focus.engine,
+          focus.steeringWheel);
+    NSLog(@"RENAULT:\nengine: %@\nsteering: %@",
+          renault.engine,
+          renault.steeringWheel);
+    
+    // ancestors
     STAssertEqualObjects(focus.logo.parentCar, focus, @"");
     SportSteeringWheel *wheel = (SportSteeringWheel *)focus.steeringWheel;
     STAssertEqualObjects(wheel.garage, garage, @"");
+    
+    // siblings
+    STAssertEqualObjects(focus.neighboringCar, renault, @"");
+    STAssertEqualObjects(renault.neighboringCar, focus, @"");
+    
+    // relatives
+    STAssertEqualObjects(focus.neighboringCarEngine, renault.engine, @"");
+    STAssertEqualObjects(focus.neighboringCarSteeringWheel,
+                         renault.steeringWheel, @"");
+    
 }
 
 #pragma mark - Objects tree

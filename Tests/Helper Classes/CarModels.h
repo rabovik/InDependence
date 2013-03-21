@@ -20,9 +20,13 @@
 @property (nonatomic,readonly) NSString *year;
 @property (nonatomic,readonly) UIColor *color;
 @property (nonatomic,strong) FordFocusLogo *logo;
+@property (nonatomic,weak) Car *neighboringCar;
+@property (nonatomic,weak) Engine *neighboringCarEngine;
+@property (nonatomic,weak) id<SteeringWheel> neighboringCarSteeringWheel;
 @end
 
 @interface Renault : Car
+@property (nonatomic,weak) Car *neighboringCar;
 @end
 
 @interface RenaultClio : Renault

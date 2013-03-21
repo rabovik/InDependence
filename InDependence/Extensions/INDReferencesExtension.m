@@ -42,12 +42,11 @@
         id desiredClassOrProtocol = [INDUtils
                                      classOrProtocolForProperty:property];
         id resolvedReference = [self reference:desiredClassOrProtocol
-                               inTreeforObject:object];
+                               inTreeForObject:object];
         [object setValue:resolvedReference forKey:propertyName];
     }
 }
-
--(id)reference:(id)classOrProtocol inTreeforObject:(NSObject *)object{
+-(id)reference:(id)classOrProtocol inTreeForObject:(NSObject *)object{
     id parent = object.ind_parent;
     if (parent) {
         return [self
@@ -66,11 +65,9 @@
         // object itself
         return object;
     }
-    NSSet *childs = object.ind_childs;
+    NSMutableSet *childs = [NSMutableSet setWithSet:object.ind_childs];
+    [childs removeObject:excludedChild];
     for (NSObject *child in childs) {
-        if ([child isEqual:excludedChild]) {
-            continue;
-        }
         if ([self object:child conformsClassOrProtocol:classOrProtocol]) {
             // child
             return child;

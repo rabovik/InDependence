@@ -34,4 +34,15 @@
             info:info];
 }
 
+-(void)injectRequirements:(NSSet *)properties
+                 toObject:(id)object
+                  session:(INDSession*)session
+                     info:(NSDictionary *)info
+{
+    return [self.delegate injectRequirements:properties
+                                    toObject:object
+                                     session:session
+                                        info:info];
+}
+
 @end

@@ -127,54 +127,34 @@ static INDInjector *gSharedInjector;
             session = [INDSession new];
         }
         
-        // 1. Resolve class
+        // Resolve class
         Class resolvedClass =
         [self.lastExtension resolveClass:classOrProtocol
                                  session:session
                                   parent:parent
                                     info:info];
         
-        // 2. Construct object
-        id objectUnderConstruction =
+        // Construct object
+        NSObject *objectUnderConstruction =
         [self.lastExtension createObjectOfClass:resolvedClass
                                         session:session
                                          parent:parent
                                            info:info];
         
+        // Build object tree
+        objectUnderConstruction.ind_parent = parent;
         [session registerInstantiatedObject:objectUnderConstruction];
         
-        // 3. Satisfy requirements
+        // Satisfy requirements
         NSSet *properties = [INDUtils
                              requirementsSetForClass:classOrProtocol
                              selector:@selector(independence_requirements)];
-        if (properties) {
-            NSMutableDictionary *propertiesDictionary =
-            [NSMutableDictionary dictionaryWithCapacity:properties.count];
-            
-            for (NSString *propertyName in properties) {
-                objc_property_t property = [INDUtils
-                                            getProperty:propertyName
-                                            fromClass:classOrProtocol];
-                INDPropertyInfo propertyInfo =
-                    [INDUtils classOrProtocolForProperty:property];
-                id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
-                
-                id theObject = [self getObject:desiredClassOrProtocol
+        [self.lastExtension injectRequirements:properties
+                                      toObject:objectUnderConstruction
                                        session:session
-                                        parent:objectUnderConstruction
-                                          info:nil];
-                
-                if (nil == theObject) {
-                    theObject = [NSNull null];
-                }
-                
-                [propertiesDictionary setObject:theObject forKey:propertyName];
-            }
-            [objectUnderConstruction
-             setValuesForKeysWithDictionary:propertiesDictionary];
-        }
+                                          info:info];
         
-        // 4. Notify objects
+        // Notify objects
         if (nil == parent) {
             [session notifyObjectsThatTheyAreReady];
         }
@@ -223,6 +203,28 @@ static INDInjector *gSharedInjector;
 {    
     return [resolvedClass new];
 }
+
+-(void)injectRequirements:(NSSet *)properties
+                 toObject:(id)object
+                  session:(INDSession*)session
+                     info:(NSDictionary *)info
+{
+    if (!properties) return;
+    
+    for (NSString *propertyName in properties) {
+        objc_property_t property = [INDUtils getProperty:propertyName
+                                               fromClass:[object class]];
+        INDPropertyInfo propertyInfo = [INDUtils
+                                        classOrProtocolForProperty:property];
+        id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
+        id theObject = [self getObject:desiredClassOrProtocol
+                               session:session
+                                parent:object
+                                  info:nil];
+        [object setValue:theObject forKey:propertyName];
+    }
+}
+
 
 #pragma mark - Modules
 -(void)addModule:(INDModule *)module{

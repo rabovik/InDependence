@@ -22,6 +22,11 @@
                   parent:(id)parent
                     info:(NSDictionary *)info;
 
+-(void)injectRequirements:(NSSet *)properties
+                 toObject:(id)object
+                  session:(INDSession*)session
+                     info:(NSDictionary *)info;
+
 @end
 
 @interface INDExtension : NSObject <INDExtensionDelegate>

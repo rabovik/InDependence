@@ -8,14 +8,55 @@
 
 #import "INDWeakCollection.h"
 
-@implementation INDWeakCollection
+@interface INDWeakObjectContainer : NSObject
+@property (nonatomic,weak) id object;
+@end
+
+@implementation INDWeakObjectContainer
+@end
+
+
+@implementation INDWeakCollection{
+    NSMutableSet *_containers;
+}
+
+#pragma mark - Init
+-(id)init{
+    if (!(self = [super init])) return self;
+    
+	_containers = [NSMutableSet new];
+    
+	return self;
+}
 
 -(void)addObject:(id)object{
-    
+    @synchronized(self){
+        INDWeakObjectContainer *container = [INDWeakObjectContainer new];
+        container.object = object;
+        [_containers addObject:container];
+    }
 }
 
 -(NSSet *)allObjects{
-    return [NSSet set];
+    @synchronized(self){
+        NSMutableSet *objectsSet = [NSMutableSet setWithCapacity:_containers.count];
+        NSSet *containersSet = [NSSet setWithSet:_containers];
+        for (INDWeakObjectContainer *container in containersSet) {
+            id object = container.object;
+            if (object) {
+                [objectsSet addObject:object];
+            }else{
+                [_containers removeObject:container];
+            }
+        }
+        return objectsSet;
+    }
 }
+
+#ifdef DEBUG
+-(NSNumber *)_containersCount{
+    return @(_containers.count);
+}
+#endif
 
 @end

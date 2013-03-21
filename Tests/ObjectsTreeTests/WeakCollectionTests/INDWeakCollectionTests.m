@@ -30,14 +30,18 @@
 
 -(void)testObjectIsRemovedFromSetAfterDealloc{
     NSObject *a = [NSObject new];
-    NSObject *b;
     [_collection addObject:a];
     @autoreleasepool {
-        b = [NSObject new];
+        NSObject *b = [NSObject new];
         [_collection addObject:b];
     }
     NSSet *etalonSet = [NSSet setWithObjects:a,nil];
     STAssertTrue([[_collection allObjects] isEqualToSet:etalonSet], @"");
+    
+    NSUInteger internalCount =
+        [[_collection performSelector:@selector(_containersCount)]
+         unsignedIntegerValue];
+    STAssertTrue(1 == internalCount, @"Internal count is %u",internalCount);
 }
 
 @end

@@ -27,6 +27,8 @@
                   session:(INDSession*)session
                      info:(NSDictionary *)info;
 
+-(void)notifyObjectsInSession:(INDSession*)session;
+
 @end
 
 @interface INDExtension : NSObject <INDExtensionDelegate>

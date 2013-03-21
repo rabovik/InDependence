@@ -39,10 +39,14 @@
                   session:(INDSession*)session
                      info:(NSDictionary *)info
 {
-    return [self.delegate injectRequirements:properties
-                                    toObject:object
-                                     session:session
-                                        info:info];
+    [self.delegate injectRequirements:properties
+                             toObject:object
+                              session:session
+                                 info:info];
+}
+
+-(void)notifyObjectsInSession:(INDSession*)session{
+    [self.delegate notifyObjectsInSession:session];
 }
 
 @end

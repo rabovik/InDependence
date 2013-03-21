@@ -156,7 +156,7 @@ static INDInjector *gSharedInjector;
         
         // Notify objects
         if (nil == parent) {
-            [session notifyObjectsThatTheyAreReady];
+            [self.lastExtension notifyObjectsInSession:session];
         }
         
         return objectUnderConstruction;
@@ -225,6 +225,9 @@ static INDInjector *gSharedInjector;
     }
 }
 
+-(void)notifyObjectsInSession:(INDSession *)session{
+    [session notifyObjectsThatTheyAreReady];
+}
 
 #pragma mark - Modules
 -(void)addModule:(INDModule *)module{

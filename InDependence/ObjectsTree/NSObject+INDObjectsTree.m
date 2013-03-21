@@ -56,4 +56,14 @@ static char childsKey;
     return [[self ind_childsCollection] allObjects];
 }
 
+#pragma mark - Root
+-(id)ind_root{
+    NSObject *root = self;
+    NSObject *parent;
+    while ((parent = root.ind_parent)) {
+        root = parent;
+    }
+    return root;
+}
+
 @end

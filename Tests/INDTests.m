@@ -123,15 +123,17 @@
         BOOL childsMatch = [PARENT.ind_childs isEqualToSet:etalonChilds]; \
         STAssertTrue(childsMatch, @"Childs:%@",PARENT.ind_childs); \
     }while(0);
+
 #define ASSERT_PARENT(CHILD,PARENT) \
     do{ \
         id parent = CHILD.ind_parent; \
         BOOL parentMatches = [parent isEqual:PARENT]; \
         STAssertTrue(parentMatches,@"Parent is %@ instead of %@",parent,PARENT); \
     }while(0);
+
 -(void)testCorrectObjectTreeBuilt{
-    Garage *garage = [[INDInjector sharedInjector] getObject:[Garage class]
-                                                      parent:nil];
+    INDInjector *injector = [INDInjector sharedInjector];
+    Garage *garage = [injector getObject:[Garage class] parent:nil];
     ASSERT_CHILDS(garage, garage.fordCar, garage.renaultCar);
     ASSERT_PARENT(garage.fordCar, garage);
     ASSERT_PARENT(garage.renaultCar, garage);
@@ -139,12 +141,11 @@
     FordFocus *fordCar = garage.fordCar;
     ASSERT_CHILDS(fordCar,
                   fordCar.engine,
-                  fordCar.road,
                   fordCar.steeringWheel,
                   fordCar.logo);
     ASSERT_PARENT(fordCar.engine, fordCar);
-    // for singletons, parent should be root object;
-    ASSERT_PARENT(fordCar.road, garage);
+    // for singletons, parent should be injector;
+    ASSERT_PARENT(fordCar.road, injector);
 }
 
 @end

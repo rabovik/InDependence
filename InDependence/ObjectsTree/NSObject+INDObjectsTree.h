@@ -13,6 +13,7 @@
 -(void)ind_addChild:(id)child;
 
 @property (nonatomic,weak) id ind_parent;
-@property (nonatomic,readonly,retain) NSSet *ind_childs;
+@property (nonatomic,readonly) NSSet *ind_childs;
+@property (nonatomic,readonly) id ind_root;
 
 @end

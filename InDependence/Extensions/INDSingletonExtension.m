@@ -9,6 +9,7 @@
 #import "INDInjector.h"
 #import "INDSingletonExtension.h"
 #import "INDUtils.h"
+#import "NSObject+INDObjectsTree.h"
 
 
 @implementation INDSingletonExtension{
@@ -35,13 +36,14 @@
          selector:@selector(independence_register_singleton)])
     {
         NSString *key = [INDUtils key:resolvedClass];
-        id object = [_singletonsStorage objectForKey:key];
+        NSObject *object = [_singletonsStorage objectForKey:key];
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
                                         session:session
                                          parent:parent
                                            info:info];
             [_singletonsStorage setObject:object forKey:key];
+            object.ind_parent = self.injector;
         }
         
         return object;

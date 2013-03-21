@@ -18,7 +18,7 @@
 {
     id createdObject = [super createObjectOfClass:resolvedClass
                                           session:session
-                                           parent:(id)parent
+                                           parent:parent
                                              info:info];
     /*
     NSSet *properties = [INDUtils

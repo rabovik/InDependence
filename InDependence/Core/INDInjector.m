@@ -123,9 +123,7 @@ static INDInjector *gSharedInjector;
           info:(NSDictionary *)info
 {
     @synchronized(self){
-        BOOL isRootObjectInSession = NO;
         if (nil == session) {
-            isRootObjectInSession = YES;
             session = [INDSession new];
         }
         
@@ -163,7 +161,7 @@ static INDInjector *gSharedInjector;
                 
                 id theObject = [self getObject:desiredClassOrProtocol
                                        session:session
-                                        parent:parent
+                                        parent:objectUnderConstruction
                                           info:nil];
                 
                 if (nil == theObject) {
@@ -177,7 +175,7 @@ static INDInjector *gSharedInjector;
         }
         
         // 4. Notify objects
-        if (isRootObjectInSession) {
+        if (nil == parent) {
             [session notifyObjectsThatTheyAreReady];
         }
         

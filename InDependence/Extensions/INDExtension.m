@@ -18,7 +18,7 @@
     return [self.delegate
             resolveClass:classOrProtocol
             session:session
-            parent:(id)parent
+            parent:parent
             info:info];
 }
 
@@ -30,7 +30,7 @@
     return [self.delegate
             createObjectOfClass:resolvedClass
             session:session
-            parent:(id)parent
+            parent:parent
             info:info];
 }
 

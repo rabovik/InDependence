@@ -39,7 +39,7 @@
         if (!object) {
             object = [super createObjectOfClass:resolvedClass
                                         session:session
-                                         parent:(id)parent
+                                         parent:parent
                                            info:info];
             [_singletonsStorage setObject:object forKey:key];
         }
@@ -49,7 +49,7 @@
         
     return [super createObjectOfClass:resolvedClass
                               session:session
-                               parent:(id)parent
+                               parent:parent
                                  info:info];
 }
 

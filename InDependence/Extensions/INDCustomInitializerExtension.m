@@ -29,7 +29,7 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
     
     id object = [self getObject:classOrProtocol
                         session:nil
-                         parent:(id)parent
+                         parent:parent
                            info:@{INDInfoArgumentsKey: arguments}];
     return object;
 }
@@ -62,7 +62,7 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
     return [super
             createObjectOfClass:resolvedClass
             session:session
-            parent:(id)parent
+            parent:parent
             info:info];
 }
 

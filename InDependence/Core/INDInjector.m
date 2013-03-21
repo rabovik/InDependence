@@ -220,9 +220,8 @@ static INDInjector *gSharedInjector;
     for (NSString *propertyName in properties) {
         objc_property_t property = [INDUtils getProperty:propertyName
                                                fromClass:[object class]];
-        INDPropertyInfo propertyInfo = [INDUtils
-                                        classOrProtocolForProperty:property];
-        id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
+        id desiredClassOrProtocol = [INDUtils
+                                     classOrProtocolForProperty:property];
         id theObject = [self getObject:desiredClassOrProtocol
                                session:session
                                 parent:object

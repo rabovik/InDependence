@@ -85,7 +85,7 @@ NSString *const INDException = @"INDException";
 }
 
 
-+(INDPropertyInfo)classOrProtocolForProperty:(objc_property_t)property{
++(id)classOrProtocolForProperty:(objc_property_t)property{
     NSString *attributes = [NSString stringWithCString: property_getAttributes(property)
                                               encoding: NSASCIIStringEncoding];
     NSString *propertyName = [NSString stringWithCString:property_getName(property)
@@ -114,7 +114,6 @@ NSString *const INDException = @"INDException";
     
     NSString *classOrProtocolName = [startOfClassName substringToIndex:endRange.location];
     id classOrProtocol = nil;
-    INDPropertyInfo propertyInfo;
     
     if ([classOrProtocolName hasPrefix:@"<"] && [classOrProtocolName hasSuffix:@">"]) {
         classOrProtocolName = [classOrProtocolName
@@ -124,10 +123,8 @@ NSString *const INDException = @"INDException";
                                stringByReplacingOccurrencesOfString:@">"
                                withString:@""];
         classOrProtocol = objc_getProtocol([classOrProtocolName UTF8String]);
-        propertyInfo.type = INDInterfaceTypeProtocol;
     } else {
         classOrProtocol = NSClassFromString(classOrProtocolName);
-        propertyInfo.type = INDInterfaceTypeClass;
     }
     
     if(!classOrProtocol) {
@@ -139,9 +136,8 @@ NSString *const INDException = @"INDException";
                         propertyName]
                 userInfo:nil];
     }
-    propertyInfo.value = (__bridge void *)(classOrProtocol);
     
-    return propertyInfo;
+    return classOrProtocol;
 }
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass{

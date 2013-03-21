@@ -11,16 +11,6 @@
 
 extern NSString *const INDException;
 
-typedef enum {
-    INDInterfaceTypeClass,
-    INDInterfaceTypeProtocol
-} INDInterfaceType;
-
-typedef struct INDPropertyInfo {
-    void *value;
-    INDInterfaceType type;
-} INDPropertyInfo;
-
 @interface INDUtils : NSObject
 
 +(NSString *)key:(id)classOrProtocol;
@@ -33,7 +23,7 @@ typedef struct INDPropertyInfo {
 +(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector;
 
 +(BOOL)propertyIsWeak:(objc_property_t)property;
-+(INDPropertyInfo)classOrProtocolForProperty:(objc_property_t)property;
++(id)classOrProtocolForProperty:(objc_property_t)property;
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;
 

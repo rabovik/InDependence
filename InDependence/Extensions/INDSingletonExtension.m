@@ -30,7 +30,6 @@
                   parent:(id)parent
                     info:(NSDictionary *)info
 {
-    
     if ([INDUtils
          isInstructionRequiredForClass:resolvedClass
          selector:@selector(independence_register_singleton)])

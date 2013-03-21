@@ -141,7 +141,7 @@ NSLog(@"%@",NSStringFromClass([car.engine class])); // HybridEngine
 ```
 
 #### Recursive bindings
-![][recursive2]
+![][recursive]
 
 There may be binding rules for already binded classes (for example, in another module). _InDependence_ finds appropriate class by recursion.
 ```objective-c
@@ -248,5 +248,5 @@ Some code and ideas derived from [Objection][Objection] by Justin DeWind.
 [requirements]: docs/img/b5b2f18b.png
 [references]: docs/img/41ba975a.png
 [bindings]: docs/img/e90379af.png
-[recursive2]: docs/img/bf3f46b8.png
+[recursive]: docs/img/bf3f46b8.png
 [singleton]: docs/img/5fd9b515.png

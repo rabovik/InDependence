@@ -8,13 +8,8 @@
 
 #import "INDWeakCollection.h"
 
-@interface INDWeakObjectContainer : NSObject
-@property (nonatomic,weak) id object;
-@end
-
 @implementation INDWeakObjectContainer
 @end
-
 
 @implementation INDWeakCollection{
     NSMutableSet *_containers;

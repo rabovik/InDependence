@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@interface INDWeakObjectContainer : NSObject
+@property (nonatomic,weak) id object;
+@end
+
 @interface INDWeakCollection : NSObject
 
 -(void)addObject:(id)object;

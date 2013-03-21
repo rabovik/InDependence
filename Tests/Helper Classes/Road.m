@@ -10,5 +10,5 @@
 #import "InDependence.h"
 
 @implementation Road
-independence_register_singleton()
+independence_singleton()
 @end

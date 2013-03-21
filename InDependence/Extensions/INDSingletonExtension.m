@@ -32,7 +32,7 @@
 {
     if ([INDUtils
          isInstructionRequiredForClass:resolvedClass
-         selector:@selector(independence_register_singleton)])
+         selector:@selector(independence_singleton)])
     {
         NSString *key = [INDUtils key:resolvedClass];
         NSObject *object = [_singletonsStorage objectForKey:key];

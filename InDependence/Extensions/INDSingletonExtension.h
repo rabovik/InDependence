@@ -8,8 +8,8 @@
 
 #import "INDExtension.h"
 
-#define independence_register_singleton() \
-+(BOOL)independence_register_singleton { \
+#define independence_singleton() \
++(BOOL)independence_singleton { \
     return YES; \
 }
 

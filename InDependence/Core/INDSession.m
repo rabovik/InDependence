@@ -30,6 +30,10 @@
     [_instantiatedObjects addObject:object];
 }
 
+-(NSArray *)allObjects{
+    return _instantiatedObjects;
+}
+
 -(void)notifyObjectsThatTheyAreReady{    
     for (id object in _instantiatedObjects) {
         SEL selector = @selector(awakeFromInjector);

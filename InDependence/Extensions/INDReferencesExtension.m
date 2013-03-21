@@ -8,66 +8,118 @@
 
 #import "INDReferencesExtension.h"
 #import "INDUtils.h"
+#import "INDSession.h"
+#import "NSObject+INDObjectsTree.h"
 
 @implementation INDReferencesExtension
 
--(id)createObjectOfClass:(Class)resolvedClass
-                 session:(INDSession *)session
-                  parent:(id)parent
-                    info:(NSDictionary *)info
-{
-    id createdObject = [super createObjectOfClass:resolvedClass
-                                          session:session
-                                           parent:parent
-                                             info:info];
-    /*
-    NSSet *properties = [INDUtils
-                         requirementsSetForClass:resolvedClass
-                         selector:@selector(independence_references)];
-    if (properties) {
-        for (NSString *propertyName in properties) {
-            objc_property_t property = [INDUtils getProperty:propertyName
-                                                            fromClass:resolvedClass];
-            if (![INDUtils propertyIsWeak:property]) {
-                @throw [NSException
-                        exceptionWithName:INDException
-                        reason:[NSString
-                                stringWithFormat:@"Required reference '%@' of class '%@' must be weak",
-                                propertyName,
-                                [INDUtils key:resolvedClass]]
-                        userInfo:nil];
-            }
-            
-            INDPropertyInfo propertyInfo =
-                [INDUtils classOrProtocolForProperty:property];
-            
-            id resolvedAncestor = nil;
-                        
-            for (int i = ancestors.count - 1; i>=0; --i) {
-                id ancestor = [ancestors objectAtIndex:i];
-                if ([self
-                     object:ancestor
-                     conformsToPropertyInfo:propertyInfo])
-                {
-                    resolvedAncestor = ancestor;
-                    break;
-                }
-            }
-            
-            [createdObject setValue:resolvedAncestor forKey:propertyName];
-        }
+-(void)notifyObjectsInSession:(INDSession *)session{
+    NSArray *objects = [session allObjects];
+    for (NSObject *object in objects) {
+        NSSet *properties = [INDUtils
+                             requirementsSetForClass:[object class]
+                             selector:@selector(independence_references)];
+        [self injectReferences:properties toObject:object];
     }
-     */
     
-    return createdObject;
+    [super notifyObjectsInSession:session];
 }
 
--(BOOL)object:(id)object conformsToPropertyInfo:(INDPropertyInfo)propertyInfo{
-    id desiredClassOrProtocol = (__bridge id)(propertyInfo.value);
-    if (propertyInfo.type == INDInterfaceTypeClass) {
-        return [object isKindOfClass:desiredClassOrProtocol];
+-(void)injectReferences:(NSSet *)properties toObject:(NSObject *)object{
+    if (nil == properties) return;
+    for (NSString *propertyName in properties) {
+        objc_property_t property = [INDUtils getProperty:propertyName
+                                               fromClass:[object class]];
+        if (![INDUtils propertyIsWeak:property]) {
+            @throw [NSException
+                    exceptionWithName:INDException
+                    reason:[NSString
+                            stringWithFormat:@"Required reference '%@' of class '%@' must be weak",
+                            propertyName,
+                            [INDUtils key:[object class]]]
+                    userInfo:nil];
+        }
+        id desiredClassOrProtocol = [INDUtils
+                                     classOrProtocolForProperty:property];
+        id resolvedReference = [self reference:desiredClassOrProtocol
+                               inTreeforObject:object];
+        [object setValue:resolvedReference forKey:propertyName];
+    }
+}
+
+-(id)reference:(id)classOrProtocol inTreeforObject:(NSObject *)object{
+    id parent = object.ind_parent;
+    if (parent) {
+        return [self
+                reference:classOrProtocol
+                inObjectAndRelatives:parent
+                excludeChild:object];
+    }
+    return nil;
+}
+
+-(id)reference:(id)classOrProtocol
+     inObjectAndRelatives:(NSObject *)object
+     excludeChild:(id)excludedChild
+{
+    if ([self object:object conformsClassOrProtocol:classOrProtocol]) {
+        // object itself
+        return object;
+    }
+    NSSet *childs = object.ind_childs;
+    for (NSObject *child in childs) {
+        if ([child isEqual:excludedChild]) {
+            continue;
+        }
+        if ([self object:child conformsClassOrProtocol:classOrProtocol]) {
+            // child
+            return child;
+        }
+    }
+    for (NSObject *child in childs) {
+        id inChild = [self
+                      reference:classOrProtocol
+                      inObjectAndChilds:child];
+        if (inChild) {
+            // found in child
+            return inChild;
+        }
+    }
+    id parent = object.ind_parent;
+    if (parent) {
+        // in parent
+        return [self
+                reference:classOrProtocol
+                inObjectAndRelatives:parent
+                excludeChild:object];
+    }
+    return nil;
+}
+
+-(id)reference:(id)classOrProtocol inObjectAndChilds:(NSObject *)object{
+    NSSet *childs = object.ind_childs;
+    for (NSObject *child in childs) {
+        if ([self object:child conformsClassOrProtocol:classOrProtocol]) {
+            // child
+            return child;
+        }
+        id inChild = [self
+                      reference:classOrProtocol
+                      inObjectAndChilds:child];
+        if (inChild) {
+            // found in child
+            return inChild;
+        }
+    }
+    return nil;
+}
+
+-(BOOL)object:(id)object conformsClassOrProtocol:(id)classOrProtocol{
+    BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
+    if (isClass) {
+        return [object isKindOfClass:classOrProtocol];
     }else{
-        return [object conformsToProtocol:desiredClassOrProtocol];
+        return [object conformsToProtocol:classOrProtocol];
     }
     return NO;
 }

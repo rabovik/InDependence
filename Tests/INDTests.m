@@ -106,14 +106,12 @@
 
 #pragma mark - References
 -(void)testRequiredAncestors{
-    /*
     Garage *garage = [[INDInjector sharedInjector] getObject:[Garage class]
                                                       parent:nil];
     FordFocus *focus = garage.fordCar;
     STAssertEqualObjects(focus.logo.parentCar, focus, @"");
     SportSteeringWheel *wheel = (SportSteeringWheel *)focus.steeringWheel;
     STAssertEqualObjects(wheel.garage, garage, @"");
-     */
 }
 
 #pragma mark - Objects tree

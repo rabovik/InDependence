@@ -11,6 +11,7 @@
 @interface INDSession : NSObject
 
 -(void)registerInstantiatedObject:(id)object;
+-(NSArray *)allObjects;
 -(void)notifyObjectsThatTheyAreReady;
 
 @end

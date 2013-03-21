@@ -29,7 +29,7 @@ _InDependence_ is a Dependency Injection (DI) framework for iOS written in Objec
 ### Basic Usage
 ![][requirements]
 
-The `independence_requirements` macro used to declare what dependencies _InDependence_ should inject to all instances it creates of that class. `independence_requirements` can be used safely with inheritance.
+The `independence_requirements` macros used to declare what dependencies _InDependence_ should inject to all instances it creates of that class. `independence_requirements` can be used safely with inheritance.
 
 ```objective-c
 @class Wheel;
@@ -74,7 +74,7 @@ INDInjector newInjector = [INDInjector new];
 ```
 
 
-### Child-to-parent references
+### References
 ![][references]
 
 _InDependence_ can automatically fill in references to parents, ancestors and any other relatives. References must be declared as `weak`.
@@ -104,15 +104,41 @@ independence_references(@"wheel");
 ```
 
 ### Awaking from Injector
-#### Example
+If an object is interested in knowing when it has been fully instantiated by _InDependence_ it can implement the method `awakeFromInjector`.
+
+```objective-c
+@implementation Car
+// ...
+-(void)awakeFromInjector{
+    NSLog(@"%@ awaked",self);
+}
+@end  
+```  
 
 ### Modules
+
+A module is a set of bindings which contributes additional configuration information to the injector. It is especially useful for integrating external dependencies and binding protocols to classes or instances.
+
 #### Class bindings
 ![][bindings]
+```objective-c
+@interface MyModule : INDModule
+@end
 
-#### Instance and protocol bindings
-
-
+@implementation MyModule
+- (void)configure {
+    [self bindClass:[UnibodyChassis class] toClass:[Chassis class]];
+    [self bindClass:[HybridEngine class] toClass:[Engine class]];
+}
+@end
+```
+```objective-c
+[[INDInjector sharedInjector] addModule:[MyModule new]];
+Car *car = [[INDInjector sharedInjector] getObject:[Car class]
+                                            parent:nil];
+NSLog(@"%@",NSStringFromClass([car.chassis class])); // UnibodyChassis
+NSLog(@"%@",NSStringFromClass([car.engine class])); // HybridEngine
+```
 
 #### Recursive bindings
 ![][recursive2]
@@ -129,15 +155,65 @@ NSLog(NSStringFromClass([car class])); // FordFocus
 ```
 
 ### Initializers
-#### Default Arguments Example
-####  Custom Arguments Example
+
+By default, _InDependence_ allocates objects with the default initializer `init`. If you'd like to instantiate an object with an alternate initializer the `independence_initializer` macros can be used to do so. The macros supports passing in default arguments (scalar values are not supported).
+
+```objective-c
+@interface ColoredCar : Car
+-(id)initWithColor:(NSString *)color;
+@property(nonatomic,copy) NSString *color;
+@end
+
+@implementation ColoredCar
+independence_initializer(initWithColor:,@"Black");
+-(id)initWithColor:(NSString *)color{
+    if (!(self = [super init])) return self;
+    _color = color;
+    return self;
+}
+@end
+
+```
+```objective-c
+ColoredCar *carWithDefaultColor = 
+    [[INDInjector sharedInjector] getObject:[ColoredCar class] 
+                                     parent:nil];
+NSLog(@"%@",carWithDefaultColor.color); // Black
+
+ColoredCar *carWithCustomColor = 
+    [[INDInjector sharedInjector] getObject:[ColoredCar class] 
+                                     parent:nil 
+                                  arguments:@"Red",nil];
+NSLog(@"%@",carWithCustomColor.color); // Red
+```
 
 ### Singletons
 ![][singleton]
 
+Any class may be annotated as a singleton using `independence_singleton()` macros.
+```objective-c
+@interface Road : NSObject
+@end
+@implementation Road
+independence_singleton();
+@end
+```
+```objective-c
+@interface Car()
+@property(nonatomic,strong) Road *road;
+@end
 
-## Extensions
-_(TODO)_
+@implementation Car
+independence_requirements(@"chassis",@"wheel",@"road");
+// …
+@end
+
+```
+```objective-c
+Car *car = [[INDInjector sharedInjector] getObject:[Car class] parent:nil];
+Car *anotherCar = [[INDInjector sharedInjector] getObject:[Car class] parent:nil];
+NSLog(@"%d",[car.road isEqual:anotherCar.road]); // 1
+```
 
 ## Installation
 Add sources from `InDependence` folder to your project. Enable ARC for them. Add `InDependence.h` to your project's `.pch` file:
@@ -155,6 +231,9 @@ MIT License.
 
 * Better README
     * _Objects Tree_ and correct _parent_ specifying
+    * Protocol bindings
+    * Inline modules
+    * Extensions
 * Bindings
     * Instance bindings
     * Custom factory blocks
@@ -167,9 +246,7 @@ Some code and ideas derived from [Objection][Objection] by Justin DeWind.
 
 [Objection]: https://github.com/atomicobject/objection
 [requirements]: docs/img/b5b2f18b.png
-[bindings2]: docs/img/ee66eff9.png
-[bindings]: docs/img/e90379af.png
 [references]: docs/img/41ba975a.png
-[recursive]: docs/img/47a78d9d.png
+[bindings]: docs/img/e90379af.png
 [recursive2]: docs/img/bf3f46b8.png
 [singleton]: docs/img/5fd9b515.png

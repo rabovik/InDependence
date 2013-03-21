@@ -8,13 +8,17 @@
 
 #import "INDTests.h"
 #import "CarModels.h"
+#import "Engine.h"
 #import "Garage.h"
+#import "Road.h"
 #import "InDependence.h"
 #import "INDModuleWithBlock.h"
+#import "NSObject+INDObjectsTree.h"
 
 @implementation INDTests{
 }
 
+#pragma mark - Setup
 - (void)setUp{
     [super setUp];
     [[INDInjector sharedInjector]
@@ -30,12 +34,14 @@
     [super tearDown];
 }
 
+#pragma mark - Inject property
 - (void)testInjectEngineToCar{
     Ford *fordCar = [[INDInjector sharedInjector] getObject:[FordFocus class]
                                                      parent:nil];
     STAssertNotNil(fordCar.engine, @"");
 }
 
+#pragma mark - Singleton
 -(void)testSingletonRoad{
     Garage *garage = [[INDInjector sharedInjector] getObject:[Garage class]
                                                       parent:nil];
@@ -44,6 +50,7 @@
     STAssertEqualObjects(garage.fordCar.road, garage.renaultCar.road, @"");
 }
 
+#pragma mark - Custom initializer
 -(void)testCustomInitializer{
     FordFocus *car = [[INDInjector sharedInjector] getObject:[FordFocus class]
                                                       parent:nil];
@@ -58,6 +65,7 @@
     STAssertEqualObjects(car2013.color, [UIColor whiteColor], @"");
 }
 
+#pragma mark - Bindings
 -(void)testClassToClassBinding{
     [[INDInjector sharedInjector]
      addModule:[[INDModuleWithBlock alloc]
@@ -96,6 +104,7 @@
     STAssertTrue([car class] == [FordFocus class], @"Class is %@",[car class]);
 }
 
+#pragma mark - References
 -(void)testRequiredAncestors{
     /*
     Garage *garage = [[INDInjector sharedInjector] getObject:[Garage class]
@@ -105,6 +114,37 @@
     SportSteeringWheel *wheel = (SportSteeringWheel *)focus.steeringWheel;
     STAssertEqualObjects(wheel.garage, garage, @"");
      */
+}
+
+#pragma mark - Objects tree
+#define ASSERT_CHILDS(PARENT,CHILDS...) \
+    do{ \
+        NSSet *etalonChilds = [NSSet setWithObjects:CHILDS, nil]; \
+        BOOL childsMatch = [PARENT.ind_childs isEqualToSet:etalonChilds]; \
+        STAssertTrue(childsMatch, @"Childs:%@",PARENT.ind_childs); \
+    }while(0);
+#define ASSERT_PARENT(CHILD,PARENT) \
+    do{ \
+        id parent = CHILD.ind_parent; \
+        BOOL parentMatches = [parent isEqual:PARENT]; \
+        STAssertTrue(parentMatches,@"Parent is %@ instead of %@",parent,PARENT); \
+    }while(0);
+-(void)testCorrectObjectTreeBuilt{
+    Garage *garage = [[INDInjector sharedInjector] getObject:[Garage class]
+                                                      parent:nil];
+    ASSERT_CHILDS(garage, garage.fordCar, garage.renaultCar);
+    ASSERT_PARENT(garage.fordCar, garage);
+    ASSERT_PARENT(garage.renaultCar, garage);
+    
+    FordFocus *fordCar = garage.fordCar;
+    ASSERT_CHILDS(fordCar,
+                  fordCar.engine,
+                  fordCar.road,
+                  fordCar.steeringWheel,
+                  fordCar.logo);
+    ASSERT_PARENT(fordCar.engine, fordCar);
+    // for singletons, parent should be root object;
+    ASSERT_PARENT(fordCar.road, garage);
 }
 
 @end

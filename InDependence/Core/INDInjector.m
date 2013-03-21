@@ -142,7 +142,7 @@ static INDInjector *gSharedInjector;
                                            info:info];
         
         // Build object tree
-        objectUnderConstruction.ind_parent = parent;
+        [parent ind_addChild:objectUnderConstruction];
         [session registerInstantiatedObject:objectUnderConstruction];
         
         // Satisfy requirements

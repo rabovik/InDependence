@@ -14,6 +14,5 @@
 
 @property (nonatomic,weak) id ind_parent;
 @property (nonatomic,readonly) NSSet *ind_childs;
-@property (nonatomic,readonly) id ind_root;
 
 @end

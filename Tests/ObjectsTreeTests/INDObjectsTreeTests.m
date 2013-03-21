@@ -32,9 +32,7 @@
         STAssertEqualObjects(root, b.ind_parent, @"");
         STAssertTrue([b.ind_childs isEqualToSet:etalonBChilds], @"");
         STAssertEqualObjects(b, c.ind_parent, @"");
-        
-        STAssertEqualObjects(c.ind_root, root, @"");
-        
+                
         b = nil;
     }
     
@@ -43,7 +41,6 @@
     STAssertEqualObjects(root, a.ind_parent, @"");
     STAssertNotNil(c, @"");
     STAssertNil(c.ind_parent, @"");
-    STAssertEqualObjects(c.ind_root, c, @"");
 }
 
 @end

@@ -245,8 +245,8 @@ MIT License.
 Some code and ideas derived from [Objection][Objection] by Justin DeWind.
 
 [Objection]: https://github.com/atomicobject/objection
-[requirements]: docs/img/b5b2f18b.png
-[references]: docs/img/41ba975a.png
-[bindings]: docs/img/e90379af.png
+[requirements]: docs/img/2450eb31.png
+[references]: docs/img/9ab14a6e.png
+[bindings]: docs/img/05a93d38.png
 [recursive]: docs/img/bf3f46b8.png
-[singleton]: docs/img/5fd9b515.png
+[singleton]: docs/img/8c227fd0.png

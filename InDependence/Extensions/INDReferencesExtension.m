@@ -13,6 +13,7 @@
 
 @implementation INDReferencesExtension
 
+#pragma mark - Notify override
 -(void)notifyObjectsInSession:(INDSession *)session{
     NSArray *objects = [session allObjects];
     for (NSObject *object in objects) {
@@ -25,6 +26,7 @@
     [super notifyObjectsInSession:session];
 }
 
+#pragma mark - Inject references
 -(void)injectReferences:(NSSet *)properties toObject:(NSObject *)object{
     if (nil == properties) return;
     for (NSString *propertyName in properties) {
@@ -46,6 +48,17 @@
         [object setValue:resolvedReference forKey:propertyName];
     }
 }
+#pragma mark └ iterating objecs in tree
+/*
+ Will try to find appropriate object for reference in:
+ 1. parent;
+ 2. siblings
+ 3. sibling's descendants
+ 4.1 grandparent
+ 4.2 uncles
+ 4.3 uncle's descendants
+ 5. etc.
+ */
 -(id)reference:(id)classOrProtocol inTreeForObject:(NSObject *)object{
     id parent = object.ind_parent;
     if (parent) {
@@ -111,6 +124,7 @@
     return nil;
 }
 
+#pragma mark - Utils
 -(BOOL)object:(id)object conformsClassOrProtocol:(id)classOrProtocol{
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
     if (isClass) {

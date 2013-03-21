@@ -94,14 +94,10 @@ static INDInjector *gSharedInjector;
 +(INDInjector *)sharedInjector{
     @synchronized(self){
         if (nil == gSharedInjector) {
-            gSharedInjector = [self createInjector];
+            gSharedInjector = [[self class] new];
         }
     }
     return gSharedInjector;
-}
-
-+(INDInjector *)createInjector{
-    return [[self class] new];
 }
 
 +(void)setSharedInjector:(INDInjector *)injector{

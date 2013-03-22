@@ -79,6 +79,33 @@
     STAssertEqualObjects(car.color, [UIColor purpleColor], @"");
 }
 
+-(void)testBindedNilArgument{
+    INDModuleWithBlock *module =
+        [[INDModuleWithBlock alloc]
+         initWithBlock:^(INDModule *module)
+         {
+             [module bindArgument:nil atIndex:0
+                          toClass:[FordFocus class]];
+             [module bindArgument:[UIColor purpleColor]
+                          atIndex:1
+                          toClass:[FordFocus class]];
+         }];
+    [[INDInjector sharedInjector] addModule:module];
+    FordFocus *car = [[INDInjector sharedInjector] getObject:[FordFocus class]
+                                                      parent:nil];
+    STAssertNil(car.year, @"");
+    STAssertEqualObjects(car.color, [UIColor purpleColor], @"");
+}
+
+-(void)testCustomNullArgument{
+    FordFocus *car2013 = [[INDInjector sharedInjector]
+                          getObject:[FordFocus class]
+                          parent:nil
+                          arguments:[NSNull null],[UIColor whiteColor],nil];
+    STAssertNil(car2013.year, @"");
+    STAssertEqualObjects(car2013.color, [UIColor whiteColor], @"");
+}
+
 #pragma mark - Bindings
 -(void)testClassToClassBinding{
     [[INDInjector sharedInjector]

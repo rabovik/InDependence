@@ -65,6 +65,20 @@
     STAssertEqualObjects(car2013.color, [UIColor whiteColor], @"");
 }
 
+-(void)testBindingArguments{
+    INDModuleWithBlock *module = [[INDModuleWithBlock alloc]
+                                  initWithBlock:^(INDModule *module)
+     {
+         [module bindArgument:@"2014" atIndex:0 toClass:[FordFocus class]];
+         [module bindArgument:[UIColor purpleColor] atIndex:1 toClass:[FordFocus class]];
+     }];
+    [[INDInjector sharedInjector] addModule:module];
+    FordFocus *car = [[INDInjector sharedInjector] getObject:[FordFocus class]
+                                                      parent:nil];
+    STAssertTrue([car.year isEqualToString:@"2014"], @"Year is %@",car.year);
+    STAssertEqualObjects(car.color, [UIColor purpleColor], @"");
+}
+
 #pragma mark - Bindings
 -(void)testClassToClassBinding{
     [[INDInjector sharedInjector]

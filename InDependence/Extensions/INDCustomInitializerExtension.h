@@ -8,6 +8,7 @@
 
 #import "INDExtension.h"
 #import "INDInjector.h"
+#import "INDModule.h"
 
 #define independence_initializer(selectorSymbols, args...) \
 +(NSString *)independence_initializer { \
@@ -18,7 +19,6 @@
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }
 
-
 @interface INDInjector (CustomInitializer)
 -(id)getObject:(id)classOrProtocol
         parent:(id)parent
@@ -26,6 +26,9 @@
 
 @end
 
-@interface INDCustomInitializerExtension : INDExtension
+@interface INDModule (CustomInitializer)
+-(void)bindArgument:(id)argument atIndex:(NSUInteger)index toClass:(Class)toClass;
+@end
 
+@interface INDCustomInitializerExtension : INDExtension
 @end

@@ -9,9 +9,13 @@
 #import "INDCustomInitializerExtension.h"
 #import "INDInjector.h"
 #import "INDUtils.h"
+#import "INDModule.h"
 
 static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
 
+
+#pragma mark - Injector
+#pragma mark -
 @implementation INDInjector (CustomInitializer)
 
 -(id)getObject:(id)classOrProtocol
@@ -36,6 +40,18 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
 
 @end
 
+#pragma mark - Module
+#pragma mark -
+@implementation INDModule (CustomInitializer)
+
+-(void)bindArgument:(id)argument atIndex:(NSUInteger)index toClass:(Class)toClass{
+    
+}
+
+@end
+
+#pragma mark - Extension
+#pragma mark -
 @implementation INDCustomInitializerExtension
 
 -(id)createObjectOfClass:(Class)resolvedClass

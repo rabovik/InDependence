@@ -12,7 +12,7 @@
 #import "INDModule.h"
 
 static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
-
+static NSString *const INDBindedArgumentsKey = @"INDBindedArgumentsKey";
 
 #pragma mark - Injector
 #pragma mark -
@@ -45,7 +45,13 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
 @implementation INDModule (CustomInitializer)
 
 -(void)bindArgument:(id)argument atIndex:(NSUInteger)index toClass:(Class)toClass{
-    
+    NSString *key = [NSString stringWithFormat:@"%@%u",INDBindedArgumentsKey,index];
+    if (nil == argument) {
+        argument = [NSNull null];
+    }
+    [self setBinding:argument
+              forKey:key
+     classOrProtocol:toClass];
 }
 
 @end
@@ -63,15 +69,38 @@ static NSString *const INDInfoArgumentsKey = @"INDInfoArgumentsKey";
                                        requirementObjectForClass:resolvedClass
                                        selector:@selector(independence_initializer)];
     if (customInitializerName) {
+        SEL initializer = NSSelectorFromString(customInitializerName);
+        // arguments in getObject:parent:arguments:
         NSArray *resolvedArguments = [info objectForKey:INDInfoArgumentsKey];
         if (!resolvedArguments) {
-            resolvedArguments = [INDUtils
-                                 requirementObjectForClass:resolvedClass
-                                 selector:@selector(independence_initializer_arguments)];
+            // arguments in initializer
+            NSArray *initializerArguments =
+                [INDUtils
+                 requirementObjectForClass:resolvedClass
+                 selector:@selector(independence_initializer_arguments)];
+            // binded arguments
+            NSMutableArray *filteredArguments =
+                [NSMutableArray arrayWithArray:initializerArguments];
+            NSMethodSignature *signature =
+                [resolvedClass instanceMethodSignatureForSelector:initializer];
+            while (filteredArguments.count < signature.numberOfArguments) {
+                [filteredArguments addObject:[NSNull null]];
+            }
+            for (NSUInteger i = 0; i < signature.numberOfArguments; ++i) {
+                NSString *key = [NSString stringWithFormat:@"%@%u",
+                                 INDBindedArgumentsKey,
+                                 i];
+                id argument = [self.injector bindingForKey:key
+                                           classOrProtocol:resolvedClass];
+                if (nil != argument) {
+                    [filteredArguments replaceObjectAtIndex:i withObject:argument];
+                }
+            }
+            resolvedArguments = filteredArguments;
         }
         return [INDUtils
                 buildObjectWithInitializer:resolvedClass
-                initializer:NSSelectorFromString(customInitializerName)
+                initializer:initializer
                 arguments:resolvedArguments];
     }
     

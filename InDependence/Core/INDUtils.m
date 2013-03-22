@@ -166,7 +166,9 @@ NSString *const INDException = @"INDException";
         [invocation setSelector:initializer];
         for (int i = 0; i < arguments.count; i++) {
             id argument = [arguments objectAtIndex:i];
-            [invocation setArgument:&argument atIndex:i + 2];
+            if (argument != [NSNull null]) {
+                [invocation setArgument:&argument atIndex:i + 2];
+            }
         }
         [invocation invoke];
         [invocation getReturnValue:&instance];

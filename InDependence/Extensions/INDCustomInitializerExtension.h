@@ -23,7 +23,6 @@
 -(id)getObject:(id)classOrProtocol
         parent:(id)parent
      arguments:(id)firstArgument, ...NS_REQUIRES_NIL_TERMINATION;
-
 @end
 
 @interface INDModule (CustomInitializer)

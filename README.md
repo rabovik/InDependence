@@ -232,6 +232,7 @@ MIT License.
 * Better README
     * _Objects Tree_ and correct _parent_ specifying
     * Protocol bindings
+    * Binded arguments
     * Inline modules
     * Extensions
 * Bindings

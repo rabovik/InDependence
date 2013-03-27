@@ -17,6 +17,7 @@
 
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass;
++(void)unRegisterExtensionClass:(Class)extensionClass;
 
 #pragma mark - Initializing
 +(INDInjector *)sharedInjector;

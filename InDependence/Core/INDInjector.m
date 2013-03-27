@@ -44,6 +44,10 @@ static INDInjector *gSharedInjector;
     [gExtensions addObject:extensionClass];
 }
 
++(void)unRegisterExtensionClass:(Class)extensionClass{
+    [gExtensions removeObject:extensionClass];
+}
+
 -(id<INDExtensionDelegate>)lastExtension{
     if (_extensions.count == 0) {
         return self;

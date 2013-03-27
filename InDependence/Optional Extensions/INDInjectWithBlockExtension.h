@@ -19,6 +19,6 @@ return nil; \
 }
 
 
-@interface INDInjectWithFactoryBlockExtension : INDExtension
+@interface INDInjectWithBlockExtension : INDExtension
 
 @end

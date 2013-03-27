@@ -27,8 +27,8 @@
 		1A1DFDCC16DFE6E500658409 /* INDReferencesExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFDCB16DFE6E400658409 /* INDReferencesExtension.m */; };
 		1A3C348416F887FC008EE0AD /* INDModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C348116F887FC008EE0AD /* INDModule.m */; };
 		1A3C348516F887FC008EE0AD /* INDModuleWithBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C348316F887FC008EE0AD /* INDModuleWithBlock.m */; };
-		1A6525BE1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6525BD1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.m */; };
-		1A6525C41702D72600C60DBE /* INDInjectWithFactoryBlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6525C31702D72600C60DBE /* INDInjectWithFactoryBlockTests.m */; };
+		1A6525BE1702D45C00C60DBE /* INDInjectWithBlockExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6525BD1702D45C00C60DBE /* INDInjectWithBlockExtension.m */; };
+		1A6525C41702D72600C60DBE /* INDInjectWithBlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6525C31702D72600C60DBE /* INDInjectWithBlockTests.m */; };
 		1AA6B19116FAFC430018DAA0 /* INDWeakCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6B19016FAFC430018DAA0 /* INDWeakCollection.m */; };
 		1AA6B19716FAFD100018DAA0 /* INDWeakCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6B19616FAFD100018DAA0 /* INDWeakCollectionTests.m */; };
 		1AA6B19B16FB09DE0018DAA0 /* NSObject+INDObjectsTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6B19A16FB09DE0018DAA0 /* NSObject+INDObjectsTree.m */; };
@@ -77,10 +77,10 @@
 		1A3C348116F887FC008EE0AD /* INDModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDModule.m; sourceTree = "<group>"; };
 		1A3C348216F887FC008EE0AD /* INDModuleWithBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDModuleWithBlock.h; sourceTree = "<group>"; };
 		1A3C348316F887FC008EE0AD /* INDModuleWithBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDModuleWithBlock.m; sourceTree = "<group>"; };
-		1A6525BC1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDInjectWithFactoryBlockExtension.h; path = "InDependence/Optional Extensions/INDInjectWithFactoryBlockExtension.h"; sourceTree = "<group>"; };
-		1A6525BD1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDInjectWithFactoryBlockExtension.m; path = "InDependence/Optional Extensions/INDInjectWithFactoryBlockExtension.m"; sourceTree = "<group>"; };
-		1A6525C21702D72600C60DBE /* INDInjectWithFactoryBlockTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDInjectWithFactoryBlockTests.h; path = OptionalExtensionsTests/INDInjectWithFactoryBlockTests.h; sourceTree = "<group>"; };
-		1A6525C31702D72600C60DBE /* INDInjectWithFactoryBlockTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDInjectWithFactoryBlockTests.m; path = OptionalExtensionsTests/INDInjectWithFactoryBlockTests.m; sourceTree = "<group>"; };
+		1A6525BC1702D45C00C60DBE /* INDInjectWithBlockExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDInjectWithBlockExtension.h; path = "InDependence/Optional Extensions/INDInjectWithBlockExtension.h"; sourceTree = "<group>"; };
+		1A6525BD1702D45C00C60DBE /* INDInjectWithBlockExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDInjectWithBlockExtension.m; path = "InDependence/Optional Extensions/INDInjectWithBlockExtension.m"; sourceTree = "<group>"; };
+		1A6525C21702D72600C60DBE /* INDInjectWithBlockTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDInjectWithBlockTests.h; path = OptionalExtensionsTests/INDInjectWithBlockTests.h; sourceTree = "<group>"; };
+		1A6525C31702D72600C60DBE /* INDInjectWithBlockTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDInjectWithBlockTests.m; path = OptionalExtensionsTests/INDInjectWithBlockTests.m; sourceTree = "<group>"; };
 		1AA6B18F16FAFC430018DAA0 /* INDWeakCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDWeakCollection.h; path = ObjectsTree/WeakCollection/INDWeakCollection.h; sourceTree = "<group>"; };
 		1AA6B19016FAFC430018DAA0 /* INDWeakCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDWeakCollection.m; path = ObjectsTree/WeakCollection/INDWeakCollection.m; sourceTree = "<group>"; };
 		1AA6B19516FAFD100018DAA0 /* INDWeakCollectionTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDWeakCollectionTests.h; path = ObjectsTreeTests/WeakCollectionTests/INDWeakCollectionTests.h; sourceTree = "<group>"; };
@@ -229,8 +229,8 @@
 		1A6525BB1702D3D800C60DBE /* Optional Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1A6525BC1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.h */,
-				1A6525BD1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.m */,
+				1A6525BC1702D45C00C60DBE /* INDInjectWithBlockExtension.h */,
+				1A6525BD1702D45C00C60DBE /* INDInjectWithBlockExtension.m */,
 			);
 			name = "Optional Extensions";
 			path = ..;
@@ -239,8 +239,8 @@
 		1A6525BF1702D65500C60DBE /* Optional Extensions Tests */ = {
 			isa = PBXGroup;
 			children = (
-				1A6525C21702D72600C60DBE /* INDInjectWithFactoryBlockTests.h */,
-				1A6525C31702D72600C60DBE /* INDInjectWithFactoryBlockTests.m */,
+				1A6525C21702D72600C60DBE /* INDInjectWithBlockTests.h */,
+				1A6525C31702D72600C60DBE /* INDInjectWithBlockTests.m */,
 			);
 			name = "Optional Extensions Tests";
 			sourceTree = "<group>";
@@ -394,8 +394,8 @@
 				1AA6B19716FAFD100018DAA0 /* INDWeakCollectionTests.m in Sources */,
 				1AA6B19B16FB09DE0018DAA0 /* NSObject+INDObjectsTree.m in Sources */,
 				1AA6B19E16FB12500018DAA0 /* INDObjectsTreeTests.m in Sources */,
-				1A6525BE1702D45C00C60DBE /* INDInjectWithFactoryBlockExtension.m in Sources */,
-				1A6525C41702D72600C60DBE /* INDInjectWithFactoryBlockTests.m in Sources */,
+				1A6525BE1702D45C00C60DBE /* INDInjectWithBlockExtension.m in Sources */,
+				1A6525C41702D72600C60DBE /* INDInjectWithBlockTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

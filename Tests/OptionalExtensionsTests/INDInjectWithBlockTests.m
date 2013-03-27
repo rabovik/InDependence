@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "INDInjectWithFactoryBlockTests.h"
+#import "INDInjectWithBlockTests.h"
 #import "InDependence.h"
-#import "INDInjectWithFactoryBlockExtension.h"
+#import "INDInjectWithBlockExtension.h"
 
 #pragma mark - Helpers -
 @implementation B
@@ -39,15 +39,15 @@ independence_inject_with_blocks(
 @end
 
 #pragma mark - Tests -
-@implementation INDInjectWithFactoryBlockTests
+@implementation INDInjectWithBlockTests
 
 -(void)setUp{
     [super setUp];
-    [INDInjector registerExtensionClass:[INDInjectWithFactoryBlockExtension class]];
+    [INDInjector registerExtensionClass:[INDInjectWithBlockExtension class]];
 }
 
 -(void)tearDown{
-    [INDInjector unRegisterExtensionClass:[INDInjectWithFactoryBlockExtension class]];
+    [INDInjector unRegisterExtensionClass:[INDInjectWithBlockExtension class]];
     [super tearDown];
 }
 
@@ -58,8 +58,10 @@ independence_inject_with_blocks(
     STAssertNotNil(root.a2, @"");
     STAssertNotNil(root.b1, @"");
     STAssertNotNil(root.b2, @"");
-    STAssertEqualObjects(root.b1, root.a1->_b, @"");
-    STAssertEqualObjects(root.b2, root.a2->_b, @"");
+    if (root.a1 && root.a2) {
+        STAssertEqualObjects(root.b1, root.a1->_b, @"");
+        STAssertEqualObjects(root.b2, root.a2->_b, @"");
+    }
 }
 
 @end

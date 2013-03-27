@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "INDInjectWithFactoryBlockExtension.h"
+#import "INDInjectWithBlockExtension.h"
 
-@implementation INDInjectWithFactoryBlockExtension
+@implementation INDInjectWithBlockExtension
 
 @end

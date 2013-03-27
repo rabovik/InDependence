@@ -35,7 +35,7 @@
 }
 
 -(void)notifyObjectsThatTheyAreReady{    
-    for (id object in _instantiatedObjects) {
+    for (id object in [_instantiatedObjects reverseObjectEnumerator]) {
         SEL selector = @selector(awakeFromInjector);
         if([object respondsToSelector:selector]) {
             [object awakeFromInjector];

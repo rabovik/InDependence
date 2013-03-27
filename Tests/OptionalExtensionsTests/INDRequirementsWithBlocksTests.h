@@ -19,7 +19,11 @@
 -(id)initWithB:(B *)b;
 @end
 
-@interface Root : NSObject
+@interface Parent : NSObject
+@property (nonatomic,strong) id d;
+@end
+
+@interface Root : Parent
 @property (nonatomic,strong) A *a1;
 @property (nonatomic,strong) A *a2;
 @property (nonatomic,strong) B *b1;

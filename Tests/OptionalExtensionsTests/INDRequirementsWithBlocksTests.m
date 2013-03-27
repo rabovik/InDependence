@@ -25,15 +25,25 @@
 }
 @end
 
+@implementation Parent
+independence_requirements_with_blocks
+    (@"d",
+     ^id(Parent *self,INDInjector *injector){
+         return [NSObject new];
+     })
+@end
+
 @implementation Root
 independence_requirements(@"b1",@"b2");
 independence_requirements_with_blocks
     (@"a1",
      ^id(Root *self,INDInjector *injector){
+         NSAssert(nil != self.d,@"");
          return [[A alloc] initWithB:self.b1];
      },
      @"a2",
      ^id(Root *self,INDInjector *injector){
+         NSAssert(nil != self.a1,@"");
          return [[A alloc] initWithB:self.b2];
      });
 

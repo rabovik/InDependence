@@ -59,6 +59,7 @@ independence_requirements_with_blocks
 
 -(void)tearDown{
     [INDInjector unRegisterExtensionClass:[INDRequirementsWithBlocksExtension class]];
+    [INDInjector setSharedInjector:nil];
     [super tearDown];
 }
 

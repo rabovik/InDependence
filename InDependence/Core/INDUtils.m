@@ -10,8 +10,10 @@
 
 NSString *const INDException = @"INDException";
 
-@implementation INDUtils
+@implementation INDUtils{
+}
 
+#pragma mark - Class & protocol encoding
 +(NSString *)key:(id)classOrProtocol{
     NSString *key = nil;
     BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
@@ -23,7 +25,7 @@ NSString *const INDException = @"INDException";
     return key;
 }
 
-
+#pragma mark - Collect annotations
 +(BOOL)isInstructionRequiredForClass:(Class)klass selector:(SEL)selector{
     if ([klass respondsToSelector:selector]) {
         NSMethodSignature *signature = [klass methodSignatureForSelector:selector];
@@ -51,6 +53,29 @@ NSString *const INDException = @"INDException";
     return nil;
 }
 
+#pragma mark └ array
++(NSArray *)annotationsArrayForClass:(Class)klass selector:(SEL)selector{
+    return [self requirementObjectForClass:klass selector:selector];
+}
++(NSArray *)appendAnnotationsArrayForClass:(Class)klass
+                                   toArray:(NSArray *)annotations
+                                  selector:(SEL)selector
+{
+    Class superClass = class_getSuperclass([klass class]);
+    if([superClass respondsToSelector:selector]){
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        NSArray *parentsAnnotations = [superClass performSelector:selector];
+        #pragma clang diagnostic pop
+        NSMutableArray *mParentAnnotations = [NSMutableArray
+                                              arrayWithArray:parentsAnnotations];
+        [mParentAnnotations addObjectsFromArray:annotations];
+        annotations = mParentAnnotations;
+    }
+    return annotations;
+}
+
+#pragma mark └ set
 +(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector{
     return [self requirementObjectForClass:klass selector:selector];
 }
@@ -71,6 +96,8 @@ NSString *const INDException = @"INDException";
     }
     return requirements;
 }
+
+#pragma mark - Other
 
 +(BOOL)propertyIsWeak:(objc_property_t)property{
     NSString *attributes = [NSString stringWithCString: property_getAttributes(property)

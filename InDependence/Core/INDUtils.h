@@ -19,6 +19,11 @@ extern NSString *const INDException;
 
 +(id)requirementObjectForClass:(Class)klass selector:(SEL)selector;
 
++(NSArray *)annotationsArrayForClass:(Class)klass selector:(SEL)selector;
++(NSArray *)appendAnnotationsArrayForClass:(Class)klass
+                                   toArray:(NSArray *)annotations
+                                  selector:(SEL)selector;
+
 +(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector;
 +(NSSet *)unionRequirementsSetForClass:(Class)klass
                                withSet:(NSSet *)requirements

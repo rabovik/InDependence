@@ -20,7 +20,9 @@ extern NSString *const INDException;
 +(id)requirementObjectForClass:(Class)klass selector:(SEL)selector;
 
 +(NSSet *)requirementsSetForClass:(Class)klass selector:(SEL)selector;
-+(NSSet *)unionRequirementsSetForClass:(Class)klass withSet:(NSSet *)requirements selector:(SEL)selector;
++(NSSet *)unionRequirementsSetForClass:(Class)klass
+                               withSet:(NSSet *)requirements
+                              selector:(SEL)selector;
 
 +(BOOL)propertyIsWeak:(objc_property_t)property;
 +(id)classOrProtocolForProperty:(objc_property_t)property;

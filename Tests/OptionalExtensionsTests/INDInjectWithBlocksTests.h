@@ -27,6 +27,6 @@
 @end
 
 #pragma mark - Tests -
-@interface INDInjectWithBlockTests : SenTestCase
+@interface INDInjectWithBlocksTests : SenTestCase
 @end
 

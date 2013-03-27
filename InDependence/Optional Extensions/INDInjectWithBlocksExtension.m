@@ -7,7 +7,7 @@
 //
 
 #import "InDependence.h"
-#import "INDInjectWithBlockExtension.h"
+#import "INDInjectWithBlocksExtension.h"
 
 @interface INDPropertyBlockPair : NSObject
 @property (nonatomic,copy) NSString *propertyName;
@@ -46,6 +46,6 @@
 
 @end
 
-@implementation INDInjectWithBlockExtension
+@implementation INDInjectWithBlocksExtension
 
 @end

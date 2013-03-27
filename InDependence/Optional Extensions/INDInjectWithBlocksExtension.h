@@ -26,6 +26,6 @@
                                               count:(NSUInteger)count;
 @end
 
-@interface INDInjectWithBlockExtension : INDExtension
+@interface INDInjectWithBlocksExtension : INDExtension
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "INDInjectWithBlockTests.h"
+#import "INDInjectWithBlocksTests.h"
 #import "InDependence.h"
-#import "INDInjectWithBlockExtension.h"
+#import "INDInjectWithBlocksExtension.h"
 
 #pragma mark - Helpers -
 @implementation B
@@ -39,15 +39,15 @@ independence_inject_with_blocks(
 @end
 
 #pragma mark - Tests -
-@implementation INDInjectWithBlockTests
+@implementation INDInjectWithBlocksTests
 
 -(void)setUp{
     [super setUp];
-    [INDInjector registerExtensionClass:[INDInjectWithBlockExtension class]];
+    [INDInjector registerExtensionClass:[INDInjectWithBlocksExtension class]];
 }
 
 -(void)tearDown{
-    [INDInjector unRegisterExtensionClass:[INDInjectWithBlockExtension class]];
+    [INDInjector unRegisterExtensionClass:[INDInjectWithBlocksExtension class]];
     [super tearDown];
 }
 

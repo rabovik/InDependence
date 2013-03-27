@@ -64,10 +64,19 @@ static NSString *const INDBindedArgumentsKey = @"INDBindedArgumentsKey";
                  session:(INDSession *)session
                   parent:(id)parent
                     info:(NSDictionary *)info
-{    
+{
+    BOOL isClassInitializer = NO;
     NSString *customInitializerName = [INDUtils
                                        requirementObjectForClass:resolvedClass
                                        selector:@selector(independence_initializer)];
+    if (nil == customInitializerName) {
+        customInitializerName = [INDUtils
+                                 requirementObjectForClass:resolvedClass
+                                 selector:@selector(independence_class_initializer)];
+        if (nil != customInitializerName) {
+            isClassInitializer = YES;
+        }
+    }
     if (customInitializerName) {
         SEL initializer = NSSelectorFromString(customInitializerName);
         // arguments in getObject:parent:arguments:
@@ -81,8 +90,13 @@ static NSString *const INDBindedArgumentsKey = @"INDBindedArgumentsKey";
             // binded arguments
             NSMutableArray *filteredArguments =
                 [NSMutableArray arrayWithArray:initializerArguments];
-            NSMethodSignature *signature =
-                [resolvedClass instanceMethodSignatureForSelector:initializer];
+            NSMethodSignature *signature;
+            if (isClassInitializer) {
+                signature = [resolvedClass methodSignatureForSelector:initializer];
+            }else{
+                signature = [resolvedClass
+                             instanceMethodSignatureForSelector:initializer];
+            }
             while (filteredArguments.count < signature.numberOfArguments) {
                 [filteredArguments addObject:[NSNull null]];
             }
@@ -101,7 +115,8 @@ static NSString *const INDBindedArgumentsKey = @"INDBindedArgumentsKey";
         return [INDUtils
                 buildObjectWithInitializer:resolvedClass
                 initializer:initializer
-                arguments:resolvedArguments];
+                arguments:resolvedArguments
+                isClassInitializer:isClassInitializer];
     }
     
     return [super

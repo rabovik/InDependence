@@ -34,6 +34,9 @@ extern NSString *const INDException;
 
 +(objc_property_t)getProperty:(NSString *)propertyName fromClass:(Class)klass;
 
-+(id)buildObjectWithInitializer:(Class)klass initializer:(SEL)initializer arguments:(NSArray *)arguments;
++(id)buildObjectWithInitializer:(Class)klass
+                    initializer:(SEL)initializer
+                      arguments:(NSArray *)arguments
+             isClassInitializer:(BOOL)isClassInitializer;
 
 @end

@@ -184,12 +184,26 @@ NSString *const INDException = @"INDException";
 +(id)buildObjectWithInitializer:(Class)klass
                     initializer:(SEL)initializer
                       arguments:(NSArray *)arguments
+             isClassInitializer:(BOOL)isClassInitializer
 {
-    id instance = [klass alloc];
-    NSMethodSignature *signature = [klass instanceMethodSignatureForSelector:initializer];
+    id instance;
+    if (!isClassInitializer) {
+        instance = [klass alloc];
+    }
+    NSMethodSignature *signature;
+    if (isClassInitializer) {
+        signature = [klass methodSignatureForSelector:initializer];
+    }else{
+        signature = [klass instanceMethodSignatureForSelector:initializer];
+    }
     if (signature) {
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-        [invocation setTarget:instance];
+        NSInvocation *invocation = [NSInvocation
+                                    invocationWithMethodSignature:signature];
+        if (isClassInitializer) {
+            [invocation setTarget:klass];
+        }else{
+            [invocation setTarget:instance];
+        }
         [invocation setSelector:initializer];
         for (int i = 0; i < arguments.count; i++) {
             id argument = [arguments objectAtIndex:i];

@@ -19,6 +19,15 @@
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }
 
+#define independence_class_initializer(selectorSymbols, args...) \
++(NSString *)independence_class_initializer { \
+    return NSStringFromSelector(@selector(selectorSymbols)); \
+} \
++(NSArray *)independence_initializer_arguments { \
+    id objs[]= {args}; \
+    return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
+}
+
 @interface INDInjector (CustomInitializer)
 -(id)getObject:(id)classOrProtocol
         parent:(id)parent

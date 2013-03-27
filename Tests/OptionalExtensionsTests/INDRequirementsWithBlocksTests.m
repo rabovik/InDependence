@@ -29,7 +29,7 @@
 independence_requirements_with_blocks
     (@"d",
      ^id(Parent *self,INDInjector *injector){
-         return [NSObject new];
+         return @"123";
      })
 @end
 

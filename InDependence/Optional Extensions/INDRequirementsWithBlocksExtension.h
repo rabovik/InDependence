@@ -8,9 +8,11 @@
 
 #import "INDExtension.h"
 
-#define independence_requirements_with_blocks(args...) \
+typedef id(^INDRequirementsFactoryBlock)(id self,INDInjector *injector);
+
+#define independence_requirements_with_blocks(keyBlockPairs...) \
 +(NSArray *)independence_requirements_with_blocks{ \
-    __unsafe_unretained id objs[]= {args}; \
+    __strong id objs[]= {keyBlockPairs}; \
     NSArray *propertiesBlocksPairs = \
         [INDUtils \
          constructPropertiesBlocksArrayFromPairs:objs \
@@ -22,7 +24,7 @@
 }
 
 @interface INDUtils (RequirementsWithBlocks)
-+(NSArray *)constructPropertiesBlocksArrayFromPairs:(__unsafe_unretained id[])pairs
++(NSArray *)constructPropertiesBlocksArrayFromPairs:(__strong id[])pairs
                                               count:(NSUInteger)count;
 @end
 

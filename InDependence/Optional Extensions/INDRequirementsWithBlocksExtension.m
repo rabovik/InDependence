@@ -8,10 +8,12 @@
 
 #import "InDependence.h"
 #import "INDRequirementsWithBlocksExtension.h"
+#import "NSObject+INDObjectsTree.h"
+#import "INDSession.h"
 
 @interface INDPropertyBlockPair : NSObject
 @property (nonatomic,copy) NSString *propertyName;
-@property (nonatomic,copy) id block;
+@property (nonatomic,copy) INDRequirementsFactoryBlock block;
 @end
 
 @implementation INDPropertyBlockPair
@@ -19,7 +21,7 @@
 
 @implementation INDUtils (RequirementsWithBlocks)
 
-+(NSArray *)constructPropertiesBlocksArrayFromPairs:(__unsafe_unretained id[])pairs
++(NSArray *)constructPropertiesBlocksArrayFromPairs:(__strong id[])pairs
                                               count:(NSUInteger)count
 {
     if (1 == count % 2) {
@@ -51,19 +53,29 @@
 
 @implementation INDRequirementsWithBlocksExtension
 
--(void)injectRequirements:(NSSet *)_properties
-                 toObject:(id)object
+-(void)injectRequirements:(NSSet *)properties
+                 toObject:(NSObject *)object
                   session:(INDSession*)session
                      info:(NSDictionary *)info
 {
-    [super injectRequirements:_properties
+    [super injectRequirements:properties
                      toObject:object
                       session:session
                          info:info];
-    // Requirements
-    NSArray *properties = [INDUtils
-                           annotationsArrayForClass:[object class]
-                           selector:@selector(independence_requirements_with_blocks)];
+    NSArray *pairs = [INDUtils
+                      annotationsArrayForClass:[object class]
+                      selector:@selector(independence_requirements_with_blocks)];
+    for (INDPropertyBlockPair *pair in pairs){
+        // construct
+        NSObject *objectUnderConstruction = pair.block(object,self.injector);
+        // build tree
+        if (nil == objectUnderConstruction.ind_parent) {
+            [object ind_addChild:objectUnderConstruction];
+        }
+        [session registerInstantiatedObject:objectUnderConstruction];
+        // inject
+        [object setValue:objectUnderConstruction forKey:pair.propertyName];
+    }
 }
 
 @end

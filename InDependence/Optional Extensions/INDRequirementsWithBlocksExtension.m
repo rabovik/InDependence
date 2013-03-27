@@ -7,14 +7,17 @@
 //
 
 #import "InDependence.h"
-#import "INDInjectWithBlocksExtension.h"
+#import "INDRequirementsWithBlocksExtension.h"
 
 @interface INDPropertyBlockPair : NSObject
 @property (nonatomic,copy) NSString *propertyName;
 @property (nonatomic,copy) id block;
 @end
 
-@implementation INDUtils (InjectWithBlocks)
+@implementation INDPropertyBlockPair
+@end
+
+@implementation INDUtils (RequirementsWithBlocks)
 
 +(NSArray *)constructPropertiesBlocksArrayFromPairs:(__unsafe_unretained id[])pairs
                                               count:(NSUInteger)count
@@ -46,7 +49,7 @@
 
 @end
 
-@implementation INDInjectWithBlocksExtension
+@implementation INDRequirementsWithBlocksExtension
 
 -(void)injectRequirements:(NSSet *)_properties
                  toObject:(id)object
@@ -60,7 +63,7 @@
     // Requirements
     NSArray *properties = [INDUtils
                            annotationsArrayForClass:[object class]
-                           selector:@selector(independence_inject_with_blocks)];
+                           selector:@selector(independence_requirements_with_blocks)];
 }
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import "INDInjectWithBlocksTests.h"
+#import "INDRequirementsWithBlocksTests.h"
 #import "InDependence.h"
-#import "INDInjectWithBlocksExtension.h"
+#import "INDRequirementsWithBlocksExtension.h"
 
 #pragma mark - Helpers -
 @implementation B
@@ -27,27 +27,28 @@
 
 @implementation Root
 independence_requirements(@"b1",@"b2");
-independence_inject_with_blocks(
-                                @"a1",
-                                ^id(Root *self,INDInjector *injector){
-                                    return [[A alloc] initWithB:self.b1];
-                                },
-                                @"a2",
-                                ^id(Root *self,INDInjector *injector){
-                                    return [[A alloc] initWithB:self.b2];
-                                });
+independence_requirements_with_blocks
+    (@"a1",
+     ^id(Root *self,INDInjector *injector){
+         return [[A alloc] initWithB:self.b1];
+     },
+     @"a2",
+     ^id(Root *self,INDInjector *injector){
+         return [[A alloc] initWithB:self.b2];
+     });
+
 @end
 
 #pragma mark - Tests -
-@implementation INDInjectWithBlocksTests
+@implementation INDRequirementsWithBlocksTests
 
 -(void)setUp{
     [super setUp];
-    [INDInjector registerExtensionClass:[INDInjectWithBlocksExtension class]];
+    [INDInjector registerExtensionClass:[INDRequirementsWithBlocksExtension class]];
 }
 
 -(void)tearDown{
-    [INDInjector unRegisterExtensionClass:[INDInjectWithBlocksExtension class]];
+    [INDInjector unRegisterExtensionClass:[INDRequirementsWithBlocksExtension class]];
     [super tearDown];
 }
 

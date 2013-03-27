@@ -48,4 +48,19 @@
 
 @implementation INDInjectWithBlocksExtension
 
+-(void)injectRequirements:(NSSet *)_properties
+                 toObject:(id)object
+                  session:(INDSession*)session
+                     info:(NSDictionary *)info
+{
+    [super injectRequirements:_properties
+                     toObject:object
+                      session:session
+                         info:info];
+    // Requirements
+    NSArray *properties = [INDUtils
+                           annotationsArrayForClass:[object class]
+                           selector:@selector(independence_inject_with_blocks)];
+}
+
 @end

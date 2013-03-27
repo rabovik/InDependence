@@ -6,7 +6,45 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
+#import "InDependence.h"
 #import "INDInjectWithBlockExtension.h"
+
+@interface INDPropertyBlockPair : NSObject
+@property (nonatomic,copy) NSString *propertyName;
+@property (nonatomic,copy) id block;
+@end
+
+@implementation INDUtils (InjectWithBlocks)
+
++(NSArray *)constructPropertiesBlocksArrayFromPairs:(__unsafe_unretained id[])pairs
+                                              count:(NSUInteger)count
+{
+    if (1 == count % 2) {
+        @throw [NSException
+                exceptionWithName:INDException
+                reason:[NSString
+                        stringWithFormat:@"Unable to construct array. Keys plus blocks count is not even."]
+                userInfo:nil];
+    }
+    NSMutableArray *pbArray = [NSMutableArray arrayWithCapacity:count/2];
+    for (NSUInteger i = 0; i<count; i+=2) {
+        NSString *key = pairs[i];
+        if (![key isKindOfClass:[NSString class]]) {
+            @throw [NSException
+                    exceptionWithName:INDException
+                    reason:@"Unable to construct array. Key is not a NSString instance!"
+                    userInfo:nil];
+        }
+        id block = pairs[i+1];
+        INDPropertyBlockPair *pair = [INDPropertyBlockPair new];
+        pair.propertyName = key;
+        pair.block = block;
+        [pbArray addObject:pair];
+    }
+    return pbArray;
+}
+
+@end
 
 @implementation INDInjectWithBlockExtension
 

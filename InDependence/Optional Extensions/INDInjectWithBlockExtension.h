@@ -8,16 +8,23 @@
 
 #import "INDExtension.h"
 
-#define independence_inject_with_block(args...) \
-+(NSSet *)independence_inject_with_block{ \
-    return nil; \
-}
-
 #define independence_inject_with_blocks(args...) \
-+(NSSet *)independence_inject_with_blocks{ \
-return nil; \
++(NSArray *)independence_inject_with_blocks{ \
+    __unsafe_unretained id objs[]= {args}; \
+    NSArray *propertiesBlocksPairs = \
+        [INDUtils \
+         constructPropertiesBlocksArrayFromPairs:objs \
+         count:sizeof(objs)/sizeof(id)]; \
+    return [INDUtils \
+            appendAnnotationsArrayForClass:self \
+            toArray:propertiesBlocksPairs \
+            selector:@selector(independence_inject_with_blocks)]; \
 }
 
+@interface INDUtils (InjectWithBlocks)
++(NSArray *)constructPropertiesBlocksArrayFromPairs:(__unsafe_unretained id[])pairs
+                                              count:(NSUInteger)count;
+@end
 
 @interface INDInjectWithBlockExtension : INDExtension
 

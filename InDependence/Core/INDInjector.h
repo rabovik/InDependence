@@ -24,6 +24,8 @@
 +(void)setSharedInjector:(INDInjector *)injector;
 
 #pragma mark - Object Factory
+// redirects message to sharedInjector
++(id)getObject:(id)classOrProtocol parent:(id)parent;
 -(id)getObject:(id)classOrProtocol parent:(id)parent;
 -(id)getObject:(id)classOrProtocol
        session:(INDSession *)session

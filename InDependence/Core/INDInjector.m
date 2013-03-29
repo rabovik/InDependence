@@ -113,6 +113,10 @@ static INDInjector *gSharedInjector;
 }
 
 #pragma mark - Object Factory
++(id)getObject:(id)classOrProtocol parent:(id)parent{
+    return [[[self class] sharedInjector] getObject:classOrProtocol parent:parent];
+}
+
 -(id)getObject:(id)classOrProtocol parent:(id)parent{
     return [self getObject:classOrProtocol session:nil parent:parent info:nil];
 }

@@ -10,6 +10,7 @@
 #import "INDUtils.h"
 #import "INDModule.h"
 #import "INDModuleWithBlock.h"
+#import "NSObject+InDependence.h"
 
 #import "INDCustomInitializerExtension.h"
 #import "INDSingletonExtension.h"

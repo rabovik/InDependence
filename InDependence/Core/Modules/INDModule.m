@@ -27,11 +27,18 @@ NSString *const INDBindedClassKey = @"INDBindedClassKey";
 }
 
 #pragma mark - Bindings storage
+-(id)classOrProtocolKey:(id)classOrProtocol{
+    BOOL isClass = class_isMetaClass(object_getClass(classOrProtocol));
+    if (isClass) {
+        return classOrProtocol;
+    }else{
+        return NSStringFromProtocol(classOrProtocol);
+    }
+}
+
 -(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
-    key = [NSString stringWithFormat:@"%@_%@",
-           key,
-           [INDUtils key:classOrProtocol]];
-    return [_bindings objectForKey:key];
+    return [[_bindings objectForKey:key]
+            objectForKey:[self classOrProtocolKey:classOrProtocol]];
 }
 
 -(void)setBinding:(id)bindingEntry
@@ -50,10 +57,12 @@ NSString *const INDBindedClassKey = @"INDBindedClassKey";
                 userInfo:nil];
     }
     
-    key = [NSString stringWithFormat:@"%@_%@",
-           key,
-           [INDUtils key:classOrProtocol]];
-    [_bindings setObject:bindingEntry forKey:key];
+    NSMutableDictionary *keyDict = [_bindings objectForKey:key];
+    if (nil == keyDict){
+        keyDict = [NSMutableDictionary new];
+        [_bindings setObject:keyDict forKey:key];
+    }
+    [keyDict setObject:bindingEntry forKey:[self classOrProtocolKey:classOrProtocol]];
 }
 
 #pragma mark - Class bindings

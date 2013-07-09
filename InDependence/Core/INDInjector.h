@@ -15,6 +15,9 @@
 
 @interface INDInjector : NSObject
 
+#define INDObjectOfClass(objectClass,parentObject) \
+    ((objectClass *)[INDInjector getObject:[objectClass class] parent:parentObject])
+
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass;
 +(void)unRegisterExtensionClass:(Class)extensionClass;

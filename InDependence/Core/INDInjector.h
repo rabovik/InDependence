@@ -39,6 +39,7 @@
 -(void)addModule:(INDModule *)module;
 -(void)removeModule:(INDModule *)module;
 -(void)removeModuleOfClass:(Class)moduleClass;
+-(NSArray *)modules;
 
 #pragma mark - Bindings
 -(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol;

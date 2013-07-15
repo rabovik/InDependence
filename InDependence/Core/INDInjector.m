@@ -255,6 +255,12 @@ static INDInjector *gSharedInjector;
     }
 }
 
+-(NSArray *)modules{
+    @synchronized(self){
+        return [NSArray arrayWithArray:_modules];
+    }
+}
+
 #pragma mark - Bindings
 -(id)bindingForKey:(NSString *)key classOrProtocol:(id)classOrProtocol{
     for (INDModule *module in _modules) {

@@ -35,7 +35,9 @@ static INDInjector *gSharedInjector;
     INDAssert([extensionClass isSubclassOfClass:[INDExtension class]],
               @"Can not register %@ extension because it is not a subclass of INDExtension",
               NSStringFromClass(extensionClass));
-    [gExtensions addObject:extensionClass];
+    if (![gExtensions containsObject:extensionClass]) {
+        [gExtensions addObject:extensionClass];
+    }
 }
 
 +(void)unRegisterExtensionClass:(Class)extensionClass{

@@ -16,6 +16,11 @@
 @implementation TestClass
 @end
 
+@interface TestSuperClass : TestClass
+@end
+@implementation TestSuperClass
+@end
+
 
 @interface TestAssociatedClass : NSObject
 @property (nonatomic,weak) TestClass *parent;
@@ -47,7 +52,7 @@ independence_references(@"parent");
 -(void)testAssociatedObject{
     TestAssociatedClass __weak *weakAssociatedObject = nil;
     @autoreleasepool {
-        TestClass *testParent = INDObjectOfClass(TestClass, nil);
+        TestClass *testParent = INDObjectOfClass(TestSuperClass, nil);
         TestAssociatedClass *associatedObject = [testParent.ind_childs anyObject];
         weakAssociatedObject = associatedObject;
         STAssertNotNil(associatedObject, @"");

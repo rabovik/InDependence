@@ -18,8 +18,10 @@
 
 
 @interface TestAssociatedClass : NSObject
+@property (nonatomic,weak) TestClass *parent;
 @end
 @implementation TestAssociatedClass
+independence_references(@"parent");
 @end
 
 @implementation INDAssociatedObjectsTests
@@ -50,7 +52,8 @@
         weakAssociatedObject = associatedObject;
         STAssertNotNil(associatedObject, @"");
         STAssertEqualObjects([associatedObject class], [TestAssociatedClass class], @"");
-        STAssertTrue(associatedObject.ind_parent == [TestAssociatedClass class], @"");
+        STAssertEqualObjects(associatedObject.ind_parent, testParent, @"");
+        STAssertEqualObjects(associatedObject.parent, testParent, @"");
     }
     STAssertNil(weakAssociatedObject, @"");
 }

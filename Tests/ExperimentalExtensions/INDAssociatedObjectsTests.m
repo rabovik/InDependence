@@ -29,6 +29,11 @@
 independence_references(@"parent");
 @end
 
+@interface TestAssociatedClass2 : NSObject
+@end
+@implementation TestAssociatedClass2
+@end
+
 @implementation INDAssociatedObjectsTests
 
 #pragma mark - Setup
@@ -49,6 +54,7 @@ independence_references(@"parent");
 }
 
 #pragma mark - Tests
+
 -(void)testAssociatedObject{
     TestAssociatedClass __weak *weakAssociatedObject = nil;
     @autoreleasepool {
@@ -63,5 +69,16 @@ independence_references(@"parent");
     STAssertNil(weakAssociatedObject, @"");
 }
 
+-(void)testSeveralAttachedObjects{
+    [[INDInjector sharedInjector]
+     addModule:[[INDModuleWithBlock alloc]
+                initWithBlock:^(INDModule *module){
+                    [module attachObjectOfClass:[TestAssociatedClass2 class]
+                                        toClass:[TestSuperClass class]];
+                }]];
+    TestSuperClass *testParent = INDObjectOfClass(TestSuperClass, nil);
+    NSSet *attachedObjects = testParent.ind_childs;
+    STAssertTrue(2 == attachedObjects.count, @"\n%@",attachedObjects);
+}
 
 @end

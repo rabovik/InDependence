@@ -52,7 +52,7 @@ independence_references(@"parent");
 -(void)testAssociatedObject{
     TestAssociatedClass __weak *weakAssociatedObject = nil;
     @autoreleasepool {
-        TestClass *testParent = INDObjectOfClass(TestSuperClass, nil);
+        TestSuperClass *testParent = INDObjectOfClass(TestSuperClass, nil);
         TestAssociatedClass *associatedObject = [testParent.ind_childs anyObject];
         weakAssociatedObject = associatedObject;
         STAssertNotNil(associatedObject, @"");

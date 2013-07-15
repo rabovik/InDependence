@@ -45,17 +45,10 @@ NSString *const INDBindedClassKey = @"INDBindedClassKey";
            forKey:(NSString *)key
   classOrProtocol:(id)classOrProtocol
 {
-    id existingBinding =
-        [self.injector bindingForKey:key classOrProtocol:classOrProtocol];
-    if (nil != existingBinding) {
-        @throw [NSException
-                exceptionWithName:INDException
-                reason:[NSString stringWithFormat:
-                        @"Duplicate binding '%@' for %@",
-                        INDBindedClassKey,
-                        [INDUtils key:classOrProtocol]]
-                userInfo:nil];
-    }
+    INDAssert(nil == [self.injector bindingForKey:key classOrProtocol:classOrProtocol],
+              @"Duplicate binding '%@' for %@",
+              INDBindedClassKey,
+              [INDUtils key:classOrProtocol]);
     
     NSMutableDictionary *keyDict = [_bindings objectForKey:key];
     if (nil == keyDict){

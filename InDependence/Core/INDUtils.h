@@ -9,7 +9,18 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
-extern NSString *const INDException;
+#define INDThrow(desc, ...) \
+    @throw [NSException \
+            exceptionWithName:@"INDException" \
+            reason:[NSString stringWithFormat:(desc), ##__VA_ARGS__] \
+            userInfo:nil]
+
+#define INDAssert(condition, desc, ...) \
+    do{ \
+        if (!(condition)){ \
+            INDThrow((desc), ##__VA_ARGS__); \
+        } \
+    } while(0)
 
 @interface INDUtils : NSObject
 

@@ -32,15 +32,9 @@ static INDInjector *gSharedInjector;
 
 #pragma mark - Extensions
 +(void)registerExtensionClass:(Class)extensionClass{
-    if (![extensionClass isSubclassOfClass:[INDExtension class]]) {
-        @throw [NSException
-                exceptionWithName:INDException
-                reason:[NSString
-                        stringWithFormat:
-                        @"Can not register %@ extension because it is not a subclass of INDExtension",
-                        NSStringFromClass(extensionClass)]
-                userInfo:nil];
-    }
+    INDAssert([extensionClass isSubclassOfClass:[INDExtension class]],
+              @"Can not register %@ extension because it is not a subclass of INDExtension",
+              NSStringFromClass(extensionClass));
     [gExtensions addObject:extensionClass];
 }
 
@@ -198,12 +192,8 @@ static INDInjector *gSharedInjector;
         return classOrProtocol;
     }
     
-    @throw [NSException
-            exceptionWithName:INDException
-            reason:[NSString
-                    stringWithFormat:@"Unable to find class for protocol: <%@>",
-                    NSStringFromProtocol(classOrProtocol)]
-            userInfo:nil];
+    INDThrow(@"Unable to find class for protocol: <%@>",
+             NSStringFromProtocol(classOrProtocol));
 }
 
 -(id)createObjectOfClass:(Class)resolvedClass

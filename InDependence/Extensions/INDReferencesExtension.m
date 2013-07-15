@@ -32,15 +32,10 @@
     for (NSString *propertyName in properties) {
         objc_property_t property = [INDUtils getProperty:propertyName
                                                fromClass:[object class]];
-        if (![INDUtils propertyIsWeak:property]) {
-            @throw [NSException
-                    exceptionWithName:INDException
-                    reason:[NSString
-                            stringWithFormat:@"Required reference '%@' of class '%@' must be weak",
-                            propertyName,
-                            [INDUtils key:[object class]]]
-                    userInfo:nil];
-        }
+        INDAssert([INDUtils propertyIsWeak:property],
+                  @"Required reference '%@' of class '%@' must be weak",
+                  propertyName,
+                  [INDUtils key:[object class]]);
         id desiredClassOrProtocol = [INDUtils
                                      classOrProtocolForProperty:property];
         id resolvedReference = [self reference:desiredClassOrProtocol

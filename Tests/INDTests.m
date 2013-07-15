@@ -210,4 +210,9 @@
     ASSERT_PARENT(fordCar.road, injector);
 }
 
+#pragma mark - Registering Extensions
+-(void)testThrowsOnRegisteringIllegalExtension{
+    STAssertThrows([INDInjector registerExtensionClass:[NSObject class]],@"");
+}
+
 @end

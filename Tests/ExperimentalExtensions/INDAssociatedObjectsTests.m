@@ -11,6 +11,8 @@
 #import "InDependence.h"
 #import "NSObject+INDObjectsTree.h"
 
+#pragma mark - HELPERS -
+
 @interface TestClass : NSObject
 @end
 @implementation TestClass
@@ -33,6 +35,8 @@ independence_references(@"parent");
 @end
 @implementation TestAssociatedClass2
 @end
+
+#pragma mark - TESTS -
 
 @implementation INDAssociatedObjectsTests
 

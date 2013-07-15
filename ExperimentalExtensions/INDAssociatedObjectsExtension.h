@@ -11,7 +11,6 @@
 
 @interface INDModule (AssociatedObjects)
 -(void)attachObjectOfClass:(Class)aClass toClass:(Class)toClass;
--(void)attachObjectOfClass:(Class)aClass toProtocol:(Protocol *)toProtocol;
 @end
 
 @interface INDAssociatedObjectsExtension : INDExtension

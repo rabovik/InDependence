@@ -15,18 +15,10 @@ static NSString *const INDAttachedAssociatedObjectKey = @"INDAttachedAssociatedO
 #pragma mark - Module -
 @implementation INDModule (AssociatedObjects)
 
--(void)attachObjectOfClass:(Class)aClass toClass:(Class)toClass{
-    [self attachObjectOfClass:aClass to:toClass];
-}
-
--(void)attachObjectOfClass:(Class)aClass toProtocol:(Protocol *)toProtocol{
-    [self attachObjectOfClass:aClass to:toProtocol];
-}
-
--(void)attachObjectOfClass:(Class)aClass to:(id)classOrProtocol{
-    [self setBinding:aClass
+-(void)attachObjectOfClass:(Class)attachedClass toClass:(Class)toClass{
+    [self setBinding:attachedClass
               forKey:INDAttachedAssociatedObjectKey
-     classOrProtocol:classOrProtocol];
+     classOrProtocol:toClass];
 }
 
 @end

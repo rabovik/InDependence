@@ -29,6 +29,7 @@
 		1A3C348516F887FC008EE0AD /* INDModuleWithBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C348316F887FC008EE0AD /* INDModuleWithBlock.m */; };
 		1A45E9251794061900B951C5 /* INDAssociatedObjectsExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45E9241794061900B951C5 /* INDAssociatedObjectsExtension.m */; };
 		1A45E929179406F000B951C5 /* INDAssociatedObjectsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45E928179406F000B951C5 /* INDAssociatedObjectsTests.m */; };
+		1A45E99D1794ACFF00B951C5 /* NSObject+InDependence.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A45E99C1794ACFE00B951C5 /* NSObject+InDependence.m */; };
 		1A6525CF170345A600C60DBE /* INDCustomClassInitializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6525CE170345A600C60DBE /* INDCustomClassInitializerTests.m */; };
 		1AA6B19116FAFC430018DAA0 /* INDWeakCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6B19016FAFC430018DAA0 /* INDWeakCollection.m */; };
 		1AA6B19716FAFD100018DAA0 /* INDWeakCollectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA6B19616FAFD100018DAA0 /* INDWeakCollectionTests.m */; };
@@ -82,6 +83,7 @@
 		1A45E9241794061900B951C5 /* INDAssociatedObjectsExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDAssociatedObjectsExtension.m; path = ExperimentalExtensions/INDAssociatedObjectsExtension.m; sourceTree = "<group>"; };
 		1A45E927179406F000B951C5 /* INDAssociatedObjectsTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDAssociatedObjectsTests.h; path = ExperimentalExtensions/INDAssociatedObjectsTests.h; sourceTree = "<group>"; };
 		1A45E928179406F000B951C5 /* INDAssociatedObjectsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDAssociatedObjectsTests.m; path = ExperimentalExtensions/INDAssociatedObjectsTests.m; sourceTree = "<group>"; };
+		1A45E99C1794ACFE00B951C5 /* NSObject+InDependence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+InDependence.m"; path = "Core/NSObject+InDependence.m"; sourceTree = "<group>"; };
 		1A6525CD170345A600C60DBE /* INDCustomClassInitializerTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INDCustomClassInitializerTests.h; sourceTree = "<group>"; };
 		1A6525CE170345A600C60DBE /* INDCustomClassInitializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INDCustomClassInitializerTests.m; sourceTree = "<group>"; };
 		1AA6B18F16FAFC430018DAA0 /* INDWeakCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDWeakCollection.h; path = ObjectsTree/WeakCollection/INDWeakCollection.h; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				1A1DFDB116DE19CA00658409 /* INDUtils.h */,
 				1A1DFDB216DE19CA00658409 /* INDUtils.m */,
 				1AAA67961709B1A500156166 /* NSObject+InDependence.h */,
+				1A45E99C1794ACFE00B951C5 /* NSObject+InDependence.m */,
 				1A3C347F16F887FC008EE0AD /* Modules */,
 			);
 			name = Core;
@@ -403,6 +406,7 @@
 				1A6525CF170345A600C60DBE /* INDCustomClassInitializerTests.m in Sources */,
 				1A45E9251794061900B951C5 /* INDAssociatedObjectsExtension.m in Sources */,
 				1A45E929179406F000B951C5 /* INDAssociatedObjectsTests.m in Sources */,
+				1A45E99D1794ACFF00B951C5 /* NSObject+InDependence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,6 +63,10 @@ NSString *const INDBindedClassKey = @"INDBindedClassKey";
     [self bindClass:aClass to:toClass];
 }
 
+-(void)bindClassToSuperClass:(Class)aClass{
+    [self bindClass:aClass to:[aClass superclass]];
+}
+
 -(void)bindClass:(Class)aClass toProtocol:(Protocol *)toProtocol{
     [self bindClass:aClass to:toProtocol];
 }

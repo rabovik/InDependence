@@ -22,6 +22,7 @@ extern NSString *const INDBindedClassKey;
 
 #pragma mark - Class bindings
 -(void)bindClass:(Class)aClass toClass:(Class)toClass;
+-(void)bindClassToSuperClass:(Class)aClass;
 -(void)bindClass:(Class)aClass toProtocol:(Protocol *)toProtocol;
 
 #pragma mark - For overriding

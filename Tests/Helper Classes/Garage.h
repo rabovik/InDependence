@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @class Ford,FordFocus,Renault;
 
 @protocol Garage <NSObject>

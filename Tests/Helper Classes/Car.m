@@ -17,5 +17,5 @@ ind_requirements(road,steeringWheel,engine);
 @end
 
 @implementation SportSteeringWheel
-independence_references(@"garage")
+ind_references(garage);
 @end

@@ -52,6 +52,8 @@
 
 @end
 
+#define _ind_concat(A, B) A ## B
+
 #define _ind_pragma(x) _Pragma (#x)
 
 #define _ind_deprecated(subject) \
@@ -63,8 +65,8 @@ _ind_pragma(message("\'" #subject "\' is deprecated.")
 #define _ind_static_check_property(PROPERTY) \
     (void)( (__typeof(self))[self class].new).PROPERTY;
 
-#define _ind_static_check_properties(args...) \
--(void)_ind_requirements_properties_static_check{ \
+#define _ind_static_check_properties(methodSuffix,args...) \
+-(void)_ind_concat(_ind_requirements_properties_static_check_,methodSuffix){ \
     _IND_MAP(_ind_static_check_property, args) \
 }
 

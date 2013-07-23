@@ -27,7 +27,7 @@ _ind_deprecated2(independence_requirements,ind_requirements) \
 }
 
 #define ind_requirements(args...) \
-_ind_static_check_properties(args) \
+_ind_static_check_properties(requirements,args) \
 +(NSSet *)ind_requirements{ \
     NSSet *requirements = _ind_set_of_strings_from_properties(args); \
     return [INDUtils \

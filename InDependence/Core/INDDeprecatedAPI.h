@@ -34,7 +34,11 @@ ind_initializer(selectorSymbols, args)
 
 #define independence_class_initializer(selectorSymbols, args...) \
 _ind_deprecated2(independence_class_initializer,ind_class_initializer) \
-ind_class_initializer(selectorSymbols, args) \
+ind_class_initializer(selectorSymbols, args)
+
+#define independence_singleton() \
+_ind_deprecated2(independence_singleton,ind_singleton) \
+ind_singleton()
 
 
 

@@ -95,6 +95,7 @@
 		1AA6B19C16FB12500018DAA0 /* INDObjectsTreeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDObjectsTreeTests.h; path = ObjectsTreeTests/INDObjectsTreeTests.h; sourceTree = "<group>"; };
 		1AA6B19D16FB12500018DAA0 /* INDObjectsTreeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDObjectsTreeTests.m; path = ObjectsTreeTests/INDObjectsTreeTests.m; sourceTree = "<group>"; };
 		1AAA67961709B1A500156166 /* NSObject+InDependence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+InDependence.h"; path = "Core/NSObject+InDependence.h"; sourceTree = "<group>"; };
+		1AFD342F179ED0D600285374 /* ind_preprocessor_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ind_preprocessor_map.h; path = Core/ind_preprocessor_map.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +186,7 @@
 				1A1DFDB216DE19CA00658409 /* INDUtils.m */,
 				1AAA67961709B1A500156166 /* NSObject+InDependence.h */,
 				1A45E99C1794ACFE00B951C5 /* NSObject+InDependence.m */,
+				1AFD342F179ED0D600285374 /* ind_preprocessor_map.h */,
 				1A3C347F16F887FC008EE0AD /* Modules */,
 			);
 			name = Core;

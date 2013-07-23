@@ -13,7 +13,7 @@
 
 -(void)testEntriesFromClassAndSuperClasses{
     NSSet *requiredSet =
-        [FordFocus performSelector:@selector(independence_requirements)];
+        [FordFocus performSelector:@selector(ind_requirements)];
     NSSet *etalonSet =
         [NSSet setWithObjects:@"logo",@"engine",@"road",@"steeringWheel",nil];
     

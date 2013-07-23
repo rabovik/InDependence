@@ -17,10 +17,21 @@
 #import "INDReferencesExtension.h"
 
 #define independence_requirements(args...) \
-+(NSSet *)independence_requirements{ \
+_ind_deprecated2(independence_requirements,ind_requirements) \
++(NSSet *)ind_requirements{ \
     NSSet *requirements = [NSSet setWithObjects: args, nil]; \
     return [INDUtils \
             unionRequirementsSetForClass:self \
             withSet:requirements \
-            selector:@selector(independence_requirements)]; \
+            selector:@selector(ind_requirements)]; \
+}
+
+#define ind_requirements(args...) \
+_ind_static_check_properties(args) \
++(NSSet *)ind_requirements{ \
+    NSSet *requirements = _ind_set_of_strings_from_properties(args); \
+    return [INDUtils \
+            unionRequirementsSetForClass:self \
+            withSet:requirements \
+            selector:@selector(ind_requirements)]; \
 }

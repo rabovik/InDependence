@@ -17,7 +17,7 @@ independence_references(@"parentCar")
 @end
 
 @implementation FordFocus
-independence_requirements(@"logo");
+ind_requirements(logo);
 independence_initializer(initWithYear:color:,@"2010",[UIColor blackColor]);
 independence_references(@"neighboringCar",
                         @"neighboringCarEngine",

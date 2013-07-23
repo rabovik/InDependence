@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
+#import "ind_preprocessor_map.h"
 
 #define INDThrow(desc, ...) \
     @throw [NSException \
@@ -51,3 +52,28 @@
              isClassInitializer:(BOOL)isClassInitializer;
 
 @end
+
+#define _ind_pragma(x) _Pragma (#x)
+
+#define _ind_deprecated(subject) \
+_ind_pragma(message("\'" #subject "\' is deprecated.")
+
+#define _ind_deprecated2(subject,replacement) \
+    _ind_pragma(message("\'" #subject "\' is deprecated. Use \'" #replacement "\' instead."))
+
+#define _ind_static_check_property(PROPERTY) \
+    (void)( (__typeof(self))[self class].new).PROPERTY;
+
+#define _ind_static_check_properties(args...) \
+-(void)_ind_requirements_properties_static_check{ \
+    _IND_MAP(_ind_static_check_property, args) \
+}
+
+#define _ind_stringify_property_and_add_to_set(A) [set addObject:@(#A)];
+
+#define _ind_set_of_strings_from_properties(args...) \
+    ({ \
+        NSMutableSet *set = [NSMutableSet set]; \
+        _IND_MAP(_ind_stringify_property_and_add_to_set, args) \
+        set; \
+    })

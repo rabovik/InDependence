@@ -10,7 +10,7 @@
 #import "InDependence.h"
 
 @implementation Car
-independence_requirements(@"engine",@"road",@"steeringWheel");
+ind_requirements(road,steeringWheel,engine);
 -(void)awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }

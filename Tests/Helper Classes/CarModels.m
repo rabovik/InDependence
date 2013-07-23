@@ -18,7 +18,7 @@ ind_references(parentCar);
 
 @implementation FordFocus
 ind_requirements(logo);
-independence_initializer(initWithYear:color:,@"2010",[UIColor blackColor]);
+ind_initializer(initWithYear:color:,@"2010",[UIColor blackColor]);
 ind_references(neighboringCar,
                neighboringCarEngine,
                neighboringCarSteeringWheel);

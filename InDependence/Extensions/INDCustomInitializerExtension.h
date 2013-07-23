@@ -10,20 +10,20 @@
 #import "INDInjector.h"
 #import "INDModule.h"
 
-#define independence_initializer(selectorSymbols, args...) \
-+(NSString *)independence_initializer { \
+#define ind_initializer(selectorSymbols, args...) \
++(NSString *)ind_initializer { \
     return NSStringFromSelector(@selector(selectorSymbols)); \
 } \
-+(NSArray *)independence_initializer_arguments { \
++(NSArray *)ind_initializer_arguments { \
     id objs[]= {args}; \
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }
 
-#define independence_class_initializer(selectorSymbols, args...) \
-+(NSString *)independence_class_initializer { \
+#define ind_class_initializer(selectorSymbols, args...) \
++(NSString *)ind_class_initializer { \
     return NSStringFromSelector(@selector(selectorSymbols)); \
 } \
-+(NSArray *)independence_initializer_arguments { \
++(NSArray *)ind_initializer_arguments { \
     id objs[]= {args}; \
     return [NSArray arrayWithObjects: objs count:sizeof(objs)/sizeof(id)]; \
 }

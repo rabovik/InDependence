@@ -11,7 +11,7 @@
 
 @implementation Car
 ind_requirements(road,steeringWheel,engine);
--(void)awakeFromInjector{
+-(void)ind_awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }
 @end

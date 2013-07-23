@@ -12,7 +12,7 @@
 @implementation Garage
 ind_requirements(fordCar,renaultCar);
 
--(void)awakeFromInjector{
+-(void)ind_awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }
 

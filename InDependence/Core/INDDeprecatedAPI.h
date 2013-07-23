@@ -8,6 +8,13 @@
 
 #import "INDUtils.h"
 
+#define _IND_THROW_ON_AWAKE_FROM_INJECTOR 1
+
+@interface NSObject ()
+-(void)awakeFromInjector DEPRECATED_ATTRIBUTE;
+@end
+
+
 #define independence_requirements(args...) \
 _ind_deprecated2(independence_requirements,ind_requirements) \
 +(NSSet *)ind_requirements{ \
@@ -39,6 +46,5 @@ ind_class_initializer(selectorSymbols, args)
 #define independence_singleton() \
 _ind_deprecated2(independence_singleton,ind_singleton) \
 ind_singleton()
-
 
 

@@ -7,5 +7,5 @@
 //
 
 @interface NSObject (InDependence)
--(void)awakeFromInjector;
+-(void)ind_awakeFromInjector;
 @end

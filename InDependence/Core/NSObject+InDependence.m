@@ -1,8 +1,9 @@
 #import "NSObject+InDependence.h"
+#import "INDUtils.h"
 
 @implementation NSObject (InDependence)
 
--(void)awakeFromInjector{
+-(void)ind_awakeFromInjector{
     
 }
 

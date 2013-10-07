@@ -10,9 +10,9 @@
 #import "InDependence.h"
 
 @implementation Garage
-independence_requirements(@"fordCar",@"renaultCar");
+ind_requirements(fordCar,renaultCar);
 
--(void)awakeFromInjector{
+-(void)ind_awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }
 

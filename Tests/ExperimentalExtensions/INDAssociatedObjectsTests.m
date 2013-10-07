@@ -28,7 +28,7 @@
 @property (nonatomic,weak) TestClass *parent;
 @end
 @implementation TestAssociatedClass
-independence_references(@"parent");
+ind_references(parent);
 @end
 
 @interface TestAssociatedClass2 : NSObject

@@ -95,6 +95,8 @@
 		1AA6B19C16FB12500018DAA0 /* INDObjectsTreeTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = INDObjectsTreeTests.h; path = ObjectsTreeTests/INDObjectsTreeTests.h; sourceTree = "<group>"; };
 		1AA6B19D16FB12500018DAA0 /* INDObjectsTreeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = INDObjectsTreeTests.m; path = ObjectsTreeTests/INDObjectsTreeTests.m; sourceTree = "<group>"; };
 		1AAA67961709B1A500156166 /* NSObject+InDependence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+InDependence.h"; path = "Core/NSObject+InDependence.h"; sourceTree = "<group>"; };
+		1AF49839179EF15D0095D926 /* INDDeprecatedAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = INDDeprecatedAPI.h; path = Core/INDDeprecatedAPI.h; sourceTree = "<group>"; };
+		1AFD342F179ED0D600285374 /* ind_preprocessor_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ind_preprocessor_map.h; path = Core/ind_preprocessor_map.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		1A1DFD9E16DC947B00658409 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1AF49839179EF15D0095D926 /* INDDeprecatedAPI.h */,
 				1A1DFDA116DC972C00658409 /* INDInjector.h */,
 				1A1DFDA216DC972C00658409 /* INDInjector.m */,
 				1A1DFDB816DE6B9100658409 /* INDSession.h */,
@@ -185,6 +188,7 @@
 				1A1DFDB216DE19CA00658409 /* INDUtils.m */,
 				1AAA67961709B1A500156166 /* NSObject+InDependence.h */,
 				1A45E99C1794ACFE00B951C5 /* NSObject+InDependence.m */,
+				1AFD342F179ED0D600285374 /* ind_preprocessor_map.h */,
 				1A3C347F16F887FC008EE0AD /* Modules */,
 			);
 			name = Core;
@@ -432,6 +436,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -464,6 +469,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;

@@ -10,7 +10,7 @@
 #import "InDependence.h"
 
 @implementation ColoredPaper
-independence_class_initializer(redPaper);
+ind_class_initializer(redPaper);
 +(id)redPaper{
     ColoredPaper *paper = [[self class] new];
     paper.color = [UIColor redColor];

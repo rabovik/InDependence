@@ -154,7 +154,7 @@ static INDInjector *gSharedInjector;
         // Satisfy requirements
         NSSet *properties = [INDUtils
                              requirementsSetForClass:classOrProtocol
-                             selector:@selector(independence_requirements)];
+                             selector:@selector(ind_requirements)];
         [self.lastExtension injectRequirements:properties
                                       toObject:objectUnderConstruction
                                        session:session

@@ -10,12 +10,12 @@
 #import "InDependence.h"
 
 @implementation Car
-independence_requirements(@"engine",@"road",@"steeringWheel");
--(void)awakeFromInjector{
+ind_requirements(road,steeringWheel,engine);
+-(void)ind_awakeFromInjector{
     //NSLog(@"AWAKE %@",self);
 }
 @end
 
 @implementation SportSteeringWheel
-independence_references(@"garage")
+ind_references(garage);
 @end

@@ -7,9 +7,10 @@
 //
 
 #import "INDSession.h"
+#import "INDDeprecatedAPI.h"
 
 @interface NSObject ()
--(void)awakeFromInjector;
+-(void)ind_awakeFromInjector;
 @end
 
 @implementation INDSession{
@@ -36,10 +37,15 @@
 
 -(void)notifyObjectsThatTheyAreReady{    
     for (id object in [_instantiatedObjects reverseObjectEnumerator]) {
-        SEL selector = @selector(awakeFromInjector);
+        SEL selector = @selector(ind_awakeFromInjector);
         if([object respondsToSelector:selector]) {
-            [object awakeFromInjector];
+            [object ind_awakeFromInjector];
         }
+#if _IND_THROW_ON_AWAKE_FROM_INJECTOR
+        if([object respondsToSelector:@selector(awakeFromInjector)]) {
+            INDThrow(@"'awakeFromInjector' is deprecated. Use 'ind_awakeFromInjector' instead.");
+        }
+#endif
     }
 }
 

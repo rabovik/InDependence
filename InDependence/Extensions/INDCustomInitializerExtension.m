@@ -68,11 +68,11 @@ static NSString *const INDBindedArgumentsKey = @"INDBindedArgumentsKey";
     BOOL isClassInitializer = NO;
     NSString *customInitializerName = [INDUtils
                                        requirementObjectForClass:resolvedClass
-                                       selector:@selector(independence_initializer)];
+                                       selector:@selector(ind_initializer)];
     if (nil == customInitializerName) {
         customInitializerName = [INDUtils
                                  requirementObjectForClass:resolvedClass
-                                 selector:@selector(independence_class_initializer)];
+                                 selector:@selector(ind_class_initializer)];
         if (nil != customInitializerName) {
             isClassInitializer = YES;
         }
@@ -86,7 +86,7 @@ static NSString *const INDBindedArgumentsKey = @"INDBindedArgumentsKey";
             NSArray *initializerArguments =
                 [INDUtils
                  requirementObjectForClass:resolvedClass
-                 selector:@selector(independence_initializer_arguments)];
+                 selector:@selector(ind_initializer_arguments)];
             // binded arguments
             NSMutableArray *filteredArguments =
                 [NSMutableArray arrayWithArray:initializerArguments];

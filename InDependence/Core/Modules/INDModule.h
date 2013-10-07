@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Yan Rabovik. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 extern NSString *const INDBindedClassKey;
 
 @class INDInjector;

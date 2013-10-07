@@ -19,7 +19,7 @@
     for (NSObject *object in objects) {
         NSSet *properties = [INDUtils
                              requirementsSetForClass:[object class]
-                             selector:@selector(independence_references)];
+                             selector:@selector(ind_references)];
         [self injectReferences:properties toObject:object];
     }
     

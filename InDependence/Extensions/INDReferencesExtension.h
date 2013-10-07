@@ -8,13 +8,14 @@
 
 #import "INDExtension.h"
 
-#define independence_references(args...) \
-+(NSSet *)independence_references{ \
-    NSSet *requirements = [NSSet setWithObjects: args, nil]; \
+#define ind_references(args...) \
+_ind_static_check_properties(references,args) \
++(NSSet *)ind_references{ \
+    NSSet *references = _ind_set_of_strings_from_properties(args); \
     return [INDUtils \
             unionRequirementsSetForClass:self \
-            withSet:requirements \
-            selector:@selector(independence_references)]; \
+            withSet:references \
+            selector:@selector(ind_references)]; \
 }
 
 @interface INDReferencesExtension : INDExtension
